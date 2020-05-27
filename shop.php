@@ -261,7 +261,7 @@
 
                                     <form action='shop.php?add_cart=$pro_id' class='form-horizontal' method='post'>
                                     <div class='col-6'>
-                                        <button class='btn px-4 py-1 ml-4  pull-left pro_list_addqty'>ADD</button>
+                                        <button class='btn px-4 py-1 ml-0  pull-left pro_list_addqty'>ADD</button>
                                     </div>
                                     </form>
                                     
@@ -368,7 +368,7 @@
 
                                         <form action='shop.php?add_cart=$pro_id' class='form-horizontal' method='post'>
                                         <div class='col-6'>
-                                            <button class='btn px-4 py-1 ml-4  pull-left pro_list_addqty'>ADD</button>
+                                            <button class='btn px-4 py-1 ml-0  pull-left pro_list_addqty'>ADD</button>
                                         </div>
                                         </form>
                                         
