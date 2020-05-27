@@ -75,8 +75,6 @@ if(isset($_POST['register'])){
 
     $c_ip = getRealIpUser();
 
-    move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
-
     $insert_customer = "insert into customers (customer_name,customer_contact,customer_email,customer_pass,customer_ip) 
     values ('$c_name','$c_contact','$c_email','$c_pass','$c_ip')";
 

@@ -26,7 +26,7 @@ $session_email = $_SESSION['customer_email'];
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
                         </a>
                     </li>
-                    <li class="nav-item pt-1">
+                    <li class="nav-item pt-2">
                         <h5 class="cart_head">Place Order</h5>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@ $session_email = $_SESSION['customer_email'];
                 <input type="hidden" name="c_id" class="form-control" value="<?php echo $customer_id; ?>">
                 <h5 class="add_head">Select Your Address</h5>
                 <div class="form-group">
-                    <select class="custom-select" name='add_id'>
+                    <select class="custom-select select_address" name='add_id'>
                     <?php
                     
                     $get_c_add = "select * from customer_address where customer_id='$customer_id'";
@@ -85,10 +85,10 @@ $session_email = $_SESSION['customer_email'];
                     </select>
                 </div>
                 <div class="form-group my-4">
-                <h5 class="add_head my-4">Schedule your Delivery</h5>
-                <input type="text" class="form-control" name="date" id="datepicker" >
+                <h5 class="add_head my-3">Schedule your Delivery</h5>
+                <input type="text" class="form-control select_address" name="date" id="datepicker" >
                 </div>
-            <button type="submit" class="btn btn-success btn-block">Place Order</button>
+            <button type="submit" class="btn btn-success btn-block add_head_btn fixed-bottom">Place Order</button>
         </form>
         </div>
     </div>

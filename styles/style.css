@@ -209,8 +209,8 @@ span.icon-name{
     border-radius: 1rem;
     border: 1px solid #ff7b00;
     color:#ff7b00;
-    top: 9px;
-    right: 1rem;
+    top: 6%;
+    right: 6%;
     font-size: .85rem;
     padding-left: 1px;
     padding-right: 2px;
@@ -219,6 +219,20 @@ span.icon-name{
 }
 
 /* fixed nav */
+
+/* shop product */
+
+.shop_qty {
+    width: 30px;
+    border: 0;
+    margin-top: 4px;
+    font-size: 1.2rem;
+    font-family: Jost;
+    text-align: center;
+    line-height: 105%;
+}
+
+/* shop product */
 
 /* breadcrumb */
 
@@ -294,7 +308,7 @@ span.icon-name{
 /* product list */
 
 .pro_list{
-    margin-top: 21.5%;
+    margin-top: 25%;
 }
 
 button.pro_list_addqty{
@@ -347,20 +361,21 @@ button.pro_list_addqty{
 }
 
 .pro_cart{
-    margin-top: 12%;
+    margin-top: 14%;
     overflow-y:auto;
     height:auto;
-    max-height:360px;
+    max-height:305px;
 }
 
 .cart_head{
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-family: Josefin Sans;
     font-weight: bold;
+    color: #999;
 }
 
 .pro_cart_title{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: lighter;
     font-family: jost;
     color: grey;
@@ -370,14 +385,14 @@ button.pro_list_addqty{
     font-size: 1rem;
     font-weight: bold;
     font-family: jost;
-    color: #999;
+    color: rgb(73, 73, 73);
 }
 
 .pro_cart_price{
     font-size: 1.2rem;
     font-weight: bold;
     font-family: Rubik;
-    color: rgb(70, 70, 70);
+    color: rgb(36, 36, 36);
 }
 
 .pro_cart_addqty{
@@ -392,10 +407,10 @@ button.pro_list_addqty{
 }
 
 .cart_qty {
-    width: 40px;
+    width: 30px;
     border: 0;
     margin-top: 4px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: Jost;
     text-align: center;
     line-height: 105%;
@@ -461,7 +476,10 @@ button.pro_list_addqty{
 
 .bill_checkout{
     font-family: Concert One;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    height: 100%;
+    border-radius: 0;
+    padding-top: 5px;
 }
 
 
@@ -525,6 +543,10 @@ button.pro_list_addqty{
     font-family: Concert One;
 }
 
+.form-control{
+    height: calc(1.5em + 0.75rem + 12px);
+}
+
 /* register */
 
 /* order details*/
@@ -562,6 +584,30 @@ button.pro_list_addqty{
     font-family: Concert One;
     font-weight: bold;
     color: #fff !important;
+}
+
+.select_address{
+    font-size: 1rem;
+    font-family: Josefin Sans;
+    font-weight: bold;
+    color: #999 !important;
+}
+
+.add_head{
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: Josefin Sans;
+    font-weight: bold;
+    color: rgb(31, 31, 31) !important;
+}
+
+.add_head_btn{
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: Josefin Sans;
+    font-weight: bold;
+    color: #fff !important;
+    border-radius: 0;
 }
 
 /* order details*/

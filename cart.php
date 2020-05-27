@@ -13,7 +13,7 @@
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
                         </a>
                     </li>
-                    <li class="nav-item pt-1">
+                    <li class="nav-item pt-2">
                         <h5 class="cart_head">Cart</h5>
                     </li>
                 </ul>
@@ -90,21 +90,20 @@
                 echo"
                 
                 <div class='row bg-white py-2 mt-1'>
-                    <div class='col-4'>
-                        <img src='admin_area/product_images/$product_img1' alt='' class='img-thumbnail border-0'>
+                    <div class='col-4 px-0'>
+                        <img src='admin_area/product_images/$product_img1' alt='' class='img-thumbnail border-0 w-75'>
                     </div>
-                        <div class='col-8'>
-                            <h5 class='pro_cart_title'>$product_title</h5>
-                            <h5 class='pro_cart_desc'>$product_desc</h5>
+                        <div class='col-8 pl-0 pt-2'>
+                            <h5 class='pro_cart_title'>$product_title - $product_desc</h5>
                             <div class='row'>
                                 <div class='col-6'>
-                                    <div class='row'>
+                                    <div class='row pl-3'>
                                         <form action='cart.php?delete_checkout=$pro_id' class='form-horizontal' method='post'>
-                                        <button class='btn btn-qty px-2'><i style='font-size:1rem; color:#fff;' class='fas fa-minus'></i></button>
+                                        <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
                                         </form>
                                         <input type='numeric' class='cart_qty' placeholder='' value='$pro_qty' aria-describedby='helpId'>
                                         <form action='cart.php?add_checkout=$pro_id' class='form-horizontal' method='post'>
-                                        <button class='btn btn-qty px-2'><i style='font-size:1rem; color:#fff;' class='fas fa-plus'></i></button>
+                                        <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
                                         </form>
                                     </div> 
                                 </div>
@@ -134,15 +133,14 @@
                     <div class="row">
                         <div class="col-lg"><img src="admin_area/other_images/cart_lobo.png" class="img-fluid w-75 mx-auto d-block" alt="..."></div>
                         <div class="col-lg"><h5 class="order_again">Lobo is waiting for your order</h5></div>
-                        <div class="col-lg"><a href="shop.php" class="btn btn-warning btn-block order_again_bottom d-block p-1">Start Shopping</a></div>
+                        <div class="col-lg px-5"><a href="shop.php" class="btn btn-warning btn-block order_again_bottom d-block p-1">Start Shopping</a></div>
                     </div>
                 </div>
 
 <!-- show lobo -->
 
 <!-- bill Section -->
-    <div class="container-fluid fixed-bottom " style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
-    <div class="container bg-white mt-2 ">
+    <div class="container bg-white mt-2 mb-5 fixed-bottom" style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
         <table class="table table-sm table-borderless bill_section ">
             <tbody>
                 <thead>
@@ -169,19 +167,21 @@
             </tbody>
         </table>
     </div>
-
+    
+  
 <!-- bill Section -->
 
 <!-- checkout float -->
+    <div class="container-fluid fixed-bottom " style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
         <div class="row cart_bottom">
             <div class="col-6 pl-3">
                 <h5 class="item_count pt-1 mb-0"><?php echo $count; ?> Items</h4>
                 <h4 class="item_cost mb-0">₹ <?php echo $total; ?></h3>
             </div>
-            <div class="col-6 p-2   ">
-                <a href="checkout.php" class="btn btn-success pull-right mx-3 bill_checkout">
-                <i style="font-size:1rem; color:#fff;" class="fas fa-shopping-basket"></i>
+            <div class="col-6 p-0">
+                <a href="checkout.php" class="btn btn-success pull-right bill_checkout">
                     Checkout
+                    <i style="font-size:1.2rem; color:#fff;" class="fas fa-angle-double-right"></i>
                 </a>
             </div>
         </div>
