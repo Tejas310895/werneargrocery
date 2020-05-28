@@ -50,19 +50,20 @@ if(isset($_GET['pro_id'])){
     <link href='https://fonts.googleapis.com/css?family=Laila' rel='stylesheet'>
     <!-- google font -->
     <!-- bootstrap link -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="styles/bootstrap.min.css" >
+    <link rel="stylesheet" href="styles/bootstrap.css" >
     <!-- bootstrap link -->
     <!-- swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <link rel="stylesheet" href="styles/swiper.css">
+    <link rel="stylesheet" href="styles/swiper.min.css">
     <!-- swiper -->
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <!-- font-awesome -->
     <!-- date -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <link rel="stylesheet" href="styles/jquery-ui.css">
+    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
     <script>

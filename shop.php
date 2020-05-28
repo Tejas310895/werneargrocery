@@ -396,7 +396,7 @@
 <!-- product list -->
 
 <!-- checkout float -->
-    <div class="container-fluid cart_bottom fixed-bottom mx-0 py-0<?php echo diaplay_cart(); ?>">
+    <div class="container-fluid cart_bottom fixed-bottom mx-0 py-0 <?php echo diaplay_cart(); ?>">
             <div class="row">
                 <div class="col-6 pl-3">
                     <h5 class="item_count pt-1 mb-0"><?php echo items(); ?> Items</h4>
