@@ -7,350 +7,296 @@
     }else{
 
         ?>
+<?php 
 
-<div class="row"><!-- row no: 1 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <h1 class="page-header"> Dashboard </h1>
+$get_total_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Delivered'";
+
+$run_total_sales = mysqli_query($con,$get_total_sales);
+
+$row_total_sales = mysqli_fetch_array($run_total_sales);
+
+$total_sales = $row_total_sales['total'];
+
+$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
+
+$run_today_sales = mysqli_query($con,$get_today_sales);
+
+$row_today_sales = mysqli_fetch_array($run_today_sales);
+
+$today_sales = $row_today_sales['total'];
+
+$get_total_count = "SELECT count(order_id) AS count FROM customer_orders where order_status='Delivered'";
+
+$run_total_count = mysqli_query($con,$get_total_count);
+
+$row_total_count = mysqli_fetch_array($run_total_count);
+
+$total_count = $row_total_count['count'];
+
+$get_today_count = "SELECT sum(due_amount) AS count FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
+
+$run_today_count = mysqli_query($con,$get_today_count);
+
+$row_today_count = mysqli_fetch_array($run_today_count);
+
+$today_count = $row_today_count['count'];
+
+$get_cancel_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Cancelled'";
+
+$run_cancel_sales = mysqli_query($con,$get_cancel_sales);
+
+$row_cancel_sales = mysqli_fetch_array($run_cancel_sales);
+
+$cancel_sales = $row_cancel_sales['total'];
+
+$get_cancel_count = "SELECT count(order_id) AS count FROM customer_orders where order_status='Cancelled'";
+
+$run_cancel_count = mysqli_query($con,$get_cancel_count);
+
+$row_cancel_count = mysqli_fetch_array($run_cancel_count);
+
+$cancel_count = $row_cancel_count['count'];
+
+
+
+?>
         
-        <ol class="breadcrumb"><!-- breadcrumb begin -->
-            <li class="active"><!-- active begin -->
-            
-                <i class="fa fa-dashboard"></i> Dashboard
-            
-            </li><!-- active finish -->
-        </ol><!-- breadcrumb finish -->
-        
-    </div><!-- col-lg-12 finish -->
-</div><!-- row no: 1 finish -->
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Total Sales</h5>
+                <h3 class="card-title"><i class="tim-icons icon-coins"></i>₹ <?php if($total_sales>0){echo $total_sales;}else{echo '0';}; ?> </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Daily Sales</h5>
+                <h3 class="card-title"><i class="tim-icons icon-coins"></i>₹ <?php if($today_sales>0){echo $today_sales;}else{echo '0';} ?> </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Total Orders</h5>
+                <h3 class="card-title"><i class="tim-icons icon-delivery-fast"></i> <?php if($total_count>0){echo $total_count;}else{echo '0';} ?> </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Today Orders</h5>
+                <h3 class="card-title"><i class="tim-icons icon-delivery-fast"></i> <?php if($today_count>0){echo $today_count;}else{echo '0';} ?> </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Sales Lost</h5>
+                <h3 class="card-title"><i class="tim-icons icon-coins"></i>₹ <?php if($cancel_sales>0){echo $cancel_sales;}else{echo '0';} ?> </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Orders Cancelled</h5>
+                <h3 class="card-title"><i class="tim-icons icon-delivery-fast"></i> <?php if($cancel_count>0){echo $cancel_count;}else{echo '0';} ?> </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card card-tasks mb-0">
+              <div class="card-header ">
+                <h4 class="title text-center">ORDERS DATA</h4>
+              </div>
+              <div class="card-body" id="refresh">
+                <div class="table-full-width table-responsive" id="time">
+                <table class="table">
+                              <thead>
+                                  <tr class="text-center">
+                                      <th>ORD ID</th>
+                                      <th>Order Date</th>
+                                      <th>Order By</th>
+                                      <th>Contact</th>
+                                      <th>Address</th>
+                                      <th>Items</th>
+                                      <th>Salary</th>
+                                      <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                
+                      $get_invoice = "SELECT DISTINCT invoice_no FROM customer_orders ORDER BY order_id DESC";
 
-<div class="row"><!-- row no: 2 begin -->
-   
-    <div class="col-lg-3 col-md-6"><!-- col-lg-3 col-md-6 begin -->
-        <div class="panel panel-primary"><!-- panel panel-primary begin -->
-            
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <div class="row"><!-- panel-heading row begin -->
-                    <div class="col-xs-3"><!-- col-xs-3 begin -->
-                       
-                        <i class="fa fa-tasks fa-5x"></i>
-                        
-                    </div><!-- col-xs-3 finish -->
-                    
-                    <div class="col-xs-9 text-right"><!-- col-xs-9 text-right begin -->
-                        <div class="huge"> <?php echo $count_products; ?> </div>
-                           
-                        <div> Products </div>
-                        
-                    </div><!-- col-xs-9 text-right finish -->
-                    
-                </div><!-- panel-heading row finish -->
-            </div><!-- panel-heading finish -->
-            
-            <a href="index.php?view_products"><!-- a href begin -->
-                <div class="panel-footer"><!-- panel-footer begin -->
-                   
-                    <span class="pull-left"><!-- pull-left begin -->
-                        View Details 
-                    </span><!-- pull-left finish -->
-                    
-                    <span class="pull-right"><!-- pull-right begin --> 
-                        <i class="fa fa-arrow-circle-right"></i> 
-                    </span><!-- pull-right finish --> 
-                    
-                    <div class="clearfix"></div>
-                    
-                </div><!-- panel-footer finish -->
-            </a><!-- a href finish -->
-            
-        </div><!-- panel panel-primary finish -->
-    </div><!-- col-lg-3 col-md-6 finish -->
-   
-    <div class="col-lg-3 col-md-6"><!-- col-lg-3 col-md-6 begin -->
-        <div class="panel panel-green"><!-- panel panel-green begin -->
-            
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <div class="row"><!-- panel-heading row begin -->
-                    <div class="col-xs-3"><!-- col-xs-3 begin -->
-                       
-                        <i class="fa fa-users fa-5x"></i>
-                        
-                    </div><!-- col-xs-3 finish -->
-                    
-                    <div class="col-xs-9 text-right"><!-- col-xs-9 text-right begin -->
-                        <div class="huge"> <?php echo $count_customers; ?> </div>
-                           
-                        <div> Customers </div>
-                        
-                    </div><!-- col-xs-9 text-right finish -->
-                    
-                </div><!-- panel-heading row finish -->
-            </div><!-- panel-heading finish -->
-            
-            <a href="index.php?view_customers"><!-- a href begin -->
-                <div class="panel-footer"><!-- panel-footer begin -->
-                   
-                    <span class="pull-left"><!-- pull-left begin -->
-                        View Details 
-                    </span><!-- pull-left finish -->
-                    
-                    <span class="pull-right"><!-- pull-right begin --> 
-                        <i class="fa fa-arrow-circle-right"></i> 
-                    </span><!-- pull-right finish --> 
-                    
-                    <div class="clearfix"></div>
-                    
-                </div><!-- panel-footer finish -->
-            </a><!-- a href finish -->
-            
-        </div><!-- panel panel-green finish -->
-    </div><!-- col-lg-3 col-md-6 finish -->
-   
-    <div class="col-lg-3 col-md-6"><!-- col-lg-3 col-md-6 begin -->
-        <div class="panel panel-orange"><!-- panel panel-yellow begin -->
-            
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <div class="row"><!-- panel-heading row begin -->
-                    <div class="col-xs-3"><!-- col-xs-3 begin -->
-                       
-                        <i class="fa fa-tags fa-5x"></i>
-                        
-                    </div><!-- col-xs-3 finish -->
-                    
-                    <div class="col-xs-9 text-right"><!-- col-xs-9 text-right begin -->
-                        <div class="huge"> <?php echo $count_p_categories; ?> </div>
-                           
-                        <div> Product Categories </div>
-                        
-                    </div><!-- col-xs-9 text-right finish -->
-                    
-                </div><!-- panel-heading row finish -->
-            </div><!-- panel-heading finish -->
-            
-            <a href="index.php?view_p_cats"><!-- a href begin -->
-                <div class="panel-footer"><!-- panel-footer begin -->
-                   
-                    <span class="pull-left"><!-- pull-left begin -->
-                        View Details 
-                    </span><!-- pull-left finish -->
-                    
-                    <span class="pull-right"><!-- pull-right begin --> 
-                        <i class="fa fa-arrow-circle-right"></i> 
-                    </span><!-- pull-right finish --> 
-                    
-                    <div class="clearfix"></div>
-                    
-                </div><!-- panel-footer finish -->
-            </a><!-- a href finish -->
-            
-        </div><!-- panel panel-yellow finish -->
-    </div><!-- col-lg-3 col-md-6 finish -->
-   
-    <div class="col-lg-3 col-md-6"><!-- col-lg-3 col-md-6 begin -->
-        <div class="panel panel-red"><!-- panel panel-red begin -->
-            
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <div class="row"><!-- panel-heading row begin -->
-                    <div class="col-xs-3"><!-- col-xs-3 begin -->
-                       
-                        <i class="fa fa-shopping-cart fa-5x"></i>
-                        
-                    </div><!-- col-xs-3 finish -->
-                    
-                    <div class="col-xs-9 text-right"><!-- col-xs-9 text-right begin -->
-                        <div class="huge"> <?php echo $count_pending_orders; ?> </div>
-                           
-                        <div> Orders </div>
-                        
-                    </div><!-- col-xs-9 text-right finish -->
-                    
-                </div><!-- panel-heading row finish -->
-            </div><!-- panel-heading finish -->
-            
-            <a href="index.php?view_orders"><!-- a href begin -->
-                <div class="panel-footer"><!-- panel-footer begin -->
-                   
-                    <span class="pull-left"><!-- pull-left begin -->
-                        View Details 
-                    </span><!-- pull-left finish -->
-                    
-                    <span class="pull-right"><!-- pull-right begin --> 
-                        <i class="fa fa-arrow-circle-right"></i> 
-                    </span><!-- pull-right finish --> 
-                    
-                    <div class="clearfix"></div>
-                    
-                </div><!-- panel-footer finish -->
-            </a><!-- a href finish -->
-            
-        </div><!-- panel panel-red finish -->
-    </div><!-- col-lg-3 col-md-6 finish -->
-    
-</div><!-- row no: 2 finish -->
+                      $run_invoice = mysqli_query($con,$get_invoice);
 
-<div class="row"><!-- row no: 3 begin -->
-    <div class="col-lg-8"><!-- col-lg-8 begin -->
-        <div class="panel panel-primary"><!-- panel panel-primary begin -->
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <h3 class="panel-title"><!-- panel-title begin -->
-                    
-                    <i class="fa fa-money fa-fw"></i> New Orders
-                    
-                </h3><!-- panel-title finish -->
-            </div><!-- panel-heading finish -->
-            
-            <div class="panel-body"><!-- panel-body begin -->
-                <div class="table-responsive"><!-- table-responsive begin -->
-                    <table class="table table-hover table-striped table-bordered"><!-- table table-hover table-striped table-bordered begin -->
-                        
-                        <thead><!-- thead begin -->
-                          
-                            <tr><!-- th begin -->
-                           
-                                <th> Order no: </th>
-                                <th> Customer Email: </th>
-                                <th> Invoice No: </th>
-                                <th> Product ID: </th>
-                                <th> Product Qty: </th>
-                                <th> Product Size: </th>
-                                <th> Status: </th>
-                            
-                            </tr><!-- th finish -->
-                            
-                        </thead><!-- thead finish -->
-                        
-                        <tbody><!-- tbody begin -->
+                      while($row_invoice=mysqli_fetch_array($run_invoice)){
 
-                        <?php 
-                        
-                            $i=0;
+                          $invoice_id = $row_invoice['invoice_no'];
 
-                            $get_order = "select * from pending_orders order by 1 DESC LIMIT 0,4";
-                        
-                            $run_order = mysqli_query($con,$get_order);
+                          $order_status = 'Order Placed';
 
-                            while($row_orders=mysqli_fetch_array($run_order)){
+                          $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
 
-                                $order_id = $row_orders['order_id'];
+                          $run_orders = mysqli_query($con,$get_orders);
 
-                                $c_id = $row_orders['customer_id'];
+                          $order_count = mysqli_num_rows($run_orders);
 
-                                $invoice_no = $row_orders['invoice_no'];
+                          $row_orders = mysqli_fetch_array($run_orders);
 
-                                $product_id = $row_orders['product_id'];
+                          $c_id = $row_orders['customer_id'];
 
-                                $qty = $row_orders['qty'];
+                          $date = $row_orders['order_date'];
 
-                                $size = $row_orders['size'];
+                          $add_id = $row_orders['add_id'];
 
-                                $order_status = $row_orders['order_status'];
+                          $order_date = $row_orders['order_date'];
 
-                                $i++;
+                          $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
+                          $run_total = mysqli_query($con,$get_total);
+
+                          $row_total = mysqli_fetch_array($run_total);
+
+                          $total = $row_total['total'];
+
+                          $get_customer = "select * from customers where customer_id='$c_id'";
+
+                          $run_customer = mysqli_query($con,$get_customer);
+
+                          $row_customer = mysqli_fetch_array($run_customer);
+
+                          $c_name = $row_customer['customer_name'];
+
+                          $c_contact = $row_customer['customer_contact'];
+
+                          $get_add = "select * from customer_address where add_id='$add_id'";
+
+                          $run_add = mysqli_query($con,$get_add);
+
+                          $row_add = mysqli_fetch_array($run_add);
+
+                          $customer_address = $row_add['customer_address'];
+
+                          $customer_phase = $row_add['customer_phase'];
+
+                          $customer_landmark = $row_add['customer_landmark'];
+
+                          $customer_city = $row_add['customer_city'];
                         ?>
-                           
-                            <tr><!-- tr begin -->
-                                <td> <?php echo $order_id; ?> </td>
-                                <td> 
-                                    <?php  
-                                    
-                                        $get_customer = "select * from customers where customer_id='$c_id'";
-
-                                        $run_customer = mysqli_query($con,$get_customer);
-
-                                        $row_customer = mysqli_fetch_array($run_customer);
-
-                                        $customer_email = $row_customer['customer_email'];
-
-                                        echo $customer_email;
-                                    
-                                    ?> 
-                                
+                                <tr class="text-center">
+                                <td style="font-size:0.8rem;"><?php echo $invoice_id; ?></td>
+                                <td style="font-size:0.8rem;"><?php echo $order_date; ?></td>
+                                <td style="font-size:0.8rem;"><?php echo $c_name; ?></td>
+                                <td style="font-size:0.8rem;">+91 <?php echo $c_contact; ?></td>
+                                <td style="font-size:0.8rem;"><?php echo $customer_address; ?>, 
+                                    <?php echo $customer_phase; ?>, 
+                                    <?php echo $customer_landmark; ?>, 
+                                    <?php echo $customer_city; ?> .
                                 </td>
-                                <td> <?php echo $invoice_no; ?> </td>
-                                <td> <?php echo $product_id; ?> </td>
-                                <td> <?php echo $qty; ?> </td>
-                                <td> <?php echo $size; ?> </td>
-                                <td>
+                                <td style="font-size:0.7rem; text-align:center;"><?php echo $order_count; ?></td>
+                                <td style="font-size:0.7rem;">₹ <?php echo $total; ?>/-</td>
+                                <td class="td-actions" >
+                                <button id="show_details" class="btn btn-success card-link pull-right px-2 py-1" style="font-size:0.7rem;" data-toggle="modal" data-target="#KK<?php echo $invoice_id; ?>">View</button>
+                                <!-- Modal -->
+                                <div class="modal modal-black fade" id="KK<?php echo $invoice_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Order Id - <?php echo $invoice_id; ?></h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body my-3">
+                                        <table class="table">
+                                          <thead>
+                                              <tr>
+                                                  <th class="text-center">Sl.no.</th>
+                                                  <th class="text-center">IMAGE</th>
+                                                  <th class="text-center">ITEMS</th>
+                                                  <th class="text-center">PACK</th>
+                                                  <th class="text-center">QTY</th>
+                                                  <th class="text-right">PRICE</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
 
-                                    <?php 
-                                    
-                                    if($order_status=='pending'){
+                                          <?php
+                                          
+                                          $get_pro_id = "select * from customer_orders where invoice_no='$invoice_id'";
 
-                                        echo $order_status = 'Pending';
+                                          $run_pro_id = mysqli_query($con,$get_pro_id);
 
-                                    }else{
+                                          $counter = 0;
 
-                                        echo $order_status = 'Complete';
+                                          while($row_pro_id = mysqli_fetch_array($run_pro_id)){
 
-                                    }
-                                    
-                                    ?>
+                                          $pro_id = $row_pro_id['pro_id'];
 
+                                          $qty = $row_pro_id['qty'];
+
+                                          $get_pro = "select * from products where product_id='$pro_id'";
+
+                                          $run_pro = mysqli_query($con,$get_pro);
+
+                                          $row_pro = mysqli_fetch_array($run_pro);
+
+                                          $pro_title = $row_pro['product_title'];
+
+                                          $pro_img1 = $row_pro['product_img1'];
+
+                                          $pro_price = $row_pro['product_price'];
+
+                                          $pro_desc = $row_pro['product_desc'];
+                                          
+                                          $sub_total = $pro_price * $qty;
+                                          
+                                          ?>
+                                              <tr>
+                                                  <td class="text-center"><?php echo ++$counter; ?></td>
+                                                  <td class="text-center">
+                                                    <img src="product_images/<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
+                                                  </td>
+                                                  <td class="text-center"><?php echo $pro_title; ?></td>
+                                                  <td class="text-center"><?php echo $pro_desc; ?></td>
+                                                  <td class="text-center"><?php echo $qty; ?> x ₹ <?php echo $pro_price; ?></td>
+                                                  <td class="text-right">₹ <?php echo $sub_total; ?></td>
+                                              </tr>
+                                              <?php } ?>
+                                          </tbody>
+                                      </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary text-left" data-dismiss="modal">Close</button>
+                                          <h3 class="card-title">Total - ₹ <?php echo $total; ?>/-</h3>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                                 </td>
-                                
-                            </tr><!-- tr finish -->
-                           
-                            <?php } ?>
-                            
-                        </tbody><!-- tbody finish -->
-                        
-                    </table><!-- table table-hover table-striped table-bordered finish -->
-                </div><!-- table-responsive finish -->
-                
-                <div class="text-right"><!-- text-right begin -->
-                    
-                    <a href="index.php?view_orders"><!-- a href begin -->
-                        
-                        View All Orders <i class="fa fa-arrow-circle-right"></i>
-                        
-                    </a><!-- a href finish -->
-                    
-                </div><!-- text-right finish -->
-                
-            </div><!-- panel-body finish -->
-            
-        </div><!-- panel panel-primary finish -->
-    </div><!-- col-lg-8 finish -->
-    
-    <div class="col-md-4"><!-- col-md-4 begin -->
-        <div class="panel"><!-- panel begin -->
-            <div class="panel-body"><!-- panel-body begin -->
-                <div class="mb-md thumb-info"><!-- mb-md thumb-info begin -->
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                                </table>
 
-                    <img src="admin_images/<?php echo $admin_image; ?>" alt="admin-thumb-info" class="rounded img-responsive">
-                    
-                    <div class="thumb-info-title"><!-- thumb-info-title begin -->
-                       
-                        <span class="thumb-info-inner"> <?php echo $admin_name; ?> </span>
-                        <span class="thumb-info-type"> <?php echo $admin_job; ?> </span>
-                        
-                    </div><!-- thumb-info-title finish -->
-
-                </div><!-- mb-md thumb-info finish -->
-                
-                <div class="mb-md"><!-- mb-md begin -->
-                    <div class="widget-content-expanded"><!-- widget-content-expanded begin -->
-                        <i class="fa fa-user"></i> <span> Email: </span> <?php echo $admin_email; ?> <br/>
-                        <i class="fa fa-flag"></i> <span> Country: </span> <?php echo $admin_country; ?> <br/>
-                        <i class="fa fa-envelope"></i> <span> Contact: </span> <?php echo $admin_contact; ?> <br/>
-                    </div><!-- widget-content-expanded finish -->
-                    
-                    <hr class="dotted short">
-                    
-                    <h5 class="text-muted"> About Me</h5>
-                    
-                    <p><!-- p begin -->
-                        
-                    <?php echo $admin_about; ?>
-                        
-                    </p><!-- p finish -->
-                    
-                </div><!-- mb-md finish -->
-                
-            </div><!-- panel-body finish -->
-        </div><!-- panel finish -->
-    </div><!-- col-md-4 finish -->
-    
-</div><!-- row no: 3 finish -->
+                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
 
     <?php } ?>

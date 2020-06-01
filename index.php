@@ -405,7 +405,7 @@
             
             ?>
                             <div class="col-6 px-2 py-2">
-                                <a href="newshop.php?=<?php echo $cat_id;?>">
+                                <a href="shop.php?cat=<?php echo $cat_id;?>">
                                     <img src="admin_area/other_images/<?php echo $cat_img; ?>" class="img-thumbnail" alt="..." >
                                 </a>
                             </div>

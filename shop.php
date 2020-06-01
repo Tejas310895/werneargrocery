@@ -166,7 +166,9 @@
 <!-- product list -->
     <div class="container-fluid pro_list p-3">
     <?php add_cart(); ?>
+    <?php add_cat_cart(); ?>
     <?php delete_cart(); ?>
+    <?php delete_cat_cart(); ?>
     <?php
 
             if(!isset($_GET['cat'])){
@@ -214,7 +216,7 @@
 
                 ?>
 
-        <div class="row bg-white mt-1 py-2">
+        <div class="row bg-white mt-1 py-2" id="<?php echo $pro_id; ?>">
                     <div class="col-4">
                         <img src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="..." class="img-thumbnail border-0">
                     </div>
@@ -350,11 +352,13 @@
                                         
                                         <div class='col-6'>
                                             <div class='row ml-1'>
-                                                <form action='shop.php?delete_cart=$pro_id' class='form-horizontal' method='post'>
+                                                <form action='shop.php?delete_cat_cart=$pro_id' class='form-horizontal' method='post'>
+                                                <input name='cat_id' type='hidden' value='$cat_id'>
                                                 <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
                                                 </form>
-                                                <input type='numeric' name='' id='' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId'>
-                                                <form action='shop.php?add_cart=$pro_id' class='form-horizontal' method='post'>
+                                                <input type='numeric' name='' id='' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
+                                                <form action='shop.php?add_cat_cart=$pro_id' class='form-horizontal' method='post'>
+                                                <input name='cat_id' type='hidden' value='$cat_id'>
                                                 <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
                                                 </form>
                                             </div>
@@ -366,7 +370,8 @@
 
                                         echo "
 
-                                        <form action='shop.php?add_cart=$pro_id' class='form-horizontal' method='post'>
+                                        <form action='shop.php?add_cat_cart=$pro_id' class='form-horizontal' method='post'>
+                                        <input name='cat_id' type='hidden' value='$cat_id'>
                                         <div class='col-6'>
                                             <button class='btn px-4 py-1 ml-0  pull-left pro_list_addqty'>ADD</button>
                                         </div>
@@ -411,6 +416,7 @@
             </div>
         </div>
 <!-- checkout float -->
+
 
 <?php
 

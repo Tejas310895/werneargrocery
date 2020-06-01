@@ -8,124 +8,95 @@
 
         ?>
 
-        <div class="row"><!-- row 1 Begins -->
-            <div class="col-lg-12"><!-- col-lg-12 Begins -->
-                <ol class="breadcrumb"><!-- breadcrumb Begins -->
-                    <li class="active">
-                    
-                        <i class="fa fa-dashboard"></i> Dashboard / View Products
-                    
-                    </li>
-                </ol><!-- breadcrumb ends -->
-            </div><!-- col-lg-12 ends -->
-        </div><!-- row 1 ends -->
+       <div class="row">
+           <div class="col-lg-6 col-md-6">
+           <h2 class="card-title">PRODUCTS (255)</h2>
+           </div>
+           <div class="col-lg-6 col-md-6">
+            <a href="index.php?insert_product" class="btn btn-success pull-right">NEW PRODUCT</a>
+           </div>
+       </div>
+       <div class="row">
+       <table class="table table-fixed">
+            <thead class="fixed-head">
+                <tr class="text-center">
+                    <th>Pro Id</th>
+                    <th>Category</th> 
+                    <th>Image</th>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th class="text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            
+            $get_product = "select * from products order by product_id DESC";
 
-        <div class="row col-lg-12"><!-- row 2 begins -->
-            <div class="panel panel-default"><!-- panel panel-default begins -->
-                <div class="panel-heading"><!-- panel-heading begins -->
-                    <h3 class="panel-title"><!-- panel-title begins -->
-                    
-                        <i class="fa fa-tags"></i> Veiw Products
-                    
-                    </h3><!-- panel-title ends -->
-                </div><!-- panel-heading ends -->
+            $run_product = mysqli_query($con,$get_product);
 
-                    <div class="panel-body"><!-- panel-body begins -->
-                        <div class="table-responsive"><!-- table-responsive begins -->
-                            <table class="table table-striped table-borderd table-hover"><!-- table table-striped table-borderd table-hover begins -->
-                            
-                                <thead><!-- thead begins -->
-                                    <tr><!-- tr begins -->
-                                        <th> Product ID: </th>
-                                        <th>Product Title: </th>
-                                        <th> Product Image: </th>
-                                        <th> Product Price: </th>
-                                        <th> Product Sold: </th>
-                                        <th> Product Keywords</th>
-                                        <th> Product Date: </th>
-                                        <th> Product Delete: </th>
-                                        <th> Product Edit: </th>
-                                    </tr><!-- tr ends -->
-                                </thead><!-- thead ends -->
+            $counter = 0;
 
-                                <tbody><!-- tbody begins -->
-                                
-                                    <?php
-                                    
-                                        $i=0;
-                                    
-                                        $get_pro = "select * from products";
+            while($row_product=mysqli_fetch_array($run_product)){
 
-                                        $run_pro = mysqli_query($con,$get_pro);
+                $product_id = $row_product['product_id'];
 
-                                        while($row_pro=mysqli_fetch_array($run_pro)){
+                $product_title = $row_product['product_title'];
 
-                                            $pro_id = $row_pro['product_id'];
+                $product_img1 = $row_product['product_img1'];
 
-                                            $pro_title = $row_pro['product_title'];
+                $product_desc = $row_product['product_desc'];
 
-                                            $pro_img1 = $row_pro['product_img1'];
+                $product_price = $row_product['product_price'];
 
-                                            $pro_price = $row_pro['product_price'];
+                $product_stock = $row_product['product_stock'];
 
-                                            $pro_keywords = $row_pro['product_keywords'];
+                $cat_id = $row_product['cat_id'];
 
-                                            $pro_date = $row_pro['date'];
+                $get_cat = "select * from categories where cat_id='$cat_id'";
 
-                                            $i++;
+                $run_cat = mysqli_query($con,$get_cat);
 
-                                    
-                                    ?>
+                $row_cat = mysqli_fetch_array($run_cat);
 
-                                    <tr><!-- tr begins -->
-                                        <td> <?php echo $i; ?> </td>
-                                        <td> <?php echo $pro_title; ?> </td>
-                                        <td> <img src="product_images/<?php echo $pro_img1; ?>" width="60" height="60"> </td>
-                                        <td> $ <?php echo $pro_price; ?> </td>
-                                        <td> 
-                                        
-                                        <?php 
-                                        
-                                                $get_sold = "select * from pending_orders where product_id='$pro_id'";
-
-                                                $run_sold = mysqli_query($con,$get_sold);
-
-                                                $count = mysqli_num_rows($run_sold);
-
-                                                echo $count;
-                                        
-                                        ?> 
-                                        
-                                        </td>
-                                        <td> <?php echo $pro_keywords; ?> </td>
-                                        <td> <?php echo $pro_date; ?> </td>
-                                        <td> 
-                                            <a class="btn btn-danger" href="index.php?delete_product=<?php echo $pro_id; ?>">
-                                        
-                                                <i class="fa fa-trash-o"></i> Delete
-                                        
-                                            </a> 
-                                        </td>
-                                        <td>
-                                        
-                                            <a class="btn btn-success" href="index.php?edit_product=<?php echo $pro_id; ?>">
-                                            
-                                                <i class="fa fa-pencil"></i> Edit
-                                    
-                                            </a> 
-                                        
-                                        </td>
-                                    </tr><!-- tr ends -->
-
-                                    <?php  } ?>
-                                
-                                </tbody><!-- tbody ends -->
-                            
-                            </table><!-- table table-striped table-borderd table-hover ends -->
-                        </div><!-- table-responsive ends -->
-                    </div><!-- panel-body ends -->
-
-            </div><!-- panel panel-default ends -->
-        </div><!-- row 2 ends -->
+                $cat_title = $row_cat['cat_title'];
+            
+            ?>
+                <tr class="text-center">
+                    <td ><?php echo ++$counter; ?></td>
+                    <td ><?php echo $cat_title; ?></td>
+                    <td>
+                        <img src="product_images/<?php echo $product_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
+                    </td>
+                    <td><?php echo $product_title; ?></td>
+                    <td><?php echo $product_desc; ?></td>
+                    <td>&#8377; <?php echo $product_price; ?></td>
+                    <td>
+                        <form action="process_order.php?update_stock=<?php echo $product_id; ?>" class="form-group pull-right" method="post">
+                        <div class="input-group w-50">
+                            <input type="text" class="form-control" name="stock" value="<?php echo $product_stock; ?>">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-md btn-icon" type="submit"><i class="tim-icons icon-refresh-02"></i></button>
+                            </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td class="td-actions text-left">
+                        <a  href="index.php?edit_product=<?php echo $product_id; ?>" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                            <i class="tim-icons icon-settings"></i>
+                        </a>
+                        <!-- <a href="index.php?delete_product=<?php //echo $product_id; ?>" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+                            <i class="tim-icons icon-simple-remove"></i>
+                        </a> -->
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+       </div>
 
     <?php } ?>
+
+    

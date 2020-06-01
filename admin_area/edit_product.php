@@ -24,15 +24,9 @@ if(!isset($_SESSION['admin_email'])){
 
         $p_title = $row_edit['product_title'];
 
-        $p_cat = $row_edit['p_cat_id'];
-
         $cat = $row_edit['cat_id'];
 
         $p_image1 = $row_edit['product_img1'];
-
-        $p_image2 = $row_edit['product_img2'];
-
-        $p_image3 = $row_edit['product_img3'];
 
         $p_price = $row_edit['product_price'];
 
@@ -40,16 +34,9 @@ if(!isset($_SESSION['admin_email'])){
 
         $p_desc = $row_edit['product_desc'];
 
+        $p_stock = $row_edit['product_stock'];
+
     }
-
-        $get_p_cat = "select * from product_categories where p_cat_id='$p_cat'";
-
-        $run_p_cat = mysqli_query($con,$get_p_cat);
-
-        $row_p_cat = mysqli_fetch_array($run_p_cat);
-
-        $p_cat_title = $row_p_cat['p_cat_title'];
-
 
         $get_cat = "select * from categories where cat_id='$cat'";
 
@@ -61,112 +48,54 @@ if(!isset($_SESSION['admin_email'])){
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Insert Products </title>
-</head>
-<body>
-    
-<div class="row"><!-- row Begin -->
-    
-    <div class="col-lg-12"><!-- col-lg-12 Begin -->
-        
-        <ol class="breadcrumb"><!-- breadcrumb Begin -->
-            
-            <li class="active"><!-- active Begin -->
-                
-                <i class="fa fa-dashboard"></i> Dashboard / Edit Products
-                
-            </li><!-- active Finish -->
-            
-        </ol><!-- breadcrumb Finish -->
-        
-    </div><!-- col-lg-12 Finish -->
-    
-</div><!-- row Finish -->
-       
-<div class="row"><!-- row Begin -->
-    
-    <div class="col-lg-12"><!-- col-lg-12 Begin -->
-        
-        <div class="panel panel-default"><!-- panel panel-default Begin -->
-            
-           <div class="panel-heading"><!-- panel-heading Begin -->
-               
-               <h3 class="panel-title"><!-- panel-title Begin -->
-                   
-                   <i class="fa fa-money fa-fw"></i> Insert Product 
-                   
-               </h3><!-- panel-title Finish -->
-               
-           </div> <!-- panel-heading Finish -->
-           
-           <div class="panel-body"><!-- panel-body Begin -->
-               
-               <form method="post" class="form-horizontal" enctype="multipart/form-data"><!-- form-horizontal Begin -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Title </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_title" type="text" class="form-control" value="<?php echo $p_title; ?>" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Category </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <select name="product_cat" class="form-control"><!-- form-control Begin -->
-                              
-                              <option value="<?php echo $p_cat; ?>"> <?php echo $p_cat_title; ?> </option>
-                              
-                              <?php 
-                              
-                              $get_p_cats = "select * from product_categories";
-                              $run_p_cats = mysqli_query($con,$get_p_cats);
-                              
-                              while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
-                                  
-                                  $p_cat_id = $row_p_cats['p_cat_id'];
-                                  $p_cat_title = $row_p_cats['p_cat_title'];
-                                  
-                                  echo "
-                                  
-                                  <option value='$p_cat_id'> $p_cat_title </option>
-                                  
-                                  ";
-                                  
-                              }
-                              
-                              ?>
-                              
-                          </select><!-- form-control Finish -->
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Category </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <select name="cat" class="form-control"><!-- form-control Begin -->
-                              
-                              <option value="<?php echo $cat; ?>"> <?php echo $cat_title; ?> </option>
-                              
-                              <?php 
+<div class="row">
+           <div class="col-lg-6 col-md-6">
+           <h2 class="card-title">EDIT PRODUCT</h2>
+           </div>
+           <div class="col-lg-6 col-md-6">
+            <a href="index.php?view_products" class="btn btn-primary pull-right">Back</a>
+           </div>
+       </div>
+       <form action="" class="form-horizontal" method="post" enctype="multipart/form-data" >
+        <div class="row">
+                <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Product Title</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="product_title" value="<?php echo $p_title; ?>" placeholder="Product Title" required>
+                </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Product Pack</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="product_desc" value="<?php echo $p_desc; ?>" placeholder="Product Pack" required>
+                </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-lg-6 col-md-6 mt-5">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Product Price</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="product_price" value="<?php echo $p_price; ?>" placeholder="Product Price" required>
+                </div>
+                </div>
+                <div class="col-lg-6 col-md-6 mt-5">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Product Keywords</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="product_keywords" value="<?php echo $p_keywords; ?>" placeholder="Product Keywords" required>
+                </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-lg-6 col-md-6 mt-5">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Product Stock</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="product_stock" value="<?php echo $p_stock; ?>" placeholder="Product Stock" required>
+                </div>
+                </div>
+                <div class="col-lg-6 col-md-6 mt-5">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select Category</label>
+                    <select class="form-control" name="cat" id="exampleFormControlSelect1" required>
+                        <option value="<?php echo $cat; ?>"><?php echo $cat_title; ?></option>
+                    <?php 
                               
                               $get_cat = "select * from categories";
                               $run_cat = mysqli_query($con,$get_cat);
@@ -185,172 +114,67 @@ if(!isset($_SESSION['admin_email'])){
                               }
                               
                               ?>
-                              
-                          </select><!-- form-control Finish -->
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Image 1 </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_img1" type="file" class="form-control" required>
+                    </select>
+                </div>
+                </div>
+                <div class="w-100"></div>
+                    <div class="col-lg-6 col-md-6 mt-5">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <label class="custom-file-label"  for="inputGroupFile01">Choose Product Image</label>
+                                <input type="file" name="product_img1" class="custom-file-input" value="<?php echo $p_image1; ?>" id="inputGroupFile01" required>
+                            </div>
+                            <img src="product_images/<?php echo $p_image1; ?>" alt="" class="img-thumbnail" width="100px">
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 mt-5">
+                <div class="form-group pull-left">
+                    <input type="submit" name="update" value="Submit Now" class="btn btn-success form-control">
+                </div>
+                </div>
+            </div> 
+       </form>
 
-                          <br>
+       <?php
+       
+       if(isset($_POST['update'])){
 
-                          <img src="product_images/<?php echo $p_image1; ?>" alt="<?php echo $p_image1; ?>" width="60" height="60">
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Image 2 </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_img2" type="file" class="form-control" required>
-
-                          <br>
-
-                            <img src="product_images/<?php echo $p_image2; ?>" alt="<?php echo $p_image2; ?>" width="60" height="60">
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Image 3 </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_img3" type="file" class="form-control form-height-custom" required>
-
-                          <br>
-
-                        <img src="product_images/<?php echo $p_image3; ?>" alt="<?php echo $p_image3; ?>" width="60" height="60">
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Price </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_price" type="text" class="form-control" value="<?php echo $p_price; ?>" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Keywords </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_keywords" type="text" class="form-control" value="<?php echo $p_keywords; ?>" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Desc </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <textarea name="product_desc" cols="19" rows="6" class="form-control"><?php echo $p_desc; ?></textarea>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"></label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="update" value="Upadte Product" type="submit" class="btn btn-primary form-control">
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-               </form><!-- form-horizontal Finish -->
-               
-           </div><!-- panel-body Finish -->
+        $product_title = $_POST['product_title'];
+        $cat = $_POST['cat'];
+        $product_price = $_POST['product_price'];
+        $product_keywords = $_POST['product_keywords'];
+        $product_desc = $_POST['product_desc'];
+        $product_stock = $_POST['product_stock'];
+        
+        $product_img1 = $_FILES['product_img1']['name'];
+        
+        $temp_name1 = $_FILES['product_img1']['tmp_name'];
+        
+        move_uploaded_file($temp_name1,"product_images/$product_img1");
+    
+        $update_product = "UPDATE products SET 
+                            cat_id='$cat',
+                            date=NOW(),
+                            product_title='$product_title',
+                            product_img1='$product_img1',
+                            product_price='$product_price',
+                            product_keywords='$product_keywords',
+                            product_desc='$product_desc',
+                            product_stock='$product_stock'
+                            WHERE product_id='$p_id'";
+        
+        $run_product = mysqli_query($con,$update_product);
+    
+    
+        if($run_product){
             
-        </div><!-- canel panel-default Finish -->
-        
-    </div><!-- col-lg-12 Finish -->
-    
-</div><!-- row Finish -->
-
-    <script src="js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea'});</script>
-</body>
-</html>
-
-
-<?php 
-
-if(isset($_POST['update'])){
-    
-    $product_title = $_POST['product_title'];
-    $product_cat = $_POST['product_cat'];
-    $cat = $_POST['cat'];
-    $product_price = $_POST['product_price'];
-    $product_keywords = $_POST['product_keywords'];
-    $product_desc = $_POST['product_desc'];
-    
-    $product_img1 = $_FILES['product_img1']['name'];
-    $product_img2 = $_FILES['product_img2']['name'];
-    $product_img3 = $_FILES['product_img3']['name'];
-    
-    $temp_name1 = $_FILES['product_img1']['tmp_name'];
-    $temp_name2 = $_FILES['product_img2']['tmp_name'];
-    $temp_name3 = $_FILES['product_img3']['tmp_name'];
-    
-    move_uploaded_file($temp_name1,"product_images/$product_img1");
-    move_uploaded_file($temp_name2,"product_images/$product_img2");
-    move_uploaded_file($temp_name3,"product_images/$product_img3");
-
-    $update_product = "update products set 
-                        p_cat_id='$product_cat',
-                        cat_id='$cat',
-                        date=NOW(),
-                        product_title='$product_title',
-                        product_img1='$product_img1',
-                        product_img2='$product_img2',
-                        product_img3='$product_img3',
-                        product_price='$product_price',
-                        product_keywords='$product_keywords',
-                        product_desc='$product_desc' 
-                        where product_id='$p_id'";
-    
-    $run_product = mysqli_query($con,$update_product);
-
-
-    if($run_product){
-        
-        echo "<script>alert('Product has been Updated sucessfully')</script>";
-        echo "<script>window.open('index.php?view_products','_self')</script>";
+            echo "<script>alert('Product has been Updated sucessfully')</script>";
+            echo "<script>window.open('index.php?view_products','_self')</script>";
+            
+        }
         
     }
-    
-}
-?>
+       
+       ?>
 
 <?php } ?>

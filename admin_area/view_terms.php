@@ -8,31 +8,15 @@
 
 ?>
 
-<div class="row"><!-- row 1 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <ol class="breadcrumb"><!-- breadcrumb begin -->
-            <li>
-                
-                <i class="fa fa-dashboard"></i> Dashboard / View Terms
-                
-            </li>
-        </ol><!-- breadcrumb finish -->
-    </div><!-- col-lg-12 finish -->
-</div><!-- row 1 finish -->
-
-<div class="row"><!-- row 2 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <div class="panel panel-default"><!-- panel panel-default begin -->
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <h3 class="panel-title"><!-- panel-title begin -->
-                
-                    <i class="fa fa-tags fa-fw"></i> View Terms
-                
-                </h3><!-- panel-title finish -->
-            </div><!-- panel-heading finish -->
-            
-            <div class="panel-body"><!-- panel-body begin -->
-            
+    <div class="row">
+           <div class="col-lg-6 col-md-6">
+           <h2 class="card-title">TERMS & CONDITIONS</h2>
+           </div>
+           <div class="col-lg-6 col-md-6">
+            <a href="index.php?insert_terms" class="btn btn-primary pull-right">Add New</a>
+           </div>
+       </div>
+       <div class="row">
                 <?php 
                 
                     $get_terms = "select * from terms";
@@ -90,10 +74,6 @@
                 
                 <?php } ?>
             
-            </div><!-- panel-body finish -->
-            
-        </div><!-- panel panel-default finish -->
-    </div><!-- col-lg-12 finish -->
 </div><!-- row 2 finish -->
 
 

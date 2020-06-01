@@ -62,6 +62,50 @@ function add_cart(){
 
 /// finish add_cart functions ///
 
+/// begin add_cat_cart functions ///
+
+function add_cat_cart(){
+    
+    global $db;
+    
+    if(isset($_GET['add_cat_cart'])){
+        
+        $ip_add = getRealIpUser();
+        
+        $p_id = $_GET['add_cat_cart'];
+        
+        $cat_id = $_POST['cat_id'];
+        
+        // $product_qty = $_POST['product_qty'];
+        
+        $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
+        
+        $run_check = mysqli_query($db,$check_product);
+        
+        if(mysqli_num_rows($run_check)>0){
+            
+            $update_qty= "update cart set qty=qty+1 where p_id='$p_id'";
+
+            $run_update_qty = mysqli_query($db,$update_qty);
+
+            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+            
+        }else{
+            
+            $query = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip_add','1')";
+            
+            $run_query = mysqli_query($db,$query);
+            
+            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+            
+        }
+        
+    }
+    
+}
+
+/// finish add_cat_cart functions ///
+
 /// begin add_index_cart functions ///
 
 function add_index_cart(){
@@ -178,6 +222,51 @@ function delete_cart(){
 }
 
 /// finish delete_cart functions ///
+
+/// begin delete_cat_cart functions ///
+
+function delete_cat_cart(){
+
+    global $db;
+
+    if(isset($_GET['delete_cat_cart'])){
+
+        $ip_add = getRealIpUser();
+
+        $p_id = $_GET['delete_cat_cart'];
+
+        $cat_id = $_POST['cat_id'];
+
+        $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
+        
+        $run_check = mysqli_query($db,$check_cart);
+
+        $row_check = mysqli_fetch_array($run_check);
+
+        $qty = $row_check['qty'];
+
+        if($qty>1){
+
+            $update_qty= "update cart set qty=qty-1 where p_id='$p_id'";
+
+            $run_update_qty = mysqli_query($db,$update_qty);
+
+            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+
+        }else{
+
+            $delete_qty= "delete from cart where p_id='$p_id'";
+
+            $run_delete_qty = mysqli_query($db,$delete_qty);
+
+            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+
+        }
+    }
+
+}
+
+/// finish delete_cat_cart functions ///
 
 /// begin delete_cart functions ///
 

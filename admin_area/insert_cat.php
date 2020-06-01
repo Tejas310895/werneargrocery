@@ -8,82 +8,44 @@
 
 ?>
 
-<div class="row"><!-- row 1 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <ol class="breadcrumb"><!-- breadcrumb begin -->
-            <li>
-                
-                <i class="fa fa-dashboard"></i> Dashboard / Insert Category
-                
-            </li>
-        </ol><!-- breadcrumb finish -->
-    </div><!-- col-lg-12 finish -->
-</div><!-- row 1 finish -->
-
-<div class="row"><!-- row 2 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <div class="panel panel-default"><!-- panel panel-default begin -->
-            <div class="panel-heading"><!-- panel-heading begin -->
-                <h3 class="panel-title"><!-- panel-title begin -->
-                
-                    <i class="fa fa-money fa-fw"></i> Insert Category
-                
-                </h3><!-- panel-title finish -->
-            </div><!-- panel-heading finish -->
-            
-            <div class="panel-body"><!-- panel-body begin -->
-                <form action="" class="form-horizontal" method="post"><!-- form-horizontal begin -->
+         <div class="row">
+           <div class="col-lg-6 col-md-6">
+           <h2 class="card-title">INSERT CATEGORY</h2>
+           </div>
+           <div class="col-lg-6 col-md-6">
+            <a href="index.php?view_cats" class="btn btn-primary pull-right">Back</a>
+           </div>
+       </div>
+                <form action="" class="form-horizontal" method="post" enctype="multipart/form-data" ><!-- form-horizontal begin -->
+                <div class="row mt-5"><!-- row 2 begin -->
+                    <div class="col-lg-6">
+                        <div class="form-group"><!-- form-group begin -->
+                            
+                                <input name="cat_title" type="text" placeholder="Category Title " class="form-control">
+                            
+                        
+                        </div><!-- form-group finish -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <label class="custom-file-label"  for="inputGroupFile01">Choose Catagory Image</label>
+                                <input type="file" name="cat_image" class="custom-file-input" id="inputGroupFile01" required>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group"><!-- form-group begin -->
-                    
-                        <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
-                        
-                            Category Title 
-                        
-                        </label><!-- control-label col-md-3 finish --> 
-                        
-                        <div class="col-md-6"><!-- col-md-6 begin -->
-                        
-                            <input name="cat_title" type="text" class="form-control">
-                        
-                        </div><!-- col-md-6 finish -->
-                    
-                    </div><!-- form-group finish -->
-                    <div class="form-group"><!-- form-group begin -->
-                    
-                        <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
-                        
-                            Category Description 
-                        
-                        </label><!-- control-label col-md-3 finish --> 
-                        
-                        <div class="col-md-6"><!-- col-md-6 begin -->
-                        
-                            <textarea type='text' name="cat_desc" id="" cols="30" rows="10" class="form-control"></textarea>
-                        
-                        </div><!-- col-md-6 finish -->
-                    
-                    </div><!-- form-group finish -->
-                    <div class="form-group"><!-- form-group begin -->
-                    
-                        <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
-                        
-                             
-                        
-                        </label><!-- control-label col-md-3 finish --> 
-                        
-                        <div class="col-md-6"><!-- col-md-6 begin -->
+                                            
+                        <div class="col-lg-12"><!-- col-md-6 begin -->
                         
                             <input value="Submit" name="submit" type="submit" class="form-control btn btn-primary">
                         
                         </div><!-- col-md-6 finish -->
                     
                     </div><!-- form-group finish -->
-                </form><!-- form-horizontal finish -->
-            </div><!-- panel-body finish -->
-            
-        </div><!-- panel panel-default finish -->
-    </div><!-- col-lg-12 finish -->
-</div><!-- row 2 finish -->
+            </div><!-- row 2 finish -->
+    </form><!-- form-horizontal finish -->
+
 
 <?php  
 
@@ -91,9 +53,13 @@
               
               $cat_title = $_POST['cat_title'];
               
-              $cat_desc = $_POST['cat_desc'];
+              $cat_image = $_FILES['cat_image']['name'];
+    
+              $temp_name = $_FILES['cat_image']['tmp_name'];
               
-              $insert_cat = "insert into categories (cat_title,cat_desc) values ('$cat_title','$cat_desc')";
+              move_uploaded_file($temp_name,"other_images/$cat_image");
+              
+              $insert_cat = "insert into categories (cat_title,cat_image) values ('$cat_title','$cat_image')";
               
               $run_cat = mysqli_query($con,$insert_cat);
               
