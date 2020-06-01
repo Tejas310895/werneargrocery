@@ -1,6 +1,6 @@
 <?php 
 
-$con = mysqli_connect('localhost:3308','root','','wrngrocery');
+$con = mysqli_connect('localhost','u464233779_grocery','Sugandha@11','u464233779_grocery');
 
 /*if($con){
     echo " connected ";
