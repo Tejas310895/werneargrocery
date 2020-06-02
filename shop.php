@@ -189,6 +189,8 @@
 
                 $pro_desc = $row_products['product_desc'];
 
+                $pro_stock = $row_products['product_stock'];
+
                 // echo "
                 
                     // <div class='row bg-white mt-1 py-2'>
@@ -227,6 +229,8 @@
                                 <div class="col-6">
                                     <h5 class="pro_list_price">₹ <?php echo $pro_price; ?></h5>
                                 </div>
+
+                                <?php if($pro_stock>0){ ?>
                             <?php 
 
                                 $ip_add = getRealIpUser();
@@ -273,6 +277,23 @@
                                 
 
                             ?>
+                            <?php }else{
+
+                                echo"
+                                
+                                <div class='row'>
+                                    <div class='col'>
+                                    <a href='customer/notify.php?pro_id=$pro_id' class='btn btn-danger py-0 px-1 text-center' style='font-size:15px;'>
+                                    Notify Us
+                                    <p class='text-center mb-0'style='font-size:8px;' >Out of Stock</p>
+                                    </a>   
+                                    </div>
+                                </div>
+
+                                ";
+                            }
+                                
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -321,6 +342,8 @@
                         $pro_desc = $row_products['product_desc'];
                         
                         $pro_img1 = $row_products['product_img1'];
+                        
+                        $pro_stock = $row_products['product_stock'];
                         ?>
                         
                             <div class="row bg-white mt-1 py-2">
@@ -334,6 +357,7 @@
                                         <div class="col-6">
                                             <h5 class="pro_list_price">₹ <?php echo $pro_price; ?></h5>
                                         </div>
+                                        <?php if($pro_stock>0){ ?>
                                         <?php 
 
                                     $ip_add = getRealIpUser();
@@ -383,6 +407,23 @@
                                     
 
                                 ?>
+                                <?php }else{
+
+                                        echo"
+
+                                        <div class='row'>
+                                        <div class='col'>
+                                        <a href='customer/notify.php?pro_id=$pro_id' class='btn btn-danger py-0 px-1 text-center' style='font-size:15px;'>
+                                        Notify Us
+                                        <p class='text-center mb-0'style='font-size:8px;' >Out of Stock</p>
+                                        </a>   
+                                        </div>
+                                        </div>
+
+                                        ";
+                                        }
+
+                                        ?>
                                     </div>
                                 </div>
                             </div>

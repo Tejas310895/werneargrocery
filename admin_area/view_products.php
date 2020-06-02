@@ -10,7 +10,7 @@
 
        <div class="row">
            <div class="col-lg-6 col-md-6">
-           <h2 class="card-title">PRODUCTS (255)</h2>
+           <h2 class="card-title">PRODUCTS (<?php echo $count_products; ?>)</h2>
            </div>
            <div class="col-lg-6 col-md-6">
             <a href="index.php?insert_product" class="btn btn-success pull-right">NEW PRODUCT</a>
