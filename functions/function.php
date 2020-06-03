@@ -31,7 +31,7 @@ function add_cart(){
         
         $p_id = $_GET['add_cart'];
         
-        // $product_qty = $_POST['product_qty'];
+        $store_id = $_POST['store_id'];
         
         $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
         

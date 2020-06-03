@@ -32,6 +32,12 @@
             </a>
           </li>
           <li>
+            <a href="index.php?view_pro_cat">
+              <i class="tim-icons icon-paper"></i>
+              <p>PRODUCT CATEGORIES</p>
+            </a>
+          </li>
+          <li>
             <a href="index.php?view_cats">
               <i class="tim-icons icon-paper"></i>
               <p>CATEGORIES</p>

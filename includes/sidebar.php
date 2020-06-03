@@ -2,7 +2,7 @@
     <div class="row">
         <nav class="pn-ProductNav">
             <div class="pn-ProductNav_Contents">
-                <a href="shop.php" class="pn-ProductNav_Link" aria-selected="<?php if(!isset($_GET['cat'])){echo 'true';}else{echo 'false';}?>">All</a>
+                <a href="store" class="pn-ProductNav_Link" aria-selected="<?php if(!isset($_GET['cat'])){echo 'true';}else{echo 'false';}?>">All</a>
                 <?php getCats(); ?>
             </div>
         </nav>

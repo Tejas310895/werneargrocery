@@ -53,20 +53,20 @@
 
                 $product_stock = $row_product['product_stock'];
 
-                $cat_id = $row_product['cat_id'];
+                $store_id = $row_product['store_id'];
 
-                $get_cat = "select * from categories where cat_id='$cat_id'";
+                $get_store = "select * from store where store_id='$store_id'";
 
-                $run_cat = mysqli_query($con,$get_cat);
+                $run_store = mysqli_query($con,$get_store);
 
-                $row_cat = mysqli_fetch_array($run_cat);
+                $row_store = mysqli_fetch_array($run_store);
 
-                $cat_title = $row_cat['cat_title'];
+                $store_title = $row_store['store_title'];
             
             ?>
                 <tr class="text-center">
                     <td ><?php echo ++$counter; ?></td>
-                    <td ><?php echo $cat_title; ?></td>
+                    <td ><?php echo $store_title; ?></td>
                     <td>
                         <img src="product_images/<?php echo $product_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
                     </td>

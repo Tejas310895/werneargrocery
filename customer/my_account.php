@@ -223,7 +223,15 @@ session_start();
                     <h5 class="mb-0 text-left order_head">My Orders</h5>
                 </div>
             </button>
-            <?php 
+            <?php
+
+            $get_min = "select * from admins";
+
+            $run_min = mysqli_query($con,$get_min);
+
+            $row_min = mysqli_fetch_array($run_min);
+
+            $del_charges = $row_min['del_charges'];
             
             $get_invoice = "select * from customer_orders where customer_id='$c_id' group by invoice_no";
 
@@ -275,10 +283,10 @@ session_start();
                                 <div class="row">
                                     <div class="col-9">
                                         <h5 class="card-title mb-0"><?php echo $row_order_count; ?> Items</h5>
-                                        <h5 class="card-title mb-0">₹ <?php echo  $order_sum; ?></h5>
+                                        <h5 class="card-title mb-0">₹ <?php echo  $order_sum+$del_charges; ?></h5>
                                     </div>
                                     <div class="col-3 pt-2">
-                                        <a href="order_view.php?invoice_no=<?php echo  $invoice_id; ?>" class="btn btn-success order_view py-0 mr-5" >View</a>
+                                        <a href="order_view?invoice_no=<?php echo  $invoice_id; ?>" class="btn btn-success order_view py-0 mr-5" >View</a>
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +385,7 @@ session_start();
                     <h5 class="modal-title text-center" id="exampleModalLabel">ADD NEW ADDRESS</h5>
                 </div>
                 <div class="modal-body">
-                    <form action="my_account.php" method="post" class="register_form">
+                    <form action="my_account" method="post" class="register_form">
                     <div class="form-group">
                         <label>City</label>
                         <select name="c_city" class="form-control" required>
@@ -448,7 +456,7 @@ session_start();
 
                     echo "<script>alert('Address Updated')</script>";
 
-                    echo "<script>window.open('my_account.php','_self')</script>";
+                    echo "<script>window.open('my_account','_self')</script>";
 
                 }else{
 
@@ -478,8 +486,8 @@ session_start();
                 <div class="card-body py-1">
                     <div class="card sup_body mb-2" style="max-width: 100%;">
                             <div class="card-body py-1">
-                                <a href=""><h5 class="sup_title mt-2">+91 9867765397</h5></a>
-                                <a href=""><p class="sup_desc mb-0">tshirsat700@gmail.com</p></a>
+                                <a href="tel:9867765397"><h5 class="sup_title mt-2">+91 9867765397</h5></a>
+                                <a href="mailto:tshirsat700@gmail.com"><p class="sup_desc mb-0">tshirsat700@gmail.com</p></a>
                             </div>
                         </div>
                     </div>
@@ -501,8 +509,22 @@ session_start();
                 <div class="card-body py-1">
                     <div class="card mb-2 trm_body" style="max-width:100%;">
                             <div class="card-body py-1">
-                                <a href=""><h5 class="trm_title mt-2">Refund Policy</h5></a>
-                                <a href=""><p class="trm_desc mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat amet vel laborum eos reprehenderit numquam nostrum velit non cupiditate aliquam quibusdam ipsa accusantium nisi consequuntur ab, repudiandae assumenda quia perspiciatis?</p></a>
+                                <?php 
+                                
+                                $get_terms = "select * from terms";
+
+                                $run_terms = mysqli_query($con,$get_terms);
+
+                                while($row_terms = mysqli_fetch_array($run_terms)){
+
+                                    $term_title = $row_terms['term_title'];
+
+                                    $term_desc = $row_terms['term_desc'];
+                                
+                                ?>
+                                <h5 class="trm_title mt-2"><?php echo $term_title; ?></h5>
+                                <p class="trm_desc mb-0"><?php echo $term_desc; ?></p>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

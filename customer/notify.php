@@ -93,11 +93,12 @@ if(isset($_POST['submit'])){
     $to = 'tshirsat700@gmail.com';
     $subject = 'Notifications';
     $from = 'tshirsat700@gmail.com';
-    $message = 'Product :'.$product_name.'</br>'.'Required Qty :'.$product_qty; 
+    $message = 'Product :'.$product_name.'</br> Required Qty :'.$product_qty; 
  
     // Sending email
     if(mail($to, $subject, $message)){
         echo "<script>alert('We will review your enquiry')</script>";
+        echo "<script>window.open('../store','_self')</script>";
     } else{
         echo "<script>alert('Not sent Please try again')</script>";
     }

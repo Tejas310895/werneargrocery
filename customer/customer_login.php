@@ -24,7 +24,7 @@
     </div>
 <!-- login form -->
 <div class="container">
-        <form action="checkout.php" method="post" class="register_form">
+        <form action="checkout" method="post" class="register_form">
         <div class="form-group">
             <label>Email address</label>
             <input type="email" class="form-control" id="email" name="c_email" aria-describedby="emailHelp" placeholder="Enter email" required>
@@ -40,7 +40,7 @@
 
 <div class="container px-5">
     <h5 class=" text-center register_link mt-2">Not a Member?</h5>
-    <a href="./customer_register.php" class="btn btnregister_link text-center btn-block p-0">Register Here</a>
+    <a href="./customer_register" class="btn btnregister_link text-center btn-block p-0">Register Here</a>
 </div>
 
 <?php 
@@ -79,7 +79,7 @@
 
             echo "<script>alert('your are Logged in ')</script>";
 
-            echo "<script>window.open('customer/my_account.php','_self')</script>";
+            echo "<script>window.open('customer/my_account','_self')</script>";
 
         }else{
 
@@ -87,7 +87,7 @@
 
             echo "<script>alert('your are Logged in ')</script>";
 
-            echo "<script>window.open('checkout.php','_self')</script>";
+            echo "<script>window.open('checkout','_self')</script>";
 
 
         }

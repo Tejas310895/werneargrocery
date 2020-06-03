@@ -24,7 +24,7 @@ if(!isset($_SESSION['admin_email'])){
 
         $p_title = $row_edit['product_title'];
 
-        $cat = $row_edit['cat_id'];
+        $store = $row_edit['store_id'];
 
         $p_image1 = $row_edit['product_img1'];
 
@@ -38,13 +38,13 @@ if(!isset($_SESSION['admin_email'])){
 
     }
 
-        $get_cat = "select * from categories where cat_id='$cat'";
+        $get_store = "select * from store where store_id='$store'";
 
-        $run_cat = mysqli_query($con,$get_cat);
+        $run_store = mysqli_query($con,$get_store);
 
-        $row_cat = mysqli_fetch_array($run_cat);
+        $row_store = mysqli_fetch_array($run_store);
 
-        $cat_title = $row_cat['cat_title'];
+        $store_title = $row_store['store_title'];
 
 ?>
 
@@ -93,21 +93,21 @@ if(!isset($_SESSION['admin_email'])){
                 <div class="col-lg-6 col-md-6 mt-5">
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Select Category</label>
-                    <select class="form-control" name="cat" id="exampleFormControlSelect1" required>
-                        <option value="<?php echo $cat; ?>"><?php echo $cat_title; ?></option>
+                    <select class="form-control" name="store" id="exampleFormControlSelect1" required>
+                        <option value="<?php echo $store; ?>"><?php echo $store_title; ?></option>
                     <?php 
                               
-                              $get_cat = "select * from categories";
-                              $run_cat = mysqli_query($con,$get_cat);
+                              $get_store = "select * from store";
+                              $run_store = mysqli_query($con,$get_store);
                               
-                              while ($row_cat=mysqli_fetch_array($run_cat)){
+                              while ($row_store=mysqli_fetch_array($run_store)){
                                   
-                                  $cat_id = $row_cat['cat_id'];
-                                  $cat_title = $row_cat['cat_title'];
+                                  $store_id = $row_store['store_id'];
+                                  $store_title = $row_store['store_title'];
                                   
                                   echo "
                                   
-                                  <option value='$cat_id'> $cat_title </option>
+                                  <option value='$store_id'> $store_title </option>
                                   
                                   ";
                                   
@@ -140,7 +140,7 @@ if(!isset($_SESSION['admin_email'])){
        if(isset($_POST['update'])){
 
         $product_title = $_POST['product_title'];
-        $cat = $_POST['cat'];
+        $store = $_POST['store'];
         $product_price = $_POST['product_price'];
         $product_keywords = $_POST['product_keywords'];
         $product_desc = $_POST['product_desc'];
@@ -153,7 +153,7 @@ if(!isset($_SESSION['admin_email'])){
         move_uploaded_file($temp_name1,"product_images/$product_img1");
     
         $update_product = "UPDATE products SET 
-                            cat_id='$cat',
+                            store_id='$store',
                             date=NOW(),
                             product_title='$product_title',
                             product_img1='$product_img1',

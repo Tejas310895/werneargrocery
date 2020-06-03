@@ -53,7 +53,7 @@ session_start();
         <!-- nav -->
             <ul class="nav bg-white accounttop ">
                 <li class="nav-item">
-                    <a class="nav-link" href="my_account.php">
+                    <a class="nav-link" href="my_account">
                         <i style="font-size: 1.5rem;" class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -72,7 +72,7 @@ session_start();
 
 <!-- Order Details -->
 
-<div class="container bg-white mt-5 pt-4">
+    <div class="container bg-white mt-5 pt-4">
     <?php 
 
     if(isset($_GET['invoice_no'])){
@@ -86,6 +86,14 @@ session_start();
         $get_total = "SELECT sum(due_amount) as sum_total FROM customer_orders WHERE invoice_no='$invoice_no'";
 
         $run_total = mysqli_query($con,$get_total);
+
+        $get_min = "select * from admins";
+
+        $run_min = mysqli_query($con,$get_min);
+
+        $row_min = mysqli_fetch_array($run_min);
+
+        $del_charges = $row_min['del_charges'];
 
         $row_total = mysqli_fetch_array($run_total);
 
@@ -148,12 +156,13 @@ session_start();
     }
 
     ?>
-            <div class="row py-2 fixed-bottom px-3" style="background-color:#999;">
+            <div class="row py-1 fixed-bottom px-3" style="background-color:#999;">
                 <div class="col-6">
-                    <h5 class="total_sum text-left">Total: </h5> 
+                    <h5 class="total_sum text-left mb-0">Total:</h5>
+                    <p class="mb-0">Inc of Charges</p>
                 </div>
                 <div class="col-6">
-                    <h5 class="total_sum text-right">₹ <?php echo $row_total['sum_total']; ?></h5>
+                    <h5 class="total_sum text-right py-2">₹ <?php echo $row_total['sum_total']+$del_charges; ?></h5>
                 </div>
             </div>
                 </div>

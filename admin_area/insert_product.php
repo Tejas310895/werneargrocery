@@ -54,20 +54,20 @@ if(!isset($_SESSION['admin_email'])){
                 <div class="col-lg-6 col-md-6 mt-5">
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Select Category</label>
-                    <select class="form-control" name="cat" id="exampleFormControlSelect1" required>
+                    <select class="form-control" name="store" id="exampleFormControlSelect1" required>
                     <?php 
                               
-                              $get_cat = "select * from categories";
-                              $run_cat = mysqli_query($con,$get_cat);
+                              $get_store = "select * from store";
+                              $run_store = mysqli_query($con,$get_store);
                               
-                              while ($row_cat=mysqli_fetch_array($run_cat)){
+                              while ($row_store=mysqli_fetch_array($run_store)){
                                   
-                                  $cat_id = $row_cat['cat_id'];
-                                  $cat_title = $row_cat['cat_title'];
+                                  $store_id = $row_store['store_id'];
+                                  $store_title = $row_store['store_title'];
                                   
                                   echo "
                                   
-                                  <option value='$cat_id'> $cat_title </option>
+                                  <option value='$store_id'> $store_title </option>
                                   
                                   ";
                                   
@@ -100,7 +100,7 @@ if(!isset($_SESSION['admin_email'])){
 if(isset($_POST['submit'])){
     
     $product_title = $_POST['product_title'];
-    $cat = $_POST['cat'];
+    $store = $_POST['store'];
     $product_price = $_POST['product_price'];
     $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
@@ -112,7 +112,7 @@ if(isset($_POST['submit'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
     
-    $insert_product = "insert into products (cat_id,date,product_title,product_img1,product_price,product_keywords,product_desc,product_stock) values ('$cat',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc','$product_stock')";
+    $insert_product = "insert into products (store_id,date,product_title,product_img1,product_price,product_keywords,product_desc,product_stock) values ('$store',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc','$product_stock')";
     
     $run_product = mysqli_query($con,$insert_product);
     

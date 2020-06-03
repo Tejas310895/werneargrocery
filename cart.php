@@ -9,7 +9,7 @@
             <!-- nav -->
                 <ul class="nav bg-white cartloc ">
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">
+                        <a class="nav-link" href="store">
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -98,11 +98,11 @@
                             <div class='row'>
                                 <div class='col-6'>
                                     <div class='row pl-3'>
-                                        <form action='cart.php?delete_checkout=$pro_id' class='form-horizontal' method='post'>
+                                        <form action='cart?delete_checkout=$pro_id' class='form-horizontal' method='post'>
                                         <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
                                         </form>
                                         <input type='numeric' class='cart_qty' placeholder='' value='$pro_qty' aria-describedby='helpId'>
-                                        <form action='cart.php?add_checkout=$pro_id' class='form-horizontal' method='post'>
+                                        <form action='cart?add_checkout=$pro_id' class='form-horizontal' method='post'>
                                         <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
                                         </form>
                                     </div> 
@@ -133,11 +133,25 @@
                     <div class="row">
                         <div class="col-lg"><img src="admin_area/other_images/cart_lobo.png" class="img-fluid w-75 mx-auto d-block" alt="..."></div>
                         <div class="col-lg"><h5 class="order_again">Lobo is waiting for your order</h5></div>
-                        <div class="col-lg px-5"><a href="shop.php" class="btn btn-warning btn-block order_again_bottom d-block p-1">Start Shopping</a></div>
+                        <div class="col-lg px-5"><a href="store" class="btn btn-warning btn-block order_again_bottom d-block p-1">Start Shopping</a></div>
                     </div>
                 </div>
 
 <!-- show lobo -->
+
+<?php 
+
+    $get_min = "select * from admins";
+
+    $run_min = mysqli_query($con,$get_min);
+
+    $row_min = mysqli_fetch_array($run_min);
+
+    $min_price = $row_min['min_order'];
+
+    $del_charges = $row_min['del_charges'];
+
+?>
 
 <!-- bill Section -->
     <div class="container bg-white mt-2 mb-5 fixed-bottom" style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
@@ -152,17 +166,13 @@
                     <th scope="row" class="bill_sub_total">Item Total:</th>
                     <td class="bill_sub_total text-center">₹ <?php echo $total; ?></td>
                 </tr>
-                <tr>
-                    <th scope="row" class="bill_tax" >Taxes:</th>
-                    <td class="bill_tax text-center">₹ 20</td>
-                </tr>
-                <tr>
+                <tr style="display:<?php if($del_charges>0){echo"table-row";}else{echo"none";} ?>;">
                     <th scope="row" class="bill_charges" >Delivery Charges:</th>
-                    <td class="bill_charges text-center">₹ 30</td>
+                    <td class="bill_charges text-center">₹ <?php echo $del_charges; ?></td>
                 </tr>
                 <tr>
                     <th scope="row" class="bill_total">TOTAL:</th>
-                    <td class="bill_total text-center">₹ <?php echo $total; ?></td>
+                    <td class="bill_total text-center">₹ <?php echo $total+$del_charges; ?></td>
                 </tr>
             </tbody>
         </table>
@@ -176,13 +186,32 @@
         <div class="row cart_bottom">
             <div class="col-6 pl-3">
                 <h5 class="item_count pt-1 mb-0"><?php echo $count; ?> Items</h4>
-                <h4 class="item_cost mb-0">₹ <?php echo $total; ?></h3>
+                <h4 class="item_cost mb-0">₹ <?php echo $total+$del_charges; ?></h3>
             </div>
             <div class="col-6 p-0">
-                <a href="checkout.php" class="btn btn-success pull-right bill_checkout">
+                <?php if($min_price>$total){
+
+                    $required = $min_price-$total;
+
+                    echo "
+                    
+                    <a class='btn btn-success pull-right bill_checkout' style='color:#fff;'>
+                    Add $required More
+                    </a>
+                    
+                    ";
+
+                }else{
+                    echo "
+                    
+                    <a href='checkout' class='btn btn-success pull-right bill_checkout'>
                     Checkout
-                    <i style="font-size:1.2rem; color:#fff;" class="fas fa-angle-double-right"></i>
-                </a>
+                    <i style='font-size:1.2rem; color:#fff;' class='fas fa-angle-double-right'></i>
+                    </a>
+                    
+                    ";
+                }
+                 ?>
             </div>
         </div>
     </div>

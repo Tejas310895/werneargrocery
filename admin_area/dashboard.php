@@ -128,7 +128,7 @@ $cancel_count = $row_cancel_count['count'];
                                       <th>Contact</th>
                                       <th>Address</th>
                                       <th>Items</th>
-                                      <th>Salary</th>
+                                      <th>Cost</th>
                                       <th>View</th>
                                     </tr>
                                 </thead>

@@ -103,6 +103,16 @@
                           $customer_landmark = $row_add['customer_landmark'];
 
                           $customer_city = $row_add['customer_city'];
+
+                          $get_min = "select * from admins";
+
+                          $run_min = mysqli_query($con,$get_min);
+
+                          $row_min = mysqli_fetch_array($run_min);
+
+                          $min_price = $row_min['min_order'];
+
+                          $del_charges = $row_min['del_charges'];
                   ?>
                       <div class="card">
                             <div class="card-body card_shadow mx-3 mt-2 mb-0">
@@ -121,7 +131,7 @@
                                                                       <?php echo $customer_city; ?> .
                                                                       </h4>
                                   </div>
-                                  <div class="col"><h3 class="card-subtitle mt-2 pull-right"><?php echo $order_count; ?> Items -  ₹<?php echo $total; ?>/-</h3></div>
+                                  <div class="col"><h3 class="card-subtitle mt-2 pull-right"><?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-</h3></div>
                                 </div>
                                 <div class="row">
                                   <div class="col-lg-12">
@@ -188,7 +198,17 @@
                                           $pro_desc = $row_pro['product_desc'];
                                           
                                           $sub_total = $pro_price * $qty;
-                                          
+
+                                          $get_min = "select * from admins";
+
+                                          $run_min = mysqli_query($con,$get_min);
+
+                                          $row_min = mysqli_fetch_array($run_min);
+
+                                          $min_price = $row_min['min_order'];
+
+                                          $del_charges = $row_min['del_charges'];
+
                                           ?>
                                               <tr>
                                                   <td class="text-center"><?php echo ++$counter; ?></td>
@@ -206,7 +226,7 @@
                                         </div>
                                         <div class="modal-footer">
                                           <button type="button" class="btn btn-primary text-left" data-dismiss="modal">Close</button>
-                                          <h3 class="card-title">Total - ₹ <?php echo $total; ?>/-</h3>
+                                          <h3 class="card-title">Total - ₹ <?php echo $total+$del_charges; ?>/-</h3>
                                         </div>
                                       </div>
                                     </div>

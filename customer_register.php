@@ -75,6 +75,19 @@ if(isset($_POST['register'])){
 
     $c_ip = getRealIpUser();
 
+     //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
+    $url = "http://5.189.169.241:5012/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=Thank%20You%20for%20Registration";
+    // Initialize a CURL session. 
+    $ch = curl_init();  
+    
+    // Return Page contents. 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+    
+    //grab URL and pass it to the variable. 
+    curl_setopt($ch, CURLOPT_URL, $url); 
+    
+    $result = curl_exec($ch); 
+
     $insert_customer = "insert into customers (customer_name,customer_contact,customer_email,customer_pass,customer_ip) 
     values ('$c_name','$c_contact','$c_email','$c_pass','$c_ip')";
 
@@ -94,7 +107,7 @@ if(isset($_POST['register'])){
 
         echo "<script>alert('You have Registered Sucessfully')</script>";
 
-        echo "<script>window.open('checkout.php','_self')</script>";
+        echo "<script>window.open('checkout','_self')</script>";
 
     }else{
 
@@ -104,7 +117,7 @@ if(isset($_POST['register'])){
 
         echo "<script>alert('You have Registered Sucessfully')</script>";
 
-        echo "<script>window.open('index.php','_self')</script>";
+        echo "<script>window.open('./','_self')</script>";
 
     }
     

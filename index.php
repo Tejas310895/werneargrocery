@@ -167,101 +167,44 @@
             <?php delete_index_cart(); ?>
             <?php
             
-                $get_products = "select * from products order by product_id DESC LIMIT 0,7";
+                $get_store = "select * from store LIMIT 0,7";
                 
-                $run_products = mysqli_query($con,$get_products);
+                $run_store = mysqli_query($con,$get_store);
                 
-                while($row_products=mysqli_fetch_array($run_products)){
+                while($row_store=mysqli_fetch_array($run_store)){
                     
-                    $pro_id = $row_products['product_id'];
+                    $store_id = $row_store['store_id'];
                     
-                    $pro_title = $row_products['product_title'];
+                    $store_title = $row_store['store_title'];
 
-                    $pro_desc = $row_products['product_desc'];
+                    $store_desc = $row_store['store_desc'];
                     
-                    $pro_price = $row_products['product_price'];
+                    $min_price = $row_store['min_price'];
                     
-                    $pro_img1 = $row_products['product_img1'];
-
-                    $pro_stock = $row_products['product_stock'];
+                    $store_img1 = $row_store['store_img'];
                     
                 ?>
 
 
                     <div class='swiper-slide'>
                                 <div class='card pro_card my-2' style='width: 18rem;'>
-                                            <img src='admin_area/product_images/<?php echo $pro_img1; ?>' class='card-img-top pro_img p-1' alt='image responsive' height='100'>
+                                            <img src='admin_area/product_images/<?php echo $store_img1; ?>' class='card-img-top pro_img p-1' alt='image responsive' height='100'>
                                             <div class='card-body p-1'>
-                                            <p class='card-text text-left px-2 pro_title'><?php echo $pro_title; ?></p>
-                                            <p class='card-text text-left px-2 pro_Desc'><?php echo $pro_desc; ?></p>   
+                                            <p class='card-text text-left px-2 pro_title'><?php echo $store_title; ?></p>
+                                            <p class='card-text text-left px-2 store_Desc'><?php echo $store_desc; ?></p>   
                                                 <div class='row'>
                                                     <div class='col-6'>
-                                                    <p class='card-text text-left pro_price pl-1 mt-1'>₹ <?php echo $pro_price; ?></p>
+                                                    <p class='card-text text-left pro_price pl-2 mt-1'>₹ <?php echo $min_price; ?></p>
                                                     </div>
-                                <?php if($pro_stock>0){ ?>
-                            <?php 
-
-                                $ip_add = getRealIpUser();
-
-                                $get_cart = "select * from cart where ip_add='$ip_add' AND p_id='$pro_id'";
-
-                                $run_cart = mysqli_query($con,$get_cart);
-
-                                $row_cart=mysqli_fetch_array($run_cart);
-
-                                    $pro_qty = $row_cart['qty'];
-
-                                    if($pro_qty>0){
-
-                                    echo "
-                                    
-                                    <div class='col-6'>
-                                        <div class='row'>
-                                            <form action='index.php?delete_index_cart=$pro_id' class='form-horizontal' method='post'>
-                                            <button class='btn btn-qty py-1 px-1'><i style='font-size:0.8rem; color:#fff;' class='fas fa-minus'></i></button>
-                                            </form>
-                                            <input type='numeric' class='index_cart_qty' placeholder='' value='$pro_qty' aria-describedby='helpId'>
-                                            <form action='index.php?add_index_cart=$pro_id' class='form-horizontal' method='post'>
-                                            <button class='btn btn-qty py-1 px-1'><i style='font-size:0.8rem; color:#fff;' class='fas fa-plus'></i></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    
-                                    ";
-
-                                }else{
-
-                                    echo "
-
-                                    <form action='index.php?add_index_cart=$pro_id' class='form-horizontal' method='post'>
-                                    <div class='col-6 px-0'>
-                                    <button class='btn py-0 ml-2 addqty'>ADD</a>
-                                    </div>
-                                    </form>
-                                    
-                                    
-                                    ";
-                                    }
-                                
-
-                            ?>
-                             <?php }else{
-
-                                                echo"
-
-                                                <div class='row'>
-                                                    <div class='col pl-1'>
-                                                    <a href='customer/notify.php?pro_id=$pro_id' class='btn btn-danger py-0 px-1 text-center' style='font-size:15px;'>
-                                                    Notify Us
-                                                    <p class='text-center mb-0'style='font-size:8px;' >Out of Stock</p>
-                                                    </a>   
+                                                    <div class='col-6 px-0'>
+                                                        <div class="row">
+                                                        <form action='shop.php?store_id=<?php echo $store_id; ?>' class='form-horizontal' method='post'>
+                                                        <div class='col-12'>
+                                                            <button class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                ";
-                                                }
-
-                                                ?>
+                                                    </form>
                                                 </div> 
                                         </div>
                                 </div>
@@ -296,7 +239,7 @@
 
                                 echo "
                                 
-                                <a class='nav-link  pb-0 pt-2' href='checkout.php'>
+                                <a class='nav-link  pb-0 pt-2' href='checkout'>
                                     <svg height='20pt' viewBox='0 0 512 512' width='20pt' fill='#ff7b00' xmlns='http://www.w3.org/2000/svg'><path d='m512 256c0-141.488281-114.496094-256-256-256-141.488281 0-256 114.496094-256 256 0 140.234375 113.539062 256 256 256 141.875 0 256-115.121094 256-256zm-256-226c124.617188 0 226 101.382812 226 226 0 45.585938-13.558594 89.402344-38.703125 126.515625-100.96875-108.609375-273.441406-108.804687-374.59375 0-25.144531-37.113281-38.703125-80.929687-38.703125-126.515625 0-124.617188 101.382812-226 226-226zm-168.585938 376.5c89.773438-100.695312 247.421876-100.671875 337.167969 0-90.074219 100.773438-247.054687 100.804688-337.167969 0zm0 0'/><path d='m256 271c49.625 0 90-40.375 90-90v-30c0-49.625-40.375-90-90-90s-90 40.375-90 90v30c0 49.625 40.375 90 90 90zm-60-120c0-33.085938 26.914062-60 60-60s60 26.914062 60 60v30c0 33.085938-26.914062 60-60 60s-60-26.914062-60-60zm0 0'/></svg>
                                 <span class='icon-name'>Account</span>
                                 </a>
@@ -307,7 +250,7 @@
                 
                                 echo "
                                 
-                                <a class='nav-link  pb-0 pt-2' href='customer/my_account.php'>
+                                <a class='nav-link  pb-0 pt-2' href='customer/my_account'>
                                     <svg height='20pt' viewBox='0 0 512 512' width='20pt' fill='#ff7b00' xmlns='http://www.w3.org/2000/svg'><path d='m512 256c0-141.488281-114.496094-256-256-256-141.488281 0-256 114.496094-256 256 0 140.234375 113.539062 256 256 256 141.875 0 256-115.121094 256-256zm-256-226c124.617188 0 226 101.382812 226 226 0 45.585938-13.558594 89.402344-38.703125 126.515625-100.96875-108.609375-273.441406-108.804687-374.59375 0-25.144531-37.113281-38.703125-80.929687-38.703125-126.515625 0-124.617188 101.382812-226 226-226zm-168.585938 376.5c89.773438-100.695312 247.421876-100.671875 337.167969 0-90.074219 100.773438-247.054687 100.804688-337.167969 0zm0 0'/><path d='m256 271c49.625 0 90-40.375 90-90v-30c0-49.625-40.375-90-90-90s-90 40.375-90 90v30c0 49.625 40.375 90 90 90zm-60-120c0-33.085938 26.914062-60 60-60s60 26.914062 60 60v30c0 33.085938-26.914062 60-60 60s-60-26.914062-60-60zm0 0'/></svg>
                                 <span class='icon-name'>Account</span>
                                 </a>
@@ -319,7 +262,7 @@
                         ?>
         </li>
         <li class="nav-item px-2  text-center">
-            <a class="nav-link pb-0 pt-2" href="shop.php">
+            <a class="nav-link pb-0 pt-2" href="store">
         <svg version="1.1" id="Capa_1" width="18pt" height="18pt" fill="#ff7b00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
             <g>
@@ -386,7 +329,7 @@
             </a>
         </li>
         <li class="nav-item px-2  text-center">
-            <a class="nav-link pb-0 pt-2 pr-2" href="cart.php">
+            <a class="nav-link pb-0 pt-2 pr-2" href="cart">
                 <svg viewBox="0 -36 512.001 512" width="22pt" height="22pt" fill="#ff7b00" xmlns="http://www.w3.org/2000/svg"><path d="m256 219.988281c5.519531 0 10-4.480469 10-10s-4.480469-10-10-10-10 4.480469-10 10 4.480469 10 10 10zm0 0"/><path d="m472 139.988281h-59.136719l-90.96875-125.152343c-8.171875-14.003907-26.171875-18.988282-40.46875-11.070313-14.492187 8.050781-19.703125 26.304687-11.648437 40.800781.230468.410156.484375.804688.769531 1.179688l71.351563 94.242187h-171.796876l71.351563-94.242187c.28125-.375.539063-.769532.769531-1.179688 8.035156-14.460937 2.882813-32.730468-11.660156-40.808594-14.265625-7.902343-32.265625-2.921874-40.453125 11.070313l-90.972656 125.160156h-59.136719c-22.054688 0-40 17.945313-40 40 0 17.394531 11.289062 32.539063 27.191406 37.898438 1.695313 1.3125 3.8125 2.101562 6.117188 2.101562.460937 0 .894531.027344 1.347656.089844 4.304688.578125 7.714844 3.84375 8.496094 8.117187l34.019531 187.164063c2.597656 14.269531 15.011719 24.628906 29.519531 24.628906h298.617188c14.507812 0 26.921875-10.359375 29.519531-24.632812l34.019531-187.15625c.78125-4.277344 4.195313-7.542969 8.515625-8.121094.4375-.0625.871094-.089844 1.328125-.089844 2.320313 0 4.453125-.796875 6.148438-2.125 15.914062-5.394531 27.160156-20.511719 27.160156-37.875 0-22.054687-17.945312-40-40-40zm-185.011719-105.660156c-2.285156-4.730469-.511719-10.492187 4.136719-13.070313 4.839844-2.683593 10.941406-.953124 13.609375 3.855469.195313.359375.417969.703125.65625 1.03125l82.746094 113.84375h-21.15625zm-80.378906-8.179687c.238281-.328126.453125-.667969.652344-1.019532 2.675781-4.8125 8.78125-6.546875 13.601562-3.878906 4.65625 2.585938 6.4375 8.339844 4.148438 13.078125l-79.992188 105.660156h-21.15625zm265.390625 173.839843h-176c-5.523438 0-10 4.476563-10 10 0 5.523438 4.476562 9.898438 10 9.898438h154.398438c-.523438 1.492187-.9375 3.039062-1.226563 4.632812l-34.023437 187.257813c-.863282 4.757812-5.003907 8.210937-9.839844 8.210937h-298.617188c-4.839844 0-8.976562-3.453125-9.84375-8.207031l-34.019531-187.164062c-.289063-1.59375-.703125-3.140626-1.226563-4.628907h154.398438c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-176c-11.121094 0-20-9.0625-20-20 0-11.027343 8.972656-20 20-20h432c11.027344 0 20 8.972657 20 20 0 11.105469-9.085938 20-20 20zm0 0"/><path d="m256 249.988281c-16.542969 0-30 13.457031-30 30v80c0 16.542969 13.457031 30 30 30s30-13.457031 30-30v-80c0-16.574219-13.425781-30-30-30zm10 110c0 5.515625-4.484375 10-10 10s-10-4.484375-10-10v-80c0-5.515625 4.484375-10 10-10 5.519531 0 10 4.480469 10 10zm0 0"/><path d="m356 389.988281c16.542969 0 30-13.457031 30-30v-80c0-16.574219-13.425781-30-30-30-16.542969 0-30 13.457031-30 30v80c0 16.542969 13.457031 30 30 30zm-10-110c0-5.515625 4.484375-10 10-10 5.519531 0 10 4.480469 10 10v80c0 5.515625-4.484375 10-10 10s-10-4.484375-10-10zm0 0"/><path d="m156 249.988281c-16.542969 0-30 13.457031-30 30v80c0 16.542969 13.457031 30 30 30s30-13.457031 30-30v-80c0-16.574219-13.425781-30-30-30zm10 110c0 5.515625-4.484375 10-10 10s-10-4.484375-10-10v-80c0-5.515625 4.484375-10 10-10 5.519531 0 10 4.476563 10 10zm0 0"/></svg>
                 <span class="badge badge-light <?php echo diaplay_cart(); ?>"><?php echo items(); ?></span>
                 <span class="icon-name">Basket</span>
@@ -425,7 +368,7 @@
             
             ?>
                             <div class="col-6 px-2 py-2">
-                                <a href="shop.php?cat=<?php echo $cat_id;?>">
+                                <a href="store.php?cat=<?php echo $cat_id;?>">
                                     <img src="admin_area/other_images/<?php echo $cat_img; ?>" class="img-thumbnail" alt="..." >
                                 </a>
                             </div>

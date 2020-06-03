@@ -263,6 +263,30 @@
                     
                 include("delete_term.php");
                 
+              }
+
+              if(isset($_GET['view_pro_cat'])){
+                    
+                include("view_pro_cat.php");
+                
+              }
+
+              if(isset($_GET['insert_pro_cat'])){
+                    
+                include("insert_pro_cat.php");
+                
+              }
+
+              if(isset($_GET['edit_pro_cat'])){
+                    
+                include("edit_pro_cat.php");
+                
+              }
+              
+              if(isset($_GET['delete_pro_cat'])){
+                    
+                include("delete_pro_cat.php");
+                
               } 
 
             

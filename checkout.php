@@ -11,11 +11,11 @@
                 
                 if(!isset($_SESSION['customer_email'])){
 
-                        include("customer/customer_login.php");
+                        include("customer/customer_login");
 
                 }else{
 
-                    include("payment_options.php");
+                    include("payment_options");
 
                 }
                 

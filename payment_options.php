@@ -22,7 +22,7 @@ $session_email = $_SESSION['customer_email'];
             <!-- nav -->
                 <ul class="nav bg-white cartloc ">
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.php">
+                        <a class="nav-link" href="cart">
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -176,13 +176,13 @@ $session_email = $_SESSION['customer_email'];
 
                     echo "<script>alert('Address Updated')</script>";
 
-                    echo "<script>window.open('checkout.php','_self')</script>";
+                    echo "<script>window.open('checkout','_self')</script>";
 
                 }else{
 
                     echo "<script>alert('Sorry Address not updated try again')</script>";
 
-                    echo "<script>window.open('checkout.php','_self')</script>";
+                    echo "<script>window.open('checkout','_self')</script>";
 
                 }
                 
