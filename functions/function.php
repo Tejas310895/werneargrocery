@@ -43,7 +43,7 @@ function add_cart(){
 
             $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('shop.php','_self')</script>";
+            echo "<script>window.open('shop?store_id=$store_id','_self')</script>";
             
         }else{
             
@@ -51,7 +51,7 @@ function add_cart(){
             
             $run_query = mysqli_query($db,$query);
             
-            echo "<script>window.open('shop.php','_self')</script>";
+            echo "<script>window.open('shop?store_id=$store_id','_self')</script>";
             
         }
         
@@ -169,7 +169,7 @@ function add_checkout(){
 
             $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('cart.php','_self')</script>";
+            echo "<script>window.open('cart','_self')</script>";
             
         }
         
@@ -191,6 +191,8 @@ function delete_cart(){
 
         $p_id = $_GET['delete_cart'];
 
+        $store_id = $_POST['store_id'];
+
         $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
         
         $run_check = mysqli_query($db,$check_cart);
@@ -205,7 +207,7 @@ function delete_cart(){
 
             $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('shop.php','_self')</script>";
+            echo "<script>window.open('shop?store_id=$store_id','_self')</script>";
 
         }else{
 
@@ -213,7 +215,7 @@ function delete_cart(){
 
             $run_delete_qty = mysqli_query($db,$delete_qty);
 
-            echo "<script>window.open('shop.php','_self')</script>";
+            echo "<script>window.open('shop?store_id=$store_id','_self')</script>";
 
         }
     }
@@ -267,7 +269,7 @@ function delete_cat_cart(){
 
 /// finish delete_cat_cart functions ///
 
-/// begin delete_cart functions ///
+/// begin delete_index_cart functions ///
 
 function delete_index_cart(){
 
@@ -308,7 +310,7 @@ function delete_index_cart(){
 
 }
 
-/// finish delete_cart functions ///
+/// finish delete_index_cart functions ///
 
 /// begin delete_checkout functions ///
 
@@ -336,7 +338,7 @@ function delete_checkout(){
 
             $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('cart.php','_self')</script>";
+            echo "<script>window.open('cart','_self')</script>";
 
         }else{
 
@@ -344,7 +346,7 @@ function delete_checkout(){
 
             $run_delete_qty = mysqli_query($db,$delete_qty);
 
-            echo "<script>window.open('cart.php','_self')</script>";
+            echo "<script>window.open('cart','_self')</script>";
 
         }
     }
@@ -468,7 +470,7 @@ function getCats(){
         
         echo "
         
-        <a href='shop.php?cat=$cat_id' class='pn-ProductNav_Link'>$cat_title</a>
+        <a href='store?cat=$cat_id' class='pn-ProductNav_Link'>$cat_title</a>
         
         ";
         
