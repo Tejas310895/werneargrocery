@@ -224,7 +224,9 @@
                                         <?php if($pro_stock>0){ ?>
                                         <?php 
 
-                                    $ip_add = getRealIpUser();
+                                    //$ip_add = getRealIpUser();
+
+                                    $ip_add = getuserid();
 
                                     $get_cart = "select * from cart where ip_add='$ip_add' AND p_id='$pro_id'";
 
