@@ -94,18 +94,21 @@ if(isset($_POST['submit'])){
 
             //HTML mail function
 
+         
+
+            $to = $c_email;
+            $subject = 'Reset Password';
+            $from = 'tshirsat700@gmail.com';
+
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-            $to = $c_email;
-            $subject = 'Notifications';
-            $from = 'tshirsat700@gmail.com';
-            $message = "<table>";
-            $message .= "<tr>";
-            $message .= "<th><img src='http://www.wernear.in/admin_area/admin_images/mailhead.jpg' width='100%'></th>";
-            $message .= "<td style='font-size:2rem;color:#999;text-align:center;font-weight:bold;'>Your Temporary Password <br>".$pass."</td>";
-            $message .= "</tr>";
-            $message .= "</table>";
+            $message = '<table>';
+            $message .= '<tr>';
+            $message .= '<th><img src="http://www.wernear.in/admin_area/admin_images/mailhead.jpg" width="100%"></th>';
+            $message .= '<td style="font-size:2rem;color:#999;text-align:center;font-weight:bold;">Your Temporary Password <br>'.$pass.'</td>';
+            $message .= '</tr>';
+            $message .= '</table>';
 
             mail($to, $subject, $message);
 
