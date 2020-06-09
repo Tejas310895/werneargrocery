@@ -71,7 +71,7 @@ if(isset($_POST['register'])){
 
     $c_email = $_POST['c_email'];
 
-    $c_pass = $_POST['c_pass'];
+    $c_pass = password_hash($_POST['c_pass'], PASSWORD_DEFAULT);
 
     $c_ip = getRealIpUser();
 

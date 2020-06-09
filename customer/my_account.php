@@ -157,7 +157,7 @@ session_start();
 
                     $c_oldpass = $_POST['c_oldpass'];
 
-                    $c_newpass = $_POST['c_newpass'];
+                    $c_newpass = password_hash($_POST['c_newpass'], PASSWORD_DEFAULT);
                     
                     $get_user_id = "select * from customers where customer_email='$c_mail'";
 
@@ -165,10 +165,17 @@ session_start();
 
                     $row_user_id = mysqli_fetch_array($run_user_id);
 
-                    $customer_pass = $row_user_id['customer_pass'];
+                    $hashindb = $row_user_id['customer_pass'];
 
 
-                    if($c_oldpass == $customer_pass){
+                    if(!password_verify($c_oldpass, $hashindb)){
+
+                        
+                        echo "<script>alert('Sorry, Your old password did not match')</script>";
+      
+                        echo "<script>window.open('my_account','_self')</script>";
+
+                    }else{
 
                         $update_c_pass = "update customers set customer_name='$c_name',customer_contact='$c_contact',customer_email='$c_email',customer_pass='$c_newpass' where customer_email='$c_mail'";
 
@@ -181,12 +188,6 @@ session_start();
                           echo "<script>window.open('../logout.php','_self')</script>";
                     
                         }
-
-                    }else{
-
-                        echo "<script>alert('Sorry, Your old password did not match')</script>";
-      
-                        exit();
 
                     }
                     

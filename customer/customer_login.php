@@ -39,6 +39,7 @@
 <!-- login form -->
 
 <div class="container px-5">
+    <a href="./reset_password" class="btn btn-link text-center btn-block pt-2">Forgot Password</a>
     <h5 class=" text-center register_link mt-2">Not a Member?</h5>
     <a href="./customer_register" class="btn btnregister_link text-center btn-block p-0">Register Here</a>
 </div>
@@ -51,9 +52,13 @@
         
         $customer_pass = $_POST['c_pass'];
 
-        $select_customer = "select * from customers where customer_email='$customer_email' AND customer_pass='$customer_pass'";
+        $select_customer = "select * from customers where customer_email='$customer_email' ";
 
         $run_customer = mysqli_query($con,$select_customer);
+
+        $row_customer = mysqli_fetch_array($run_customer);
+
+        $hashindb = $row_customer['customer_pass'];
 
         $get_ip = getRealIpUser();
 
@@ -65,33 +70,35 @@
 
         $check_cart = mysqli_num_rows($run_cart);
 
-        if($check_customer==0){
+        if(!password_verify($customer_pass, $hashindb)){
 
             echo "<script>alert('your email or password id invalid')</script>";
 
             exit();
 
-        }
+        }else{
 
-        if($check_customer==1 And $check_cart==0){
+
+        if($check_cart==0){
 
             $_SESSION['customer_email']=$customer_email;
 
             echo "<script>alert('your are Logged in ')</script>";
 
             echo "<script>window.open('customer/my_account','_self')</script>";
-
-        }else{
+            }else{
 
             $_SESSION['customer_email']=$customer_email;
 
             echo "<script>alert('your are Logged in ')</script>";
 
-            echo "<script>window.open('checkout','_self')</script>";
+            echo "<script>window.open('cart','_self')</script>";
 
 
         }
 
     }
+
+}
 
 ?>
