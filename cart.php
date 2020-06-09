@@ -100,13 +100,9 @@
                             <div class='row'>
                                 <div class='col-6'>
                                     <div class='row pl-3'>
-                                        <form action='cart?delete_checkout=$pro_id' class='form-horizontal' method='post'>
-                                        <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
-                                        </form>
-                                        <input type='numeric' class='cart_qty' placeholder='' value='$pro_qty' aria-describedby='helpId'>
-                                        <form action='cart?add_checkout=$pro_id' class='form-horizontal' method='post'>
-                                        <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
-                                        </form>
+                                        <a href='cart?delete_checkout=$pro_id' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></a>
+                                        <input type='numeric' name='' id='' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
+                                        <a href='cart?add_checkout=$pro_id' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></a>
                                     </div> 
                                 </div>
                                     <div class='col-6 pt-1 pl-5'>

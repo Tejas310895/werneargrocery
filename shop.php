@@ -242,15 +242,9 @@
                                         
                                         <div class='col-6'>
                                             <div class='row ml-1'>
-                                                <form action='shop?delete_cart=$pro_id' class='form-horizontal' method='post'>
-                                                <input name='store_id' type='hidden' value='$store_id'>
-                                                <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
-                                                </form>
+                                                <a href='shop?delete_cart=$pro_id&store_id=".urlencode($store_id)."' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></a>
                                                 <input type='numeric' name='' id='' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
-                                                <form action='shop?add_cart=$pro_id' class='form-horizontal' method='post'>
-                                                <input name='store_id' type='hidden' value='$store_id'>
-                                                <button class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
-                                                </form>
+                                                <a href='shop?add_cart=$pro_id&store_id=".urlencode($store_id)."' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></a>
                                             </div>
                                         </div>
                                         
@@ -260,13 +254,7 @@
 
                                         echo "
 
-                                        <form action='shop?add_cart=$pro_id' class='form-horizontal' method='post'>
-                                        <input name='store_id' type='hidden' value='$store_id'>
-                                        <div class='col-6'>
-                                            <button class='btn px-4 py-1 ml-0  pull-left pro_list_addqty'>ADD</button>
-                                        </div>
-                                        </form>
-                                        
+                                            <a href='shop?add_cart=$pro_id&store_id=".urlencode($store_id)."' class='btn px-4 py-1 ml-0  pull-left pro_list_addqty'>ADD</a>
                                         
                                         ";
                                         }
