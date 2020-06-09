@@ -14,7 +14,7 @@
                 if(!isset($_SESSION['customer_email'])){
 
                     echo "
-                    <a href='checkout.php'>
+                    <a href='checkout'>
                         Hi Guest <br> 
                         <i class='fas fa-map-marker-alt'></i> 
                         Choose your location
@@ -54,7 +54,7 @@
                     if($add_count>0){
 
                     echo " 
-                    <a href='customer/my_account.php'>
+                    <a href='customer/my_account'>
                         $c_name <br> 
                     <i class='fas fa-map-marker-alt'></i> 
                     $c_phase, $c_landmark
@@ -64,7 +64,7 @@
                     }else{
 
                         echo "
-                        <a href='customer/my_account.php'>
+                        <a href='customer/my_account'>
                         $c_name <br> 
                         <i class='fas fa-map-marker-alt'></i> 
                         Add Your Location
@@ -339,7 +339,6 @@
 
     </div>
 <!-- floatnav -->
-
 
 <!-- Product Categories -->
     <div class="container-fluid gridheading mt-3">

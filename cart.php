@@ -35,9 +35,9 @@
 
         <?php 
             
-            //$ip_add = getRealIpUser();
+            $ip_add = getRealIpUser();
 
-            $ip_add = getuserid();
+            //$ip_add = getuserid();
     
             $select_cart = "select * from cart where ip_add='$ip_add'";
     

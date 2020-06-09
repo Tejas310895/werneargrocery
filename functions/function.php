@@ -21,16 +21,16 @@ function getRealIpUser(){
 
 /// Begin getuserid functions ///
 
-function getuserid(){
+// function getuserid(){
 
 
-    session_id();
+//     session_id();
 
-    $new_sessionid = session_id();
+//     $new_sessionid = 'cart_'.session_id();
 
-    return $new_sessionid;
+//     return $new_sessionid;
 
-}
+// }
 
 /// finish getuserid functions ///
 
@@ -42,9 +42,9 @@ function add_cart(){
     
     if(isset($_GET['add_cart'])){
         
-        //$ip_add = getRealIpUser();
+        $ip_add = getRealIpUser();
 
-        $ip_add = getuserid();
+        //$ip_add = getuserid();
         
         $p_id = $_GET['add_cart'];
         
@@ -171,9 +171,9 @@ function add_checkout(){
     
     if(isset($_GET['add_checkout'])){
         
-        //$ip_add = getRealIpUser();
+        $ip_add = getRealIpUser();
         
-        $ip_add = getuserid();
+        //$ip_add = getuserid();
         
         $p_id = $_GET['add_checkout'];
         
@@ -206,9 +206,9 @@ function delete_cart(){
 
     if(isset($_GET['delete_cart'])){
 
-        //$ip_add = getRealIpUser();
+        $ip_add = getRealIpUser();
 
-        $ip_add = getuserid();
+        //$ip_add = getuserid();
 
         $p_id = $_GET['delete_cart'];
 
@@ -341,9 +341,9 @@ function delete_checkout(){
 
     if(isset($_GET['delete_checkout'])){
 
-        //$ip_add = getRealIpUser();
+        $ip_add = getRealIpUser();
 
-        $ip_add = getuserid();
+        //$ip_add = getuserid();
 
         $p_id = $_GET['delete_checkout'];
 
@@ -597,9 +597,9 @@ function items(){
 
     global $db;
 
-    //$ip_add = getRealIpUser();
+    $ip_add = getRealIpUser();
 
-    $ip_add = getuserid();
+    //$ip_add = getuserid();
 
     $get_items = "select * from cart where ip_add='$ip_add'";
 
@@ -619,9 +619,9 @@ function total_price(){
 
     global $db;
 
-    //$ip_add = getRealIpUser();
+    $ip_add = getRealIpUser();
 
-    $ip_add = getuserid();
+    //$ip_add = getuserid();
 
     $total = 0;
 
@@ -661,9 +661,9 @@ function diaplay_cart(){
 
     global $db;
 
-    //$ip_add = getRealIpUser();
+    $ip_add = getRealIpUser();
 
-    $ip_add = getuserid();
+    //$ip_add = getuserid();
 
     $show_cart = "select * from cart where ip_add='$ip_add'";
 
