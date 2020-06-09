@@ -87,8 +87,10 @@ if(isset($_POST['submit'])){
             
             }
 
-            $c_pass = password_hash(rand_string(6), PASSWORD_DEFAULT);
-            //$pass = rand_string(6);
+            $pass = rand_string(6);
+
+            $c_pass = password_hash($pass, PASSWORD_DEFAULT);
+            
 
             //HTML mail function
 
@@ -98,23 +100,12 @@ if(isset($_POST['submit'])){
             $to = $c_email;
             $subject = 'Notifications';
             $from = 'tshirsat700@gmail.com';
-            $message = "
-            <html>
-            <head>
-            </head>
-            <body>
-            <table>
-            <tr>
-            <th><img src='mailhead.jpg' width='100%'></th>
-            </tr>
-            <tr>
-            <td style='font-size:2rem;font-weight:bold;text-align:center;color:#999;font-family:Concert One;'>Your temporary password is:</td>
-            <td style='font-size:1.5rem;font-weight:bold;text-align:center;color:#999;font-family:Jost;>$c_pass</td>
-            </tr>
-            </table>
-            </body>
-            </html>
-            ";
+            $message = "<table>";
+            $message .= "<tr>";
+            $message .= "<th><img src='http://www.wernear.in/admin_area/admin_images/mailhead.jpg' width='100%'></th>";
+            $message .= "<td style='font-size:2rem;color:#999;text-align:center;font-weight:bold;'>Your Temporary Password <br>".$pass."</td>";
+            $message .= "</tr>";
+            $message .= "</table>";
 
             mail($to, $subject, $message);
 
