@@ -84,7 +84,7 @@
                         ?>    
                 </li>
                 <li class="nav-item ml-3">
-                    <a class="nav-link px-1 pt-3 " href="#">
+                    <a class="nav-link px-1 pt-3 " href="search_product">
                         <svg version="1.1" id="Capa_1" width="20pt" height="20pt" fill="#999" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                             <g>

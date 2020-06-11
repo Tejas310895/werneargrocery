@@ -48,7 +48,7 @@ function add_cart(){
         
         $p_id = $_GET['add_cart'];
         
-        $store_id = $_POST['store_id'];
+        $store_id = $_GET['store_id'];
         
         $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
         
@@ -212,7 +212,7 @@ function delete_cart(){
 
         $p_id = $_GET['delete_cart'];
 
-        $store_id = $_POST['store_id'];
+        $store_id = $_GET['store_id'];
 
         $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
         

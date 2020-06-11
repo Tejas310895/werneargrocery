@@ -567,7 +567,7 @@ button.pro_store{
 }
 
 .form-control{
-    height: calc(1.5em + 0.75rem + 12px);
+    min-height: 59px;    
 }
 
 /* register */

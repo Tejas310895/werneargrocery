@@ -1,7 +1,36 @@
 <?php 
 
-include("includes/db.php");
+    session_start();
+    
+    include("includes/db.php");
+    include("functions/function.php");
+
 ?>
+
+<?php 
+
+if(isset($_GET['pro_id'])){
+    
+    $product_id = $_GET['pro_id'];
+    
+    $get_product = "select * from products where product_id='$product_id'";
+    
+    $run_product = mysqli_query($con,$get_product);
+    
+    $row_product = mysqli_fetch_array($run_product);
+    
+    $pro_title = $row_product['product_title'];
+    
+    $pro_price = $row_product['product_price'];
+    
+    $pro_desc = $row_product['product_desc'];
+    
+    $pro_img1 = $row_product['product_img1'];
+    
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,90 +80,86 @@ include("includes/db.php");
      <script src="js/script.js"></script>
     <!-- date -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css?version=1">
+    <style>
+    
+    body{
+        background: rgb(255, 246, 233);
+        margin-top: 16%;
+    }
+
+    a{
+        text-decoration:none;
+        color:#999 !important;
+    }
+
+    </style>
     <!-- styles -->
 </head>
 <body>
 
-
-<img src="admin_area/admin_images/wrnlogo.png" class="img-thumbnail rounded mx-auto d-block border-0" alt="..." width="50%" style="background-color:transparent;">
-<form class="px-5" action="" method="post">
-<div class="form-group text-center">
-  <label>Enter Registered email</label>
-  <input type="email" name="c_email" id="" class="form-control" placeholder="Enter Email">
+<div class="container-fluid py-2 fixed-top bg-white">
+    <div class="row">
+        <div class="col-2 pr-0 py-1"> <a href="./"><i class="fas fa-arrow-left" style="color:#999;font-size:1.7rem;"></i></a> </div>
+        <div class="col-10 pl-0">
+            <form action="search_product" method="post">
+                <div class="input-group mb-1 px-0">
+                    <input type="text" name="search" class="form-control border-0" placeholder="Search your product">
+                        <div class="input-group-append">
+                            <button type="submit" name="submit" class="btn"><i class="fas fa-search"></i></button>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<div class="form-group text-center">
-  <input type="submit" name="submit" value="Send mail" id="" class="btn btn-success">
-</div>
-</form>
-
+<div class="container mt-5 bg-white" id="display">
+    <div class="row">
 <?php 
 
 if(isset($_POST['submit'])){
 
-    $c_email = $_POST['c_email'];
+    $keyword = $_POST['search'];
 
-    $verify_email = "select * from customers where customer_email='$c_email'";
+    $get_result = "select DISTINCT store_id AS store_id from products where product_keywords LIKE '%$keyword%'";
 
-    $run_verify = mysqli_query($con,$verify_email);
+    $run_result = mysqli_query($con,$get_result);
 
-    if(mysqli_num_rows($run_verify)>0){
+    while($row_result=mysqli_fetch_array($run_result)){
 
-        function rand_string( $length ) {
+        $store_id = $row_result['store_id'];
 
-            $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return substr(str_shuffle($chars),0,$length);
+        $get_name = "select * from store where store_id='$store_id'";
+
+        $run_name = mysqli_query($con,$get_name);
+
+        $row_name = mysqli_fetch_array($run_name);
+
+        $store_title = $row_name['store_title'];
+
+        if(!isset($store_title)){
+
+            echo "<h5>No Such Product Found</h5>";
+
+        }else{
+
+            echo "
             
-            }
-
-            $pass = rand_string(6);
-
-            $c_pass = password_hash($pass, PASSWORD_DEFAULT);
+            <div class='col-12 pl-5 pt-2'>
+            <a href='shop?store_id=$store_id'><h5>$store_title</h5></a>
+            </div>
             
+            ";
 
-            //HTML mail function
-
-            $to = $c_email;
-            $subject = 'Reset Password';
-            $from = 'tshirsat700@gmail.com';
-
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-            $message = '<html><body>';
-            $message .= '<img src="http://www.wernear.in/admin_area/admin_images/mailhead.jpg" width="100%">';
-            $message .= '<h1 style="color:#999;font-size:1.5rem;text-align:center;">Your Temporary Password</h1>';
-            $message .= '<h1 style="color:#999;font-size:2rem;text-align:center;">'.$pass.'</h1>';
-            $message .= '</body></html>';
-
-            mail($to, $subject, $message, $headers);
-
-            $update_pass = "update customers set customer_pass='$c_pass' where customer_email='$c_email'";
-
-            $run_pass = mysqli_query($con,$update_pass);
-                    
-                        if($run_pass){
-                    
-                          echo "<script>alert('Temporary password sent on mail, change once logged in')</script>";
-                    
-                          echo "<script>window.open('checkout','_self')</script>";
-                    
-                        }
-
-    }else{
-
-        echo "<script>alert('Email Does not exist')</script>";
-
-        echo "<script>window.open('enter_email','_self')</script>";
-
+        }
+        
     }
-
 
 }
 
 ?>
-
-<?php 
+    </div>
+</div>
+<?php
 
 include("includes/footer.php");
 

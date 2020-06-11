@@ -41,4 +41,4 @@
 
 </head>
 
-<body class="">
+<body>

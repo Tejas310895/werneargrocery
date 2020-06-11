@@ -143,7 +143,7 @@
                                   <form action="process_order.php?cancel_order=<?php echo $invoice_id; ?>" class='form-horizontal' method='post'>
                                   <button id="show_details" class="btn btn-danger card-link pull-right mt-2 text-white" >Cancle</button>
                                   </form>
-                                  <a id="show_details" class="btn btn-info card-link pull-right mt-2 text-white" >Print</a>
+                                  <a href="print.php?print=<?php echo $invoice_id; ?>" id="show_details" class="btn btn-info card-link pull-right mt-2 text-white" >Print</a>
                                   </div>
                                   <!-- Modal -->
                                   <div class="modal modal-black fade" id="KK<?php echo $invoice_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
