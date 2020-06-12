@@ -1,6 +1,5 @@
 <?php 
 
-    session_start();
     
     include("includes/db.php");
     include("functions/function.php");
@@ -113,7 +112,6 @@ if(isset($_GET['pro_id'])){
     </div>
 </div>
 <div class="container mt-5 bg-white" id="display">
-    <div class="row">
 <?php 
 
 if(isset($_POST['submit'])){
@@ -136,16 +134,13 @@ if(isset($_POST['submit'])){
 
         $store_title = $row_name['store_title'];
 
-        if(!isset($store_title)){
-
-            echo "<h5>No Such Product Found</h5>";
-
-        }else{
+        if(isset($store_title)){
 
             echo "
-            
+            <div class='row'>
             <div class='col-12 pl-5 pt-2'>
             <a href='shop?store_id=$store_id'><h5>$store_title</h5></a>
+            </div>
             </div>
             
             ";
@@ -157,7 +152,6 @@ if(isset($_POST['submit'])){
 }
 
 ?>
-    </div>
 </div>
 <?php
 

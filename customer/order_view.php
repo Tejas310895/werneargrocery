@@ -133,10 +133,10 @@ session_start();
                         <h5 class='view_title mt-0'>$pro_title</h5>
                         <p class='view_qty'>$pro_desc</p>
                     </div>
-                    <div class='col-2'>
+                    <div class='col-1'>
                         <p class='view_qty'>X $qty</p>
                     </div>
-                    <div class='col-3'>
+                    <div class='col-4'>
                         <h5 class='view_total'>₹ $sub_total</h5>
                     </div>
                 </div>

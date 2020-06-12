@@ -202,6 +202,8 @@
                         $pro_title = $row_products['product_title'];
                         
                         $pro_price = $row_products['product_price'];
+
+                        $price_display = $row_products['price_display'];
                         
                         $pro_desc = $row_products['product_desc'];
                         
@@ -219,7 +221,10 @@
                                     <h5 class="pro_list_desc"><?php echo $pro_desc; ?></h5>
                                     <div class="row">
                                         <div class="col-6">
-                                            <h5 class="pro_list_price">₹ <?php echo $pro_price; ?></h5>
+                                        <div class="row">
+                                            <div class="col-4 px-0 <?php if($price_display>0){echo "show";}else{echo "d-none";}?> "><h5 class="pro_dis_price">₹ <?php echo $price_display; ?> </h5></div>
+                                            <div class="col-8 pr-0"><h5 class="pro_list_price">₹ <?php echo $pro_price; ?></div>
+                                        </div>
                                         </div>
                                         <?php if($pro_stock>0){ ?>
                                         <?php 

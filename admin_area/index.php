@@ -287,7 +287,31 @@
                     
                 include("delete_pro_cat.php");
                 
-              } 
+              }
+
+              if(isset($_GET['view_hsn'])){
+                    
+                include("view_hsn.php");
+                
+              }
+
+              if(isset($_GET['insert_hsn'])){
+                    
+                include("insert_hsn.php");
+                
+              }
+
+              if(isset($_GET['edit_hsn'])){
+                    
+                include("edit_hsn.php");
+                
+              }
+              
+              if(isset($_GET['delete_hsn'])){
+                    
+                include("delete_hsn.php");
+                
+              }
 
             
             ?>

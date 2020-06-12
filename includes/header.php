@@ -80,7 +80,7 @@ if(isset($_GET['pro_id'])){
      <script src="js/script.js"></script>
     <!-- date -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css?version=2">
+    <link rel="stylesheet" href="styles/style.css?version=3">
     <!-- styles -->
 </head>
 <body>

@@ -367,6 +367,14 @@ button.pro_store{
     color: rgb(70, 70, 70);
 }
 
+.pro_dis_price{
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: jost;
+    color: #999;
+    text-decoration: line-through;
+}
+
 .no_pro{
     font-size: 1.2rem;
     font-weight: bold;

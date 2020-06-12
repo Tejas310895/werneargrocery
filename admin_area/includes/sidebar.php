@@ -4,14 +4,14 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
     -->
       <div class="sidebar-wrapper">
-        <div class="logo">
+        <!-- <div class="logo">
           <a href="#" class="simple-text logo-mini">
             WN
           </a>
           <a href="#" class="simple-text logo-normal">
             WERNEAR
           </a>
-        </div>
+        </div> -->
         <ul class="nav">
           <li >
             <a href="index.php?view_orders">
@@ -59,6 +59,12 @@
             <a href="index.php?view_customers">
               <i class="tim-icons icon-badge"></i>
               <p>CUSTOMERS</p>
+            </a>
+          </li>
+          <li>
+            <a href="index.php?view_hsn">
+              <i class="tim-icons icon-sound-wave"></i>
+              <p>TAXES</p>
             </a>
           </li>
           <li>
