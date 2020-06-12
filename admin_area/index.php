@@ -91,21 +91,23 @@
                 <div class="container-fluid">
                 <div class="navbar-wrapper">
                     <div class="navbar-toggle d-inline">
-                    <button type="button" class="navbar-toggler">
-                        <span class="navbar-toggler-bar bar1"></span>
-                        <span class="navbar-toggler-bar bar2"></span>
-                        <span class="navbar-toggler-bar bar3"></span>
-                    </button>
                     </div>
                     <a class="navbar-brand"><img src="admin_images/logo.png" alt="" class="img-thumbnail border-0" width="150px"></a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <?php 
+                        
+                        $get_c_count = "select distinct ip_add from cart";
+
+                        $run_c_count = mysqli_query($con,$get_c_count);
+
+                        $count = mysqli_num_rows($run_c_count);
+                        
+                        ?>
+                        <h5 class="mt-3"><?php echo $count; ?> Customer are surfing</h5>
+                      </li>
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="photo">
@@ -122,7 +124,7 @@
                         <li class="nav-link"><a href="logout.php" class="nav-item dropdown-item">Log out</a></li>
                         </ul>
                     </li>
-                    <li class="separator d-lg-none"></li>
+                    <li class="separator d-lg"></li>
                     </ul>
                 </div>
                 </div>
