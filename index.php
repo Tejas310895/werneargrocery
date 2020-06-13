@@ -1,8 +1,20 @@
+
 <?php 
 
     include("includes/header.php");
 
 ?>
+
+<script>
+window.addEventListener('resize', function() {
+	if (window.innerWidth <= 700) {
+		window.location.href = "./"; 
+	}
+    if (window.innerWidth >= 700) {
+		window.location.href = "desktop"; 
+	}
+});
+</script>
 
 <!-- header -->
     <div class="container-fluid geolocation fixed-top pt-0 mt-0 px-0 mx-0">
