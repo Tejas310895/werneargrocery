@@ -39,6 +39,12 @@ $(function() {
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.js"></script>
-
+<script>
+window.addEventListener('resize', function() {
+    if (window.innerWidth >= 700) {
+		window.location = "desktop"; 
+	}
+});
+</script>
 </body>
 </html>
