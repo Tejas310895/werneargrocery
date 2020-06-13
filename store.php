@@ -198,11 +198,9 @@
                                 <div class="col-6">
                                     <h5 class="pro_list_price">₹ <?php echo $min_price; ?></h5>
                                 </div>
-                                    <form action='shop?store_id=<?php echo $store_id; ?>' class='form-horizontal' method='post'>
-                                    <div class='col-12'>
-                                        <button class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></button>
+                                    <div class='col-6'>
+                                        <a href="shop?store_id=<?php echo $store_id; ?>" class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></a>
                                     </div>
-                                    </form>
                             </div>
                         </div>
                     </div>

@@ -328,7 +328,7 @@ a.pro_list_addqty{
     color: #ff7b00;
 }
 
-button.pro_store{
+a.pro_store{
     font-size: 0.9rem;
     font-family: Righteous;
     border: 1.5px solid #ff7b00;

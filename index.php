@@ -210,13 +210,11 @@ window.addEventListener('resize', function() {
                                                     </div>
                                                     <div class='col-6 px-0'>
                                                         <div class="row">
-                                                        <form action='shop.php?store_id=<?php echo $store_id; ?>' class='form-horizontal' method='post'>
                                                         <div class='col-12'>
-                                                            <button class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></button>
+                                                            <a href="shop?store_id=<?php echo $store_id; ?>" class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    </form>
                                                 </div> 
                                         </div>
                                 </div>
