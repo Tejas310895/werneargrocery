@@ -6,6 +6,7 @@ body{
     padding-bottom: 15%;
     background-color: rgb(255, 246, 233);
     overflow-x: hidden;
+    overscroll-behavior: none;
 }
 
 

@@ -81,7 +81,7 @@ if(isset($_GET['pro_id'])){
      <script src="js/script.js"></script>
     <!-- date -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css?version=4">
+    <link rel="stylesheet" href="styles/style.css?version=5">
     <!-- styles -->
 </head>
 <body>
