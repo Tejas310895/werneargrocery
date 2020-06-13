@@ -42,10 +42,10 @@ $(function() {
 <script>
 window.addEventListener('resize', function() {
 	if (window.innerWidth <= 700) {
-		window.location.href = "./"; 
+		window.location = "./"; 
 	}
     if (window.innerWidth >= 700) {
-		window.location.href = "desktop"; 
+		window.location = "desktop"; 
 	}
 });
 </script>
