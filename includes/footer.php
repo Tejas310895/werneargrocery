@@ -41,9 +41,6 @@ $(function() {
 <script src="js/bootstrap.js"></script>
 <script>
 window.addEventListener('resize', function() {
-	if (window.innerWidth <= 700) {
-		window.location = "./"; 
-	}
     if (window.innerWidth >= 700) {
 		window.location = "desktop"; 
 	}
