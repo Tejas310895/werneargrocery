@@ -55,37 +55,36 @@ while($row_cart = mysqli_fetch_array($run_cart)){
         $run_delete = mysqli_query($con,$delete_cart);
 
 
-        if($run_customer_order){
-
-            $text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
-
-            //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-            $url = "http://5.189.169.241:5012/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text";
-            // Initialize a CURL session. 
-            $ch = curl_init();  
-            
-            // Return Page contents. 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-            
-            //grab URL and pass it to the variable. 
-            curl_setopt($ch, CURLOPT_URL, $url); 
-            
-            $result = curl_exec($ch);
-
-            include('paytm/TxnTest.php');
-
-        }else{
-
-            echo "<script>alert('Order Failed')</script>";
-
-            echo "<script>window.open('cart','_self')</script>";
-
-        }
-
-
-
-
     }
+
+}
+
+if($run_customer_order){
+
+    $invoice_no = $invoice_no;
+
+    $text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
+
+    //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
+    $url = "http://5.189.169.241:5012/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text";
+    // Initialize a CURL session. 
+    $ch = curl_init();  
+    
+    // Return Page contents. 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+    
+    //grab URL and pass it to the variable. 
+    curl_setopt($ch, CURLOPT_URL, $url); 
+    
+    $result = curl_exec($ch);
+
+    include('paytm/TxnTest.php');
+
+}else{
+
+    echo "<script>alert('Order Failed')</script>";
+
+    echo "<script>window.open('cart','_self')</script>";
 
 }
 
