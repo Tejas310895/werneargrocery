@@ -315,6 +315,12 @@
                 
               }
 
+              if(isset($_GET['view_payments'])){
+                    
+                include("view_payments.php");
+                
+              }
+
             
             ?>
 

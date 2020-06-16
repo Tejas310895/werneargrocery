@@ -68,6 +68,12 @@
             </a>
           </li>
           <li>
+            <a href="index.php?view_payments">
+              <i class="tim-icons icon-money-coins"></i>
+              <p>PAYMENTS</p>
+            </a>
+          </li>
+          <li>
             <a href="index.php?view_terms">
               <i class="tim-icons icon-badge"></i>
               <p>TERMS</p>

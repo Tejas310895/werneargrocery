@@ -118,7 +118,7 @@ if(isset($_POST['submit'])){
 
     $keyword = $_POST['search'];
 
-    $get_result = "select DISTINCT store_id AS store_id from products where product_keywords LIKE '%$keyword%'";
+    $get_result = "select DISTINCT store_id AS store_id from products where LOWER(product_keywords) LIKE LOWER('%$keyword%')";
 
     $run_result = mysqli_query($con,$get_result);
 

@@ -88,6 +88,18 @@ $session_email = $_SESSION['customer_email'];
                 <h5 class="add_head my-3">Schedule your Delivery</h5>
                 <input type="text" class="form-control select_address" name="date" id="datepicker" >
                 </div>
+                <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="p_type" value="COD" checked>
+                <label class="form-check-label cod_text" for="exampleRadios1">
+                    Cash on Delivery
+                </label>
+                </div>
+                <div class="form-check mb-0">
+                <input class="form-check-input" type="radio" name="p_type"  value="PAYTM">
+                <label class="form-check-label paytm_text" for="exampleRadios2">
+                    Pay Online
+                </label>
+                </div>
             <button type="submit" class="btn btn-success btn-block add_head_btn fixed-bottom">Place Order</button>
         </form>
         </div>

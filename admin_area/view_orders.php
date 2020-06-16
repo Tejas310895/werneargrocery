@@ -113,6 +113,14 @@
                           $min_price = $row_min['min_order'];
 
                           $del_charges = $row_min['del_charges'];
+
+                          $get_txn = "select * from paytm where ORDERID='$invoice_id'";
+
+                          $run_txn = mysqli_query($con,$get_txn);
+
+                          $row_txn = mysqli_fetch_array($run_txn);
+
+                          $txn_status = $row_txn['STATUS'];
                   ?>
                       <div class="card">
                             <div class="card-body card_shadow mx-3 mt-2 mb-0">
@@ -131,7 +139,12 @@
                                                                       <?php echo $customer_city; ?> .
                                                                       </h4>
                                   </div>
-                                  <div class="col"><h3 class="card-subtitle mt-2 pull-right"><?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-</h3></div>
+                                  <div class="col">
+                                  <h3 class="card-subtitle mt-2 pull-right">
+                                  <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-<br>
+                                  <?php if($txn_status==='TXN_SUCCESS'){echo "PAID ONLINE";}else{echo "TAKE CASH";} ?>
+                                  </h3>
+                                  </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-lg-12">

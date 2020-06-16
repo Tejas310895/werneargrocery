@@ -234,7 +234,7 @@ session_start();
 
             $del_charges = $row_min['del_charges'];
             
-            $get_invoice = "select * from customer_orders where customer_id='$c_id' group by invoice_no";
+            $get_invoice = "select distinct invoice_no from customer_orders where customer_id='$c_id' order by order_id DESC";
 
             $run_invoice = mysqli_query($con,$get_invoice);
 
@@ -270,6 +270,14 @@ session_start();
 
             $order_sum = $row_order_sum['order_sum'];
 
+            $get_txn = "select * from paytm where ORDERID='$invoice_id'";
+
+            $run_txn = mysqli_query($con,$get_txn);
+
+            $row_txn = mysqli_fetch_array($run_txn);
+
+            $txn_status = $row_txn['STATUS'];
+
             ?>
             <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body bg-white py-1">
@@ -284,7 +292,10 @@ session_start();
                                 <div class="row">
                                     <div class="col-9">
                                         <h5 class="card-title mb-0"><?php echo $row_order_count; ?> Items</h5>
-                                        <h5 class="card-title mb-0">₹ <?php echo  $order_sum+$del_charges; ?></h5>
+                                        <h4 class="card-title mb-0">₹ <?php echo  $order_sum+$del_charges; ?></h4>
+                                        <p class="card-text mb-0  <?php if($txn_status==='TXN_SUCCESS'){echo 'text-success';}else{echo 'text-danger'; } ?>" style="font-size:0.7rem;font-weight:bold;">
+                                        <?php if($txn_status==='TXN_SUCCESS'){echo 'PAID ONLINE';}else{echo 'PAYMENT PENDING'; } ?>
+                                        </p>
                                     </div>
                                     <div class="col-3 pt-2">
                                         <a href="order_view?invoice_no=<?php echo  $invoice_id; ?>" class="btn btn-success order_view py-0 mr-5" >View</a>

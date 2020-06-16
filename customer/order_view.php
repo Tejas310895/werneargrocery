@@ -12,6 +12,8 @@ session_start();
     include("includes/db.php");
     include("functions/function.php");
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -62,17 +64,15 @@ session_start();
                 </li>
             </ul>
         <!-- nav -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page" my-0 mx-0 rounded-0>Order ID - <?php echo $_GET['invoice_no']; ?></li>
-            </ol>
-        </nav>
-    </div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item active" aria-current="page" my-0 mx-0 rounded-0>Order ID - <?php echo $_GET['invoice_no']; ?></li>
+                    </ol>
+                </nav>
 <!-- fixed top -->
-
 <!-- Order Details -->
 
-    <div class="container bg-white mt-5 pt-4">
+    <div class="container bg-white mt-0 pt-2">
     <?php 
 
     if(isset($_GET['invoice_no'])){
@@ -125,19 +125,19 @@ session_start();
 
             echo "
 
-            <div class='row'>
+            <div class='row '>
                     <div class='col-3'>
-                        <img class='img-thumbnail mb-2 borderless' src='../admin_area/product_images/$pro_img1' alt=''>
+                        <img class='img-thumbnail mb-2 border-0' src='../admin_area/product_images/$pro_img1' alt=''>
                     </div>
-                    <div class='col-4'>
-                        <h5 class='view_title mt-0'>$pro_title</h5>
+                    <div class='col-4 px-0'>
+                        <h5 class='view_title mt-0 mb-0'>$pro_title</h5>
                         <p class='view_qty'>$pro_desc</p>
                     </div>
-                    <div class='col-1'>
+                    <div class='col-1 px-0 pt-3'>
                         <p class='view_qty'>X $qty</p>
                     </div>
-                    <div class='col-4'>
-                        <h5 class='view_total'>₹ $sub_total</h5>
+                    <div class='col-4 px-0 pt-3'>
+                        <h5 class='view_total text-center'>₹ $sub_total</h5>
                     </div>
                 </div>
             

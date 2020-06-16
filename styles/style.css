@@ -644,3 +644,21 @@ a.pro_store{
 
 
 /* order details*/
+
+/* order COD*/
+
+.cod_text{
+    font-size: 1.2rem;
+    font-family: Josefin Sans;
+    font-weight: bold;
+    color: #999;
+}
+
+.paytm_text{
+    font-size: 1.2rem;
+    font-family: Josefin Sans;
+    font-weight: bold;
+    color: #999;
+}
+
+/* order COD*/
