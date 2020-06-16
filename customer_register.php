@@ -30,7 +30,7 @@
 
     </div>
 <!-- fixed nav -->
-
+<!-- onKeyPress="if(this.value.length==10) return false;" -->
 <!-- register form -->
     <div class="container">
         <form action="customer_register.php" method="post" enctype="multipart/form-data" class="register_form">
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label>Mobile No.</label>
-            <input type="number" onKeyPress="if(this.value.length==10) return false;" class="form-control" id="name" name="c_contact" aria-describedby="emailHelp" placeholder="Enter Number" required>
+            <input type="number"  minlength="10" maxlength="10" class="form-control" id="name" name="c_contact" aria-describedby="emailHelp" placeholder="Enter Number" required>
         </div>
         <div class="form-group">
             <label>Email address</label>
@@ -75,6 +75,14 @@ if(isset($_POST['register'])){
 
     $c_ip = getRealIpUser();
 
+    $get_count = "select * from customers where customer_email='$c_email'";
+
+    $run_count = mysqli_query($con,$get_count);
+
+    $count = mysqli_num_rows($run_count);
+
+    if($count<0){
+
      //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
     $url = "http://5.189.169.241:5012/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=Thank%20You%20for%20Registration";
     // Initialize a CURL session. 
@@ -86,7 +94,7 @@ if(isset($_POST['register'])){
     //grab URL and pass it to the variable. 
     curl_setopt($ch, CURLOPT_URL, $url); 
     
-    $result = curl_exec($ch); 
+    $result = curl_exec($ch);
 
     $insert_customer = "insert into customers (customer_name,customer_contact,customer_email,customer_pass,customer_ip) 
     values ('$c_name','$c_contact','$c_email','$c_pass','$c_ip')";
@@ -121,7 +129,13 @@ if(isset($_POST['register'])){
 
     }
     
+    }else{
+
+    echo "<script>alert('Email Already Registered, Please Login')</script>";
 
 }
+
+}
+
 
 ?>
