@@ -214,6 +214,9 @@
                         
                             <div class="row bg-white mt-1 py-2">
                                     <div class="col-4">
+                                        <span class="notify-badge <?php if($price_display>0){echo "show";}else{echo "d-none";}?>">
+                                        <h5 class="pro_dis_price mb-0">₹ <?php echo $price_display; ?> </h5>
+                                        </span>
                                         <img src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="..." class="img-thumbnail border-0">
                                     </div>
                                 <div class="col-8">
@@ -222,7 +225,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                         <div class="row">
-                                            <div class="col-4 px-0 <?php if($price_display>0){echo "show";}else{echo "d-none";}?> "><h5 class="pro_dis_price">₹ <?php echo $price_display; ?> </h5></div>
+                                            <!-- <div class="col-4 px-0 <?php //if($price_display>0){echo "show";}else{echo "d-none";}?> "><h5 class="pro_dis_price">₹ <?php //echo $price_display; ?> </h5></div> -->
                                             <div class="col-8 pr-0"><h5 class="pro_list_price">₹ <?php echo $pro_price; ?></div>
                                         </div>
                                         </div>
@@ -231,9 +234,9 @@
 
                                     $ip_add = getRealIpUser();
 
-                                    //$ip_add = getuserid();
+                                    $user_id = getuserid();
 
-                                    $get_cart = "select * from cart where ip_add='$ip_add' AND p_id='$pro_id'";
+                                    $get_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id' AND p_id='$pro_id'";
 
                                     $run_cart = mysqli_query($con,$get_cart);
 

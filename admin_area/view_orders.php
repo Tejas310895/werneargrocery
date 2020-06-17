@@ -147,17 +147,24 @@
                                   </div>
                                 </div>
                                 <div class="row">
-                                  <div class="col-lg-12">
-                                  <button id="show_details" class="btn btn-success card-link pull-left mt-2" data-toggle="modal" data-target="#KK<?php echo $invoice_id; ?>">View</button>
-                                  <form action="process_order.php?update_order=<?php echo $invoice_id; ?>" class='form-horizontal' method='post'>
-                                  <!-- <input type="hidden" name="update_order" value=""> -->
-                                  <button id="show_details" class="btn btn-primary card-link pull-right mt-2 text-white" >Delivered</button>
-                                  </form>
-                                  <form action="process_order.php?cancel_order=<?php echo $invoice_id; ?>" class='form-horizontal' method='post'>
-                                  <button id="show_details" class="btn btn-danger card-link pull-right mt-2 text-white" >Cancle</button>
-                                  </form>
-                                  <a href="print.php?print=<?php echo $invoice_id; ?>" id="show_details" class="btn btn-info card-link pull-right mt-2 text-white" >Print</a>
-                                  </div>
+                                    <div class="col-lg-6">
+                                        <button id="show_details" class="btn btn-success card-link pull-left mt-2" data-toggle="modal" data-target="#KK<?php echo $invoice_id; ?>">View</button>
+                                        <a href="print.php?print=<?php echo $invoice_id; ?>" id="show_details" class="btn btn-info card-link pull-left mt-2 text-white" >Print</a>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <form action="process_order.php?update_order=<?php echo $invoice_id; ?>" class="form-group pull-right" method="post">
+                                            <div class="input-group">
+                                              <select class="form-control mt-2" name="status">
+                                                <option>Delivered</option>
+                                                <option>Cancelled</option>
+                                                <option>Refunded</option>
+                                              </select>
+                                              <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit">Update Order</button>
+                                              </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                   <!-- Modal -->
                                   <div class="modal modal-black fade" id="KK<?php echo $invoice_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                     <div class="modal-dialog" role="document">

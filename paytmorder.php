@@ -21,11 +21,13 @@ $c_contact = $row_contact['customer_contact'];
 
 $ip_add = getRealIpUser();
 
+$user_id = getuserid();
+
 $status = "Order Placed";
 
 $invoice_no = mt_rand();
 
-$select_cart = "select * from cart where ip_add='$ip_add'";
+$select_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
 
 $run_cart = mysqli_query($con,$select_cart);
 
@@ -50,7 +52,7 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
-        $delete_cart = "delete from cart where ip_add='$ip_add'";
+        $delete_cart = "delete from cart where ip_add='$ip_add' AND user_id='$user_id'";
 
         $run_delete = mysqli_query($con,$delete_cart);
 

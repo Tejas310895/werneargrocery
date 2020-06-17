@@ -122,6 +122,7 @@ $cancel_count = $row_cancel_count['count'];
                 <table class="table">
                               <thead>
                                   <tr class="text-center">
+                                      <th>STATUS</th>
                                       <th>ORD ID</th>
                                       <th>Order Date</th>
                                       <th>Order By</th>
@@ -159,6 +160,8 @@ $cancel_count = $row_cancel_count['count'];
 
                           $add_id = $row_orders['add_id'];
 
+                          $status = $row_orders['order_status'];
+
                           $order_date = $row_orders['order_date'];
 
                           $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
@@ -194,6 +197,7 @@ $cancel_count = $row_cancel_count['count'];
                           $customer_city = $row_add['customer_city'];
                         ?>
                                 <tr class="text-center">
+                                <td style="font-size:0.8rem;"><?php echo $status; ?></td>
                                 <td style="font-size:0.8rem;"><?php echo $invoice_id; ?></td>
                                 <td style="font-size:0.8rem;"><?php echo $order_date; ?></td>
                                 <td style="font-size:0.8rem;"><?php echo $c_name; ?></td>

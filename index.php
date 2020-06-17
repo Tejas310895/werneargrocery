@@ -190,7 +190,7 @@
 
                     <div class='swiper-slide'>
                                 <div class='card pro_card my-2' style='width: 18rem;'>
-                                            <img src='admin_area/product_images/<?php echo $store_img1; ?>' class='card-img-top pro_img p-1' alt='image responsive' height='100'>
+                                            <img src='admin_area/other_images/store_images/<?php echo $store_img1; ?>' class='card-img-top pro_img p-1' alt='image responsive' height='100'>
                                             <div class='card-body p-1'>
                                             <p class='card-text text-left px-2 pro_title'><?php echo $store_title; ?></p>
                                             <p class='card-text text-left px-2 store_Desc'><?php echo $store_desc; ?></p>   

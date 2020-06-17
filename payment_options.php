@@ -86,7 +86,7 @@ $session_email = $_SESSION['customer_email'];
                 </div>
                 <div class="form-group my-4">
                 <h5 class="add_head my-3">Schedule your Delivery</h5>
-                <input type="text" class="form-control select_address" name="date" id="datepicker" >
+                <input type="text" class="form-control select_address" name="date" id="datepicker" required>
                 </div>
                 <div class="form-check mb-3">
                 <input class="form-check-input" type="radio" name="p_type" value="COD" checked>

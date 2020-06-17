@@ -6,7 +6,9 @@ if(isset($_GET['update_order'])){
 
   $update_order = $_GET['update_order'];
 
-  $update_status_del = "UPDATE customer_orders SET order_status='Delivered' WHERE invoice_no='$update_order'";
+  $status = $_POST['status'];
+
+  $update_status_del = "UPDATE customer_orders SET order_status='$status' WHERE invoice_no='$update_order'";
 
   $run_status_del = mysqli_query($con,$update_status_del);
 
@@ -18,21 +20,21 @@ if(isset($_GET['update_order'])){
 
 }
 
-if(isset($_GET['cancel_order'])){
+// if(isset($_GET['cancel_order'])){
 
-    $update_order = $_GET['cancel_order'];
+//     $update_order = $_GET['cancel_order'];
   
-    $update_status_del = "UPDATE customer_orders SET order_status='Cancelled' WHERE invoice_no='$update_order'";
+//     $update_status_del = "UPDATE customer_orders SET order_status='Cancelled' WHERE invoice_no='$update_order'";
   
-    $run_status_del = mysqli_query($con,$update_status_del);
-  
-  
-      echo "<script>alert('Order Cancelled')</script>";
-  
-      echo "<script>window.open('index.php?view_orders','_self')</script>";
+//     $run_status_del = mysqli_query($con,$update_status_del);
   
   
-  }
+//       echo "<script>alert('Order Cancelled')</script>";
+  
+//       echo "<script>window.open('index.php?view_orders','_self')</script>";
+  
+  
+//   }
 
   if(isset($_GET['update_stock'])){
 

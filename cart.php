@@ -37,9 +37,9 @@
             
             $ip_add = getRealIpUser();
 
-            //$ip_add = getuserid();
+            $user_id = getuserid();
     
-            $select_cart = "select * from cart where ip_add='$ip_add'";
+            $select_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
     
             $run_cart = mysqli_query($con,$select_cart);
     
@@ -52,6 +52,8 @@
         <?php 
             
             $total = 0;
+
+            $save_total = 0;
 
             while($row_cart = mysqli_fetch_array($run_cart)){
 
@@ -71,9 +73,17 @@
 
                         $only_price = $row_products['product_price'];
 
+                        $dis_price = $row_products['price_display'];
+
                         $sub_total = $row_products['product_price']*$pro_qty;
 
+                        $save = $dis_price*$pro_qty;
+
                         $total += $sub_total;
+
+                        $save_total += $save;
+
+                        $you_save = $total-$save_total;
 
             if($count>0){
 
@@ -174,6 +184,7 @@
                 </tr>
             </tbody>
         </table>
+        <h5 class="save_total text-center <?php if($save_total>0){echo "show";}else{echo "d-none";} ?>" >You saved ₹<?php echo $you_save; ?> on this order</h5>
     </div>
     
   
