@@ -115,7 +115,7 @@ if(isset($_POST['register'])){
 
         echo "<script>alert('You have Registered Sucessfully')</script>";
 
-        echo "<script>window.open('checkout','_self')</script>";
+        echo "<script>window.open('cart','_self')</script>";
 
     }else{
 
