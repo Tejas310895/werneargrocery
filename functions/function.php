@@ -5,15 +5,28 @@ $db = mysqli_connect('localhost','u464233779_grocery','Sugandha@11','u464233779_
 
 function getRealIpUser(){
     
-    switch(true){
+    // switch(true){
             
-            case(!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
-            case(!empty($_SERVER['HTTP_CLIENT_IP'])) : return $_SERVER['HTTP_CLIENT_IP'];
-            case(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    //         case(!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
+    //         case(!empty($_SERVER['HTTP_CLIENT_IP'])) : return $_SERVER['HTTP_CLIENT_IP'];
+    //         case(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
             
-            default : return $_SERVER['REMOTE_ADDR'];
+    //         default : return $_SERVER['REMOTE_ADDR'];
             
-    }
+    // }
+
+ 
+  
+        // Declaring a variable to hold the IP 
+        // address getHostName() gets the name 
+        // of the local machine getHostByName() 
+        // gets the corresponding IP 
+        $localIP = getHostByName(getHostName()); 
+            
+        // Displaying the address  
+        return $localIP; 
+            
+            
     
 }
 
