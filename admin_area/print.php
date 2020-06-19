@@ -114,7 +114,7 @@ if(isset($_GET['print'])){
         <h4>Address : <?php echo $customer_address.', '.$customer_phase.', '.$customer_landmark.', '.$customer_city.'.'; ?></h4>
     </div>
     <div class="col-12">
-    <table class="table">
+    <table class="table table-lg">
         <thead class="text-center">
             <tr>
                 <th>HSN</th>
@@ -210,7 +210,7 @@ if(isset($_GET['print'])){
 
             $hsn_code = $row_tax['hsn'];
 
-            $get_sum = "select sum(due_amount) as hsn_total from customer_orders where hsn='$hsn_code'";
+            $get_sum = "select sum(due_amount) as hsn_total from customer_orders where hsn='$hsn_code' and invoice_no='$invoice_id'";
 
             $run_sum = mysqli_query($con,$get_sum);
 
@@ -239,9 +239,9 @@ if(isset($_GET['print'])){
         ?>
             <tr>
                 <td scope="row"><?php echo $hsn_code; ?></td>
-                <td><?php echo $hsn_cgst; ?></td>
-                <td><?php echo $hsn_sgst; ?></td>
-                <td><?php echo $hsn_cess; ?></td>
+                <td><?php echo $hsn_cgst.'('.$cgst.'%)'; ?></td>
+                <td><?php echo $hsn_sgst.'('.$sgst.'%)'; ?></td>
+                <td><?php echo $hsn_cess.'('.$cess.'%)'; ?></td>
                 <td><?php echo $hsn_cgst+$hsn_sgst+$hsn_cess; ?></td>
             </tr>
     <?php } ?>

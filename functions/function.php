@@ -36,12 +36,29 @@ function getRealIpUser(){
 
 function getuserid(){
 
+    global $db;
 
+    if(!isset($_SESSION['customer_email'])){
     session_id();
 
     $new_sessionid = session_id();
 
     return $new_sessionid;
+
+    }else{
+
+        $customer_email = $_SESSION['customer_email'];
+
+        $get_c_id = "select * from customers where customer_email='$customer_email'";
+
+        $run_c_id = mysqli_query($db,$get_c_id);
+
+        $row_c_id = mysqli_fetch_array($run_c_id);
+
+        $customer_id = $row_c_id['customer_id'];
+
+        return $customer_id;
+    }
 
 }
 
@@ -77,7 +94,7 @@ function add_cart(){
             
         }else{
             
-            $query = "insert into cart (p_id,ip_add,user_id,qty) values ('$p_id','$ip_add','$user_id','1')";
+            $query = "insert into cart (p_id,ip_add,user_id,qty,exp_date) values ('$p_id','$ip_add','$user_id','1',NOW())";
             
             $run_query = mysqli_query($db,$query);
             

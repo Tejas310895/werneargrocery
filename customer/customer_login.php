@@ -60,7 +60,11 @@
 
         $hashindb = $row_customer['customer_pass'];
 
+        $customer_id = $row_customer['customer_id'];
+
         $get_ip = getRealIpUser();
+
+        $user_id = getuserid();
 
         $check_customer = mysqli_num_rows($run_customer);
 
@@ -78,6 +82,35 @@
 
         }else{
 
+            $update_c_id = "update cart set user_id='$customer_id' where ip_add='$get_ip' AND user_id='$user_id'";
+
+            if($run_update_c_id = mysqli_query($con,$update_c_id)){
+
+                $get_cart = "select DISTINCT p_id from cart where ip_add='$get_ip' AND user_id='$customer_id'";
+
+                $run_cart = mysqli_query($con,$get_cart);
+
+                while ($row_cart = mysqli_fetch_array($run_cart)){
+
+                    $p_id = $row_cart['p_id'];
+
+                    $count_cart = "select * from cart where p_id='$p_id' and ip_add='$get_ip' and user_id='$customer_id'";
+
+                    $run_count_cart = mysqli_query($con,$count_cart);
+
+                    $row_count_cart = mysqli_num_rows($run_count_cart);
+                    
+                    if($row_count_cart>1){
+
+                        $delete_cart = "delete from cart where p_id='$p_id' and ip_add='$get_ip' and user_id='$customer_id' limit 1";
+
+                        $run_delete_cart = mysqli_query($con,$delete_cart);
+
+                    }
+
+                }
+            }
+            
 
         if($check_cart==0){
 
@@ -102,3 +135,4 @@
 }
 
 ?>
+
