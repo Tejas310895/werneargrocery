@@ -165,8 +165,8 @@
 
 <!-- product list -->
     <div class="container-fluid pro_list p-3">
-    <?php add_cart(); ?>
-    <?php delete_cart(); ?>
+    <?php //add_cart(); ?>
+    <?php //delete_cart(); ?>
 
         <?php 
         
@@ -250,9 +250,9 @@
                                         
                                         <div class='col-6'>
                                             <div class='row ml-1'>
-                                                <a href='shop?delete_cart=$pro_id&store_id=".urlencode($store_id)."' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></a>
-                                                <input type='numeric' name='' id='' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
-                                                <a href='shop?add_cart=$pro_id&store_id=".urlencode($store_id)."' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></a>
+                                                <button class='btn btn-qty px-1 py-1 del' type='button' id='$pro_id'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
+                                                <input type='numeric' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
+                                                <button class='btn btn-qty px-1 py-1 add' type='button' id='$pro_id'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
                                             </div>
                                         </div>
                                         
@@ -262,7 +262,7 @@
 
                                         echo "
 
-                                            <a href='shop?add_cart=$pro_id&store_id=".urlencode($store_id)."' class='btn px-4 py-1 ml-0  pull-left pro_list_addqty'>ADD</a>
+                                            <button class='btn px-4 py-1 ml-3 pull-left pro_list_addqty add' type='button' id='$pro_id'>ADD</button>
                                         
                                         ";
                                         }
@@ -319,7 +319,6 @@
             </div>
         </div>
 <!-- checkout float -->
-
 
 <?php
 

@@ -54,6 +54,10 @@ while($row_cart = mysqli_fetch_array($run_cart)){
         $delete_cart = "delete from cart where ip_add='$ip_add' AND user_id='$user_id'";
 
         $run_delete = mysqli_query($con,$delete_cart);
+
+        $update_stock = "UPDATE products SET product_stock=product_stock-'$pro_qty' WHERE product_id='$pro_id'";
+
+        $run_update_stock = mysqli_query($con,$update_stock);
         
         $text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
 

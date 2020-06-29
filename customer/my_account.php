@@ -44,7 +44,7 @@ session_start();
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <!-- font-awesome -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css?version=2">
     <!-- styles -->
 </head>
 <body>

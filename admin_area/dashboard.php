@@ -25,13 +25,13 @@ $row_today_sales = mysqli_fetch_array($run_today_sales);
 
 $today_sales = $row_today_sales['total'];
 
-$get_total_count = "SELECT count(order_id) AS count FROM customer_orders where order_status='Delivered'";
+$get_total_count = "SELECT DISTINCT invoice_no FROM customer_orders where order_status='Delivered'";
 
 $run_total_count = mysqli_query($con,$get_total_count);
 
-$row_total_count = mysqli_fetch_array($run_total_count);
+$total_count = mysqli_num_rows($run_total_count);
 
-$total_count = $row_total_count['count'];
+//$total_count = $row_total_count['count'];
 
 $get_today_count = "SELECT sum(due_amount) AS count FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
 
@@ -49,13 +49,13 @@ $row_cancel_sales = mysqli_fetch_array($run_cancel_sales);
 
 $cancel_sales = $row_cancel_sales['total'];
 
-$get_cancel_count = "SELECT count(order_id) AS count FROM customer_orders where order_status='Cancelled'";
+$get_cancel_count = "SELECT DISTINCT invoice_no FROM customer_orders where order_status='Cancelled'";
 
 $run_cancel_count = mysqli_query($con,$get_cancel_count);
 
-$row_cancel_count = mysqli_fetch_array($run_cancel_count);
+$cancel_count = mysqli_num_rows($run_cancel_count);
 
-$cancel_count = $row_cancel_count['count'];
+//$cancel_count = $row_cancel_count['count'];
 
 
 

@@ -88,6 +88,9 @@ a,.geolocation{
 }
 
 .pro_title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 1.2rem;
     font-family: jost;
     font-weight: bold;
@@ -318,7 +321,7 @@ span.icon-name{
     margin-top: 25%;
 }
 
-a.pro_list_addqty{
+button.pro_list_addqty{
     font-size: 0.8rem;
     font-family: Righteous;
     border: 1.5px solid #ff7b00;

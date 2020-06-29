@@ -52,6 +52,10 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
+        $update_stock = "UPDATE products SET product_stock=product_stock-'$pro_qty' WHERE product_id='$pro_id'";
+
+        $run_update_stock = mysqli_query($con,$update_stock);
+
         $delete_cart = "delete from cart where ip_add='$ip_add' AND user_id='$user_id'";
 
         $run_delete = mysqli_query($con,$delete_cart);

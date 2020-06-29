@@ -37,6 +37,7 @@ if(isset($_GET['pro_id'])){
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="The best online grocery store in palava. We can fulfill all your grocery needs ranging from grains,pulses,kitchen needs to fresh vegetables and fruits"/>
     <link rel="shortcut icon" type="image/png" href="../admin_area/admin_images/wrnlogo.png"/>
     <title>Wernear Grocery</title>
     <!-- google font -->
@@ -62,7 +63,7 @@ if(isset($_GET['pro_id'])){
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <!-- font-awesome -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css?version=1">
+    <link rel="stylesheet" href="styles/style.css?version=2">
     <!-- styles -->
 </head>
 <body>

@@ -114,7 +114,7 @@
                         ";
                     }
 
-                    $get_slides = "select * from slider LIMIT 1,3";
+                    $get_slides = "select * from slider LIMIT 1,4";
 
                     $run_slides = mysqli_query($con,$get_slides);
 
@@ -384,7 +384,7 @@
             <div class="container-fluid gridheading mt-3">
             <div class="row pl-1 pb-2 mx-0">
                 <div class="col">
-                    <h5 class="heading_main">Offers for you</h5>
+                    <h5 class="heading_main"></h5>
                 </div>
             </div>
             </div>

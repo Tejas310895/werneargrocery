@@ -140,9 +140,11 @@
                                                                       </h4>
                                   </div>
                                   <div class="col">
-                                  <h3 class="card-subtitle mt-2 pull-right">
-                                  <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-<br>
+                                  <h6 class="card-title mt-2 pull-right p-2 rounded font-weight-bold <?php if($txn_status==='TXN_SUCCESS'){echo "bg-success";}else{echo "bg-danger";} ?>">
                                   <?php if($txn_status==='TXN_SUCCESS'){echo "PAID ONLINE";}else{echo "TAKE CASH";} ?>
+                                  </h6>
+                                  <h3 class="card-subtitle mt-2 pull-right">
+                                  <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-  
                                   </h3>
                                   </div>
                                 </div>
