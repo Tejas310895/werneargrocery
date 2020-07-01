@@ -101,7 +101,7 @@
 
                 echo"
                 
-                <div class='row bg-white py-2 mt-1'>
+                <div class='row bg-white py-2 mt-1' id='hidScroll'>
                     <div class='col-4 px-0'>
                         <img src='admin_area/product_images/$product_img1' alt='' class='img-thumbnail border-0 w-75'>
                     </div>
@@ -110,9 +110,9 @@
                             <div class='row'>
                                 <div class='col-6'>
                                     <div class='row pl-3'>
-                                        <a href='cart?delete_checkout=$pro_id' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></a>
-                                        <input type='numeric' name='' id='' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
-                                        <a href='cart?add_checkout=$pro_id' class='btn btn-qty px-1 py-1'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></a>
+                                        <button class='btn btn-qty px-1 py-1 del' type='button' id='$pro_id'><i style='font-size:0.9rem; color:#fff;' class='fas fa-minus'></i></button>
+                                        <input type='numeric' class='shop_qty' placeholder='' value='$pro_qty' aria-describedby='helpId' readonly>
+                                        <button class='btn btn-qty px-1 py-1 add' type='button' id='$pro_id'><i style='font-size:0.9rem; color:#fff;' class='fas fa-plus'></i></button>
                                     </div> 
                                 </div>
                                     <div class='col-6 pt-1 pl-5'>
