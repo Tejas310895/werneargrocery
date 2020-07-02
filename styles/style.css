@@ -686,7 +686,8 @@ a.pro_store{
 
 /*loading*/
 
-body { 
+.pro_list_addqty,
+.shopAdd { 
     animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
