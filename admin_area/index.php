@@ -90,8 +90,6 @@
             <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
                 <div class="container-fluid">
                 <div class="navbar-wrapper">
-                    <div class="navbar-toggle d-inline">
-                    </div>
                     <a class="navbar-brand"><img src="admin_images/logo.png" alt="" class="img-thumbnail border-0" width="150px"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navigation">
@@ -119,7 +117,7 @@
                         </p>
                         </a>
                         <ul class="dropdown-menu dropdown-navbar">
-                        <li class="nav-link"><a href="user_profile.php" class="nav-item dropdown-item">Profile</a></li>
+                        <li class="nav-link"><a href="index.php?user_profile" class="nav-item dropdown-item">Profile</a></li>
                         <li class="dropdown-divider"></li>
                         <li class="nav-link"><a href="logout.php" class="nav-item dropdown-item">Log out</a></li>
                         </ul>
@@ -318,6 +316,12 @@
               if(isset($_GET['view_payments'])){
                     
                 include("view_payments.php");
+                
+              }
+
+              if(isset($_GET['view_area'])){
+                    
+                include("view_area.php");
                 
               }
 

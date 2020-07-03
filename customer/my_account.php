@@ -48,7 +48,7 @@ session_start();
     <!-- styles -->
 </head>
 <body>
-
+<?php delete_address(); ?>
 <!-- fixed nav -->
     <div class="container-fuild fixed-top">
                 <!-- nav -->
@@ -405,32 +405,44 @@ session_start();
                     <form action="my_account" method="post" class="register_form">
                     <div class="form-group">
                         <label>City</label>
-                        <select name="c_city" class="form-control" required>
-                            <option>Mumbai</option>
+                        <select name="c_city" class="form-control" id="city" required>
+                        <option disabled selected hidden>Choose City</option>
+                            <?php 
+                            
+                                $get_city = "select * from city";
+
+                                $run_city = mysqli_query($con,$get_city);
+
+                                while($row_city = mysqli_fetch_array($run_city)){
+
+                                $city_id = $row_city['city_id'];
+
+                                $city_name = $row_city['city_name'];
+                            
+                            ?>
+                            <option><?php echo $city_name;  ?></option>
+                        <?php }?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Area</label>
+                        <select name="c_landmark" class="form-control" id="area" required>
+                        <option disabled selected hidden>Choose Area</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Landmark</label>
-                        <select name="c_landmark" class="form-control" required>
-                            <option>Palava City</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Phase</label>
-                        <select name="c_phase" class="form-control" required>
-                            <option>Casa Rio</option>
-                            <option>Casa Rio Gold</option>
-                            <option>Casa Bella</option>
-                            <option>Casa Bella Gold</option>
+                        <select name="c_phase" class="form-control" id="landmark" required>
+                            <option disabled selected hidden>Choose Landmark</option>
                         </select>
                     </div>
                     <div class="form-group ">
-                        <label>Address</label>
+                        <label>Society & Flat No/ House No</label>
                         <input type="text" class="form-control" id="address" name="c_address" aria-describedby="emailHelp" placeholder="Enter Address" required>
                     </div>
                     <div class="form-group ">
                         <label>Address type</label>
-                        <input type="text" class="form-control" id="ctype" name="add_type" aria-describedby="emailHelp" placeholder="Enter Address Type" required>
+                        <input type="text" class="form-control" id="ctype" name="add_type" aria-describedby="emailHelp" placeholder="Home/Office/Others" required>
                     </div>
                     <button type="submit" name="insertadd" class="btn btn-primary" >Submit</button>
                     </form>
