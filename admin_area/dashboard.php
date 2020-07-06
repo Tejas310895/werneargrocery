@@ -33,13 +33,13 @@ $total_count = mysqli_num_rows($run_total_count);
 
 //$total_count = $row_total_count['count'];
 
-$get_today_count = "SELECT sum(due_amount) AS count FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
+$get_today_count = "SELECT DISTINCT invoice_no FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
 
 $run_today_count = mysqli_query($con,$get_today_count);
 
-$row_today_count = mysqli_fetch_array($run_today_count);
+$today_count = mysqli_num_rows($run_today_count);
 
-$today_count = $row_today_count['count'];
+// $today_count = $row_today_count['count'];
 
 $get_cancel_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Cancelled'";
 
@@ -131,6 +131,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                       <th>Items</th>
                                       <th>Cost</th>
                                       <th>View</th>
+                                      <th>Print</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -289,6 +290,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                   </div>
                                 </div>
                                 </td>
+                                <td><a href="print.php?print=<?php echo $invoice_id; ?>" id="show_details" class="btn btn-info card-link pull-left px-2 py-1 text-white" >Print</a></td>
                                 </tr>
                                 <?php } ?>
                                 </tbody>

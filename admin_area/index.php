@@ -343,7 +343,11 @@
                 
               }
 
-            
+              if(isset($_GET['stock_report'])){
+                    
+                include("stock_report.php");
+                
+              }
             ?>
 
         </div>

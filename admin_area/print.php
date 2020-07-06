@@ -82,7 +82,7 @@ if(isset($_GET['print'])){
         }
 
         window.onafterprint = function(){
-            document.location.href = "index.php?view_orders";
+            history.back();
         }
     </script>
     <style>

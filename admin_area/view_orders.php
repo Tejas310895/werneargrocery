@@ -16,6 +16,7 @@
               <div class="card-header ">
                 <h4 class="title d-inline">ORDERS</h4>
                 <p class="card-category d-inline">TODAY</p>
+                <a href="index?stock_report" class="btn btn-primary pull-right">ORDER STOCK</a>
               </div>
               <div class="card-body" id="refresh">
                 <div class="table-full-width table-responsive" id="time">
