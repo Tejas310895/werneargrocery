@@ -120,7 +120,7 @@ if(isset($_GET['print'])){
         <h4>Name : <?php echo $c_name; ?></h4>
         <h4>Mobile No. : <?php echo $c_contact; ?></h4>
         <h4>Address : <?php echo $customer_address.', '.$customer_phase.', '.$customer_landmark.', '.$customer_city.'.'; ?></h4>
-        <h4>Payment Mode : <?php if($txn_status='TXN_SUCCESS'){echo"Paid Online";}else{echo"Take Cash";} ?></h4>
+        <h4>Payment Mode : <?php if($txn_status=='TXN_SUCCESS'){echo"ONLINE";}else{echo"OFFLINE";} ; ?></h4>
     </div>
     <div class="col-12">
     <table class="table table-lg">
