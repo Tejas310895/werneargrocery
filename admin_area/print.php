@@ -65,6 +65,14 @@ if(isset($_GET['print'])){
 
     $del_charges = $row_min['del_charges'];
 
+    $get_txn = "select * from paytm where ORDERID='$invoice_id'";
+
+    $run_txn = mysqli_query($con,$get_txn);
+
+    $row_txn = mysqli_fetch_array($run_txn);
+
+    $txn_status = $row_txn['STATUS'];
+
 
 }
 
@@ -164,14 +172,6 @@ if(isset($_GET['print'])){
             $min_price = $row_min['min_order'];
 
             $del_charges = $row_min['del_charges'];
-
-            $get_txn = "select * from taxes where ORDERID='$invoice_id'";
-
-            $run_txn = mysqli_query($con,$get_txn);
-        
-            $row_txn = mysqli_fetch_array($run_txn);
-        
-            $txn_status = $row_txn['STATUS'];
 
             ?>
             <tr>
