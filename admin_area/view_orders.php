@@ -14,8 +14,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card card-tasks mb-0">
               <div class="card-header ">
-                <h4 class="title d-inline">ORDERS</h4>
-                <p class="card-category d-inline">TODAY</p>
+                <h3 class="title d-inline ml-4">ORDERS</h3>
                 <a href="index?stock_report" class="btn btn-primary pull-right">ORDER STOCK</a>
               </div>
               <div class="card-body" id="refresh">

@@ -78,6 +78,7 @@
   <link href="dashboard/assets/demo/demo.css" rel="stylesheet" />
 
   <!-- datatables -->
+  <link rel='stylesheet' href='https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css'>
 
 
 </head>
@@ -348,6 +349,7 @@
                 include("stock_report.php");
                 
               }
+
             ?>
 
         </div>
