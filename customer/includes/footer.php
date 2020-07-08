@@ -40,5 +40,41 @@ $(function() {
     <script src="js/script.js?version=1"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+window.addEventListener('resize', function() {
+    if (window.innerWidth >= 700) {
+		window.location = "desktop"; 
+	}
+});
+</script>
+<script>
+// Add event listener offline to detect network loss.
+window.addEventListener("offline", function(e) {
+    showPopForOfflineConnection();
+});
+
+// Add event listener online to detect network recovery.
+window.addEventListener("online", function(e) {
+    hidePopAfterOnlineInternetConnection();
+});
+
+function hidePopAfterOnlineInternetConnection(){
+    $('#fade-wrapper').fadeOut();
+    // $('#internet-connection-status-dialogue').trigger('close');
+    
+    
+}
+
+function showPopForOfflineConnection(){
+    $('#fade-wrapper').fadeIn();
+    // $('#internet-connection-status-dialogue').lightbox_me({
+    //     centered: true,
+    //     overlaySpeed:"slow",
+    //     closeClick:false,
+    //     onLoad: function() {
+    //     }
+    // });
+}
+</script>
 </body>
 </html>
