@@ -597,7 +597,7 @@ a.pro_store{
 }
 
 .form-control{
-    min-height: 59px;    
+  /* min-height: 59px;     */
 }
 
 /* register */
