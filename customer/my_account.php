@@ -46,6 +46,22 @@ session_start();
     <!-- styles -->
     <link rel="stylesheet" href="styles/style.css?version=2">
     <!-- styles -->
+
+    <!-- Chatra {literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'Wd4a7RX9vgyRxaS3P';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} -->
+
 </head>
 <body>
 <div id="fade-wrapper" class="text-center pt-5">
@@ -588,32 +604,6 @@ session_start();
         </div>
     </div>
 <!-- user account logout -->
-
-<!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v7.0'
-          });
-        };
-
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your Chat Plugin code -->
-      <div class="fb-customerchat"
-        attribution=setup_tool
-        page_id="110424543849402"
-  theme_color="#ff7e29">
-      </div>
-      <!-- Load Facebook SDK for JavaScript -->
 
 <?php
 
