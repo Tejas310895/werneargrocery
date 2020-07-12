@@ -28,7 +28,7 @@ if(isset($_POST['view'])){
 
     $pro_id = $row_bstock['pro_id'];
 
-    $get_qtysum = "SELECT SUM(qty) AS bulk_qty FROM customer_orders where pro_id='$pro_id' and order_status in ('Order Placed' , 'Delivered') and order_date between '$from' and '$to'";
+    $get_qtysum = "SELECT SUM(qty) AS bulk_qty FROM customer_orders where pro_id='$pro_id' and order_status in ('Order Placed' , 'Delivered' , 'Out For Delivery') and order_date between '$from' and '$to'";
 
     $run_qtysum = mysqli_query($con,$get_qtysum);
 
@@ -46,14 +46,20 @@ if(isset($_POST['view'])){
 
     $pro_desc = $row_prodet['product_desc'];
 
+    $pro_price = $row_prodet['product_price'];
+
+    $bulk_price = $bulk_qty*$pro_price;
+
     $counter = $counter+1;
 
     echo "
     <tr>
         <td class='text-center'> $counter </td>
-        <td>$pro_title</td>
-        <td>$pro_desc</td>
-        <td>$bulk_qty</td>
+        <td class='text-center'>$pro_title</td>
+        <td class='text-center'>$pro_desc</td>
+        <td class='text-center'>$bulk_qty</td>
+        <td class='text-center'>$bulk_qty x $pro_price</td>
+        <td class='text-center'>$bulk_price</td>
     </tr>
     ";
 

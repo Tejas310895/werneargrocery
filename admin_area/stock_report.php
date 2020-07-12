@@ -30,11 +30,13 @@
                     <div class="table-full-width table-responsive" id="time">
                             <table class="table" id="tblexportData">
                             <thead>
-                                <tr>
-                                    <th class="text-center">Sl.No</th>
+                                <tr class="text-center">
+                                    <th>Sl.No</th>
                                     <th>Product</th>
                                     <th>Type</th>
                                     <th>Bulk Quantity</th>
+                                    <th>Amount/Item</th>
+                                    <th>Bulk Amount</th>
                                 </tr>
                             
                             </thead>

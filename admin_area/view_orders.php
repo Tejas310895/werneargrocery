@@ -46,7 +46,7 @@
                   </table> -->
                   <?php
                 
-                      $get_invoice = "SELECT DISTINCT invoice_no FROM customer_orders WHERE order_status='Order Placed' ORDER BY order_id DESC";
+                      $get_invoice = "SELECT DISTINCT invoice_no FROM customer_orders WHERE order_status in ('Order Placed','Out For Delivery') ORDER BY order_id DESC";
 
                       $run_invoice = mysqli_query($con,$get_invoice);
 
@@ -157,6 +157,20 @@
                                         <form action="process_order.php?update_order=<?php echo $invoice_id; ?>" class="form-group pull-right" method="post">
                                             <div class="input-group">
                                               <select class="form-control mt-2" name="status">
+                                              <?php 
+                                              
+                                              $get_status = "select * from customer_orders where invoice_no='$invoice_id'";
+
+                                              $run_status = mysqli_query($con,$get_status);
+
+                                              $row_status = mysqli_fetch_array($run_status);
+
+                                              $status = $row_status['order_status'];
+
+                                              echo "<option>$status</option>";
+                                              
+                                              ?>
+                                                <option>Out For Delivery</option>
                                                 <option>Delivered</option>
                                                 <option>Cancelled</option>
                                                 <option>Refunded</option>
