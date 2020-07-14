@@ -350,6 +350,12 @@
                 
               }
 
+              if(isset($_GET['notify'])){
+                    
+                include("notify.php");
+                
+              }
+
             ?>
 
         </div>
