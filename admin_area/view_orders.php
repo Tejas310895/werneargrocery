@@ -17,6 +17,7 @@
                 <h3 class="title d-inline ml-4">ORDERS</h3>
                 <a href="index?notify" class="btn btn-primary pull-right">REQUIREMENT</a>
                 <a href="index?stock_report" class="btn btn-primary pull-right">ORDER STOCK</a>
+                <a href="index?order_report" class="btn btn-primary pull-right">REPORTS</a>
               </div>
               <div class="card-body" id="refresh">
                 <div class="table-full-width table-responsive" id="time">
@@ -141,12 +142,12 @@
                                                                       </h4>
                                   </div>
                                   <div class="col">
-                                  <h6 class="card-title mt-2 pull-right p-2 rounded font-weight-bold <?php if($txn_status==='TXN_SUCCESS'){echo "bg-success";}else{echo "bg-danger";} ?>">
-                                  <?php if($txn_status==='TXN_SUCCESS'){echo "PAID ONLINE";}else{echo "TAKE CASH";} ?>
-                                  </h6>
-                                  <h3 class="card-subtitle mt-2 pull-right">
-                                  <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-  
-                                  </h3>
+                                    <h6 class="card-title mt-2 pull-right p-2 rounded font-weight-bold <?php if($txn_status==='TXN_SUCCESS'){echo "bg-success";}else{echo "bg-danger";} ?>">
+                                      <?php if($txn_status==='TXN_SUCCESS'){echo "PAID ONLINE";}else{echo "TAKE CASH";} ?>
+                                    </h6>
+                                    <h3 class="card-subtitle mt-2 pull-right">
+                                      <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-  
+                                    </h3>
                                   </div>
                                 </div>
                                 <div class="row">

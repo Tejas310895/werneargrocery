@@ -60,7 +60,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" sizes="76x76" href="admin_images/wrnlogo.png">
   <link rel="icon" type="image/png" href="admin_images/wrnlogo.png">
   <title>
@@ -353,6 +353,12 @@
               if(isset($_GET['notify'])){
                     
                 include("notify.php");
+                
+              }
+
+              if(isset($_GET['order_report'])){
+                    
+                include("order_report.php");
                 
               }
 
