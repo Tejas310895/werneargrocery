@@ -15,9 +15,9 @@
             <div class="card card-tasks mb-0">
               <div class="card-header ">
                 <h3 class="title d-inline ml-4">ORDERS</h3>
-                <a href="index?notify" class="btn btn-primary pull-right">REQUIREMENT</a>
-                <a href="index?stock_report" class="btn btn-primary pull-right">ORDER STOCK</a>
-                <a href="index?order_report" class="btn btn-primary pull-right">REPORTS</a>
+                <a href="index?notify" class="btn btn-primary pull-right">REQUIREMENT</a>
+                <a href="index?stock_report" class="btn btn-primary pull-right">ORDER STOCK</a>
+                <a href="index?order_report" class="btn btn-primary pull-right">REPORTS</a>
               </div>
               <div class="card-body" id="refresh">
                 <div class="table-full-width table-responsive" id="time">
