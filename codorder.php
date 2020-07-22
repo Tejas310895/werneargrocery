@@ -66,6 +66,13 @@ while($row_cart = mysqli_fetch_array($run_cart)){
         $update_stock = "UPDATE products SET product_stock=product_stock-'$pro_qty' WHERE product_id='$pro_id'";
 
         $run_update_stock = mysqli_query($con,$update_stock);
+
+    }
+}
+
+    if($run_customer_order){
+
+        $invoice_no = $invoice_no;
         
         $text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
 
@@ -85,13 +92,14 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         echo "<script>alert('Order Placed, thanks')</script>";
 
+        echo "<script>window.history.go(-window.history.length)</script>";
+
         echo "<script>window.open('customer/my_account','_self')</script>";
-
-
-
-
+        
+    }else{
+        echo "<script>alert('Order Placed, thanks')</script>";
+    
+        echo "<script>window.open('./','_self')</script>";
     }
-
-}
 
 ?>
