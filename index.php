@@ -114,7 +114,7 @@ include("includes/header.php");
                     ";
                 }
 
-                $get_slides = "select * from slider LIMIT 1,4";
+                $get_slides = "select * from slider LIMIT 1,8";
 
                 $run_slides = mysqli_query($con,$get_slides);
 
@@ -122,6 +122,7 @@ include("includes/header.php");
 
                     $slide_name = $row_slide['slide_name'];
                     $slide_image = $row_slide['slide_image'];
+                    $slide_url = $row_slide['slide_url'];
 
                     echo "
                     
@@ -129,7 +130,7 @@ include("includes/header.php");
 
                     <a href='$slide_url'>
 
-                        <img src='admin_area/slides_images/$slide_image' class='d-block w-100'>
+                        <img src='$slide_image' class='d-block w-100'>
 
                     </a>
 
@@ -157,7 +158,7 @@ include("includes/header.php");
 gridheading">
     <div class="row pl-1 pb-2">
         <div class="col">
-            <h5 class="heading_main">Most Reviewed</h5>
+            <h5 class="heading_main">Newly Arrived</h5>
         </div>
     </div>
 </div>
@@ -379,7 +380,6 @@ gridheading">
 </div>    
 
 <!-- Product Categories -->
-
 <!-- offers -->
         <div class="container-fluid gridheading mt-3">
         <div class="row pl-1 pb-2 mx-0">
@@ -406,9 +406,9 @@ gridheading">
             
             ?>
         <div class="col-12 mx-1 my-2">
-            <a href="newshop.php">
+            <!-- <a href="newshop.php"> -->
             <img src="admin_area/other_images/<?php echo $offer_img; ?>" class="img-fluid" alt="Responsive image">
-            </a>
+            <!-- </a> -->
         </div>
             <?php } ?>
     </div>

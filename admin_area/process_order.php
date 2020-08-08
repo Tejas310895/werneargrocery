@@ -6,7 +6,7 @@ if(isset($_GET['update_order'])){
 
   $update_order = $_GET['update_order'];
 
-  $status = $_POST['status'];
+  $status = $_GET['status'];
 
   $update_status_del = "UPDATE customer_orders SET order_status='$status' WHERE invoice_no='$update_order'";
 
@@ -176,5 +176,62 @@ if(isset($_GET['update_order'])){
   
   
   }
+
+  if(isset($_GET['undeliver_order'])){
+
+    $invoice_id = $_GET['undeliver_order'];
+
+    $pro_id = $_GET['undelpro_id'];
+
+    $update_undel = "update customer_orders set product_status='Undeliver' where invoice_no='$invoice_id' and pro_id='$pro_id'";
+
+    $run_update_undel = mysqli_query($con,$update_undel);
+
+    if($run_update_undel){
+  
+      echo "<script>alert('Order Updated')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+    }else{
+
+      echo "<script>alert('Try Again')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+
+    }
+  
+  
+  }
+
+  if(isset($_GET['deliver_order'])){
+
+    $invoice_id = $_GET['deliver_order'];
+
+    $pro_id = $_GET['delpro_id'];
+
+    $update_del = "update customer_orders set product_status='Deliver' where invoice_no='$invoice_id' and pro_id='$pro_id'";
+
+    $run_update_del = mysqli_query($con,$update_del);
+
+    if($run_update_del){
+  
+      echo "<script>alert('Order Updated')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+    }else{
+
+      echo "<script>alert('Try Again')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+
+    }
+  
+  
+  }
+
 
 ?>

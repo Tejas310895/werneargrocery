@@ -9,7 +9,7 @@
         <!-- nav -->
             <ul class="nav bg-white shoploc pb-0">
                 <li class="nav-item">
-                    <a class="nav-link pt-2 mt-1" href="store">
+                    <a class="nav-link pt-2 mt-1" onClick="window.history.back()">
                     <svg id="Layer" enable-background="new 0 0 64 64" height="25pt" float="left" fill="#999" viewBox="0 0 64 64" width="25pt" xmlns="http://www.w3.org/2000/svg"><path d="m54 30h-39.892l15.272-14.552c.799-.762.83-2.028.068-2.828-.762-.798-2.027-.831-2.828-.068l-17.445 16.625c-.758.758-1.175 1.761-1.175 2.823s.417 2.063 1.21 2.858l17.41 16.59c.387.369.884.552 1.38.552.528 0 1.055-.208 1.448-.62.762-.8.731-2.065-.068-2.828l-15.341-14.552h39.961c1.104 0 2-.896 2-2s-.896-2-2-2z" fill="#012e52"/></svg>
                     </a>
                 </li>
@@ -146,7 +146,7 @@
         <!-- breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb pt-1">
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="./">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Shop</li>
                 </ol>
             </nav>
@@ -212,12 +212,33 @@
                         $pro_stock = $row_products['product_stock'];
                         ?>
                         
-                            <div class="row bg-white mt-1 py-2">
+                            <div class="row bg-white mt-1 py-2" id="<?php echo $pro_id;?>">
                                     <div class="col-4">
                                         <span class="notify-badge <?php if($price_display>0){echo "show";}else{echo "d-none";}?>">
                                         <h5 class="pro_dis_price mb-0">₹ <?php echo $price_display; ?> </h5>
                                         </span>
-                                        <img src="<?php echo $pro_img1; ?>" alt="..." class="img-thumbnail border-0">
+                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#zimg<?php echo $pro_id; ?>">
+                                            <img src="<?php echo $pro_img1; ?>" alt="..." class="img-thumbnail border-0">
+                                        </button>
+                                            <div class="modal fade" id="zimg<?php echo $pro_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                    <!-- <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div> -->
+                                                    <div class="modal-body">
+                                                        <img src="<?php echo $pro_img1; ?>" alt="..." class="img-fluid border-0">
+                                                    </div>
+                                                    <!-- <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 <div class="col-8">
                                     <h5 class="pro_list_title"><?php echo $pro_title; ?></h5>
@@ -272,7 +293,7 @@
                                         echo"
 
                                         <div class='row'>
-                                        <div class='col'>
+                                        <div class='col pr-0 pl-4'>
                                         <a href='customer/notify?pro_id=$pro_id' class='btn btn-danger py-0 px-1 text-center' style='font-size:15px;'>
                                         Notify Us
                                         <p class='text-center mb-0'style='font-size:8px;' >Out of Stock</p>

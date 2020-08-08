@@ -2,6 +2,7 @@
 
 
 body{
+    height: 100%;
     padding-top: 12%;
     padding-bottom: 15%;
     background-color: rgb(255, 246, 233);
@@ -409,9 +410,9 @@ a.pro_store{
 
 .pro_cart{
     margin-top: 14%;
+    margin-bottom: 14%;
     overflow-y:auto;
     height:auto;
-    max-height:305px;
 }
 
 .cart_head{
@@ -711,4 +712,9 @@ a.pro_store{
 }
 
 /*loading*/
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
 

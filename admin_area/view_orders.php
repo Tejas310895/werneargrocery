@@ -48,15 +48,13 @@
                   </table> -->
                   <?php
                 
-                      $get_invoice = "SELECT DISTINCT invoice_no FROM customer_orders WHERE order_status in ('Order Placed','Out For Delivery') ORDER BY order_id DESC";
+                      $get_invoice = "SELECT DISTINCT invoice_no FROM customer_orders WHERE order_status in ('Order Placed','Out for Delivery','Packed') ORDER BY order_id DESC";
 
                       $run_invoice = mysqli_query($con,$get_invoice);
 
                       while($row_invoice=mysqli_fetch_array($run_invoice)){
 
                           $invoice_id = $row_invoice['invoice_no'];
-
-                          $order_status = 'Order Placed';
 
                           $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
 
@@ -73,6 +71,8 @@
                           $add_id = $row_orders['add_id'];
 
                           $order_date = $row_orders['order_date'];
+
+                          $order_status = $row_orders['order_status'];
 
                           $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
@@ -127,7 +127,7 @@
                       <div class="card">
                             <div class="card-body card_shadow mx-3 mt-2 mb-0">
                                 <div class="row">
-                                  <div class="col"><h4 class="card-text mb-2">Order on - <?php echo $order_date; ?></h4></div>
+                                  <div class="col"><h4 class="card-text mb-2">Order on - <?php echo date('d/M/Y,h:i:s a',strtotime($order_date)); ?></h4></div>
                                   <div class="col"><h4 class="card-title pull-right">Delivery by - <?php echo $date; ?></h4></div>
                                 </div>
                                 <div class="row">
@@ -153,23 +153,60 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <button id="show_details" class="btn btn-success card-link pull-left mt-2" data-toggle="modal" data-target="#KK<?php echo $invoice_id; ?>">View</button>
-                                        <a href="print.php?print=<?php echo $invoice_id; ?>" id="show_details" class="btn btn-info card-link pull-left mt-2 text-white" >Print</a>
+                                        <a href="print.php?print=<?php echo $invoice_id; ?>" target="_blank" id="show_details" class="btn btn-info card-link pull-left mt-2 text-white" >Bill</a>
                                     </div>
                                     <div class="col-lg-6">
-                                        <form action="process_order.php?update_order=<?php echo $invoice_id; ?>" class="form-group pull-right" method="post">
+                                      <div class="row">
+                                      <div class="col-6">
+                                      <button type="button" class="btn btn-danger <?php if($order_status==='Order Placed'){echo"show";}else {echo"d-none";} ?>" data-toggle="modal" data-target="#cancle">Cancle Order</button>
+                                      <div class="modal fade" id="cancle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h3 class="modal-title" id="exampleModalLabel">ARE YOU SURE YOU WANT TO CANCEL</h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <a href="" type="button" class="btn btn-primary">YES</a>
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <?php 
+                                          
+                                          if($order_status==='Order Placed'){
+                                            echo "
+                                            <a href='index.php?confirm_order=$invoice_id' class='btn btn-primary d-block'>Confirm Order</a>
+                                            ";
+                                          }elseif ($order_status==='Packed') {
+                                            echo "
+                                            <a href='process_order.php?update_order=$invoice_id&status=Out for Delivery' class='btn btn-primary d-block'>Out for Delivery</a>
+                                            ";
+                                          }elseif($order_status==='Out for Delivery'){
+                                            echo "
+                                            <a href='process_order.php?update_order=$invoice_id&status=Delivered' class='btn btn-primary d-block'>Update Delivered</a>
+                                            ";
+                                          }
+                                          
+                                          ?>
+                                        </div>
+                                      </div>
+                                        <!-- <form action="process_order.php?update_order=<?php //echo $invoice_id; ?>" class="form-group pull-right" method="post">
                                             <div class="input-group">
                                               <select class="form-control mt-2" name="status">
                                               <?php 
                                               
-                                              $get_status = "select * from customer_orders where invoice_no='$invoice_id'";
+                                              // $get_status = "select * from customer_orders where invoice_no='$invoice_id'";
 
-                                              $run_status = mysqli_query($con,$get_status);
+                                              // $run_status = mysqli_query($con,$get_status);
 
-                                              $row_status = mysqli_fetch_array($run_status);
+                                              // $row_status = mysqli_fetch_array($run_status);
 
-                                              $status = $row_status['order_status'];
+                                              // $status = $row_status['order_status'];
 
-                                              echo "<option>$status</option>";
+                                              // echo "<option>$status</option>";
                                               
                                               ?>
                                                 <option>Out For Delivery</option>
@@ -181,7 +218,7 @@
                                                 <button class="btn btn-primary" type="submit">Update Order</button>
                                               </div>
                                             </div>
-                                        </form>
+                                        </form> -->
                                     </div>
                                   <!-- Modal -->
                                   <div class="modal modal-black fade" id="KK<?php echo $invoice_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

@@ -69,14 +69,14 @@ if(isset($_GET['pro_id'])){
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
     <script>
-    jQuery(function($) {
-        var today = new Date();
-        $("#datepicker").datepicker({
-           dateFormat: "dd-mm-yy",
-           minDate: today.getHours() >= 17 ? 2 : 1
+    // jQuery(function($) {
+    //     var today = new Date();
+    //     $("#datepicker").datepicker({
+    //        dateFormat: "dd-mm-yy",
+    //        minDate: today.getHours() >= 17 ? 2 : 1
         
-         });
-    });
+    //      });
+    // });
     </script>
     <script>
     // function saves scroll position
@@ -96,7 +96,7 @@ if(isset($_GET['pro_id'])){
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- date -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css?version=14">
+    <link rel="stylesheet" href="styles/style.css?version=15">
     <!-- styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -73,7 +73,7 @@
   <!-- Nucleo Icons -->
   <link href="dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="dashboard/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link href="dashboard/assets/css/black-dashboard.css?v=1.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="dashboard/assets/demo/demo.css" rel="stylesheet" />
 
@@ -359,6 +359,36 @@
               if(isset($_GET['order_report'])){
                     
                 include("order_report.php");
+                
+              }
+
+              if(isset($_GET['view_client'])){
+                    
+                include("view_client.php");
+                
+              }
+
+              if(isset($_GET['insert_client'])){
+                    
+                include("insert_client.php");
+                
+              }
+
+              if(isset($_GET['edit_client'])){
+                    
+                include("edit_client.php");
+                
+              }
+
+              if(isset($_GET['confirm_order'])){
+                    
+                include("confirm_order.php");
+                
+              }
+
+              if(isset($_GET['delete_client'])){
+                    
+                include("delete_client.php");
                 
               }
 

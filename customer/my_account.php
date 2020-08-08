@@ -319,7 +319,7 @@ session_start();
                                             elseif($order_status==='Delivered'){echo 'PAID OFFLINE'; }
                                             elseif ($order_status==='Cancelled'){echo 'Cancelled';}
                                             elseif ($order_status==='Order Placed'){echo 'PAY CASH OR OFFLINE MODE';}
-                                            elseif ($order_status==='Refunded'){echo 'REFUNDED';}
+                                            elseif ($order_status==='Cancelled'&$txn_status==='TXN_SUCCESS'){echo 'REFUNDED';}
                                             ?>
                                         </p>
                                     </div>

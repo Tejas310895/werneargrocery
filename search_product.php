@@ -66,14 +66,14 @@ if(isset($_GET['pro_id'])){
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
     <script>
-    jQuery(function($) {
-        var today = new Date();
-        $("#datepicker").datepicker({
-           dateFormat: "dd-mm-yy",
-           minDate: today.getHours() >= 17 ? 2 : 1
-        
-         });
-    });
+        $(document).ready(function () {
+            $(document).on('keyup keypress', 'input', function(e) {
+            if(e.which == 13) {
+                e.preventDefault();
+                return false;
+            }
+            });
+        });
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
      <script src="js/script.js"></script>
@@ -91,6 +91,11 @@ if(isset($_GET['pro_id'])){
         color:#999 !important;
     }
 
+    .form-control:focus{
+        border-color: none;
+        box-shadow: none;
+    }
+
     </style>
     <!-- styles -->
 </head>
@@ -98,16 +103,14 @@ if(isset($_GET['pro_id'])){
 
 <div class="container-fluid py-2 fixed-top bg-white">
     <div class="row">
-        <div class="col-2 pr-0 py-1"> <a href="./"><i class="fas fa-arrow-left" style="color:#999;font-size:1.7rem;"></i></a> </div>
+        <div class="col-2 pr-0 py-1"> <a onClick="window.history.back()"><i class="fas fa-arrow-left" style="color:#999;font-size:1.7rem;"></i></a> </div>
         <div class="col-10 pl-0">
-            <form action="search_product" method="post">
                 <div class="input-group mb-1 px-0">
                     <input type="text" name="search" class="form-control border-0 search" placeholder="Search your product">
                         <!-- <div class="input-group-append">
                             <button type="submit" name="submit" class="btn"><i class="fas fa-search"></i></button>
                         </div> -->
                 </div>
-            </form>
         </div>
     </div>
 </div>

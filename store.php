@@ -10,7 +10,7 @@
         <!-- nav -->
             <ul class="nav bg-white shoploc pb-0">
                 <li class="nav-item">
-                    <a class="nav-link pt-2 mt-1" href="./">
+                    <a class="nav-link pt-2 mt-1" onClick="window.history.back()">
                     <svg id="Layer" enable-background="new 0 0 64 64" height="25pt" float="left" fill="#999" viewBox="0 0 64 64" width="25pt" xmlns="http://www.w3.org/2000/svg"><path d="m54 30h-39.892l15.272-14.552c.799-.762.83-2.028.068-2.828-.762-.798-2.027-.831-2.828-.068l-17.445 16.625c-.758.758-1.175 1.761-1.175 2.823s.417 2.063 1.21 2.858l17.41 16.59c.387.369.884.552 1.38.552.528 0 1.055-.208 1.448-.62.762-.8.731-2.065-.068-2.828l-15.341-14.552h39.961c1.104 0 2-.896 2-2s-.896-2-2-2z" fill="#012e52"/></svg>
                     </a>
                 </li>
@@ -147,7 +147,7 @@
         <!-- breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb pt-1">
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="./">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Shop</li>
                 </ol>
             </nav>
@@ -189,7 +189,28 @@
 
         <div class="row bg-white mt-1 py-2">
                     <div class="col-4">
-                        <img src="<?php echo $store_img; ?>" alt="..." class="img-thumbnail border-0">
+                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#zimg<?php echo $store_id; ?>">
+                            <img src="<?php echo $store_img; ?>" alt="..." class="img-thumbnail border-0">
+                        </button>
+                            <div class="modal fade" id="zimg<?php echo $store_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <!-- <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div> -->
+                                    <div class="modal-body">
+                                        <img src="<?php echo $store_img; ?>" alt="..." class="img-fluid border-0">
+                                    </div>
+                                    <!-- <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-8">
                             <h5 class="pro_list_title"><?php echo $store_title; ?></h5>
@@ -238,7 +259,28 @@
 
         <div class="row bg-white mt-1 py-2">
                     <div class="col-4">
+                    <button type="button" class="btn p-0" data-toggle="modal" data-target="#zimg<?php echo $cat_store_id; ?>">
                         <img src="<?php echo $cat_store_img; ?>" alt="..." class="img-thumbnail border-0">
+                    </button>
+                        <div class="modal fade" id="zimg<?php echo $cat_store_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <!-- <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div> -->
+                                <div class="modal-body">
+                                    <img src="<?php echo $cat_store_img; ?>" alt="..." class="img-fluid border-0">
+                                </div>
+                                <!-- <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     <div class="col-8">
                             <h5 class="pro_list_title"><?php echo $cat_store_title; ?></h5>

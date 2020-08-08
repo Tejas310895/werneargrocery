@@ -8,6 +8,7 @@ if(isset($_POST['c_id'])){
 
     $date = $_POST['date'];
 
+    date_default_timezone_set('Asia/Kolkata');
 }
 
 $get_contact = "select * from customers where customer_id='$customer_id'";
@@ -52,10 +53,8 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $sub_total = $row_products['product_price']*$pro_qty;
 
-        $hsn = $row_products['hsn'];
-
-        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,hsn) 
-        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',NOW(),'$date','$status','$hsn')";
+        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status) 
+        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',now(),'$date','$status')";
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
@@ -74,30 +73,49 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $invoice_no = $invoice_no;
         
-        $text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
+        $text1 = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20https://www.wernear.in//customer/order_view?invoice_no=$invoice_no";
+        $text2 = "Postpaid%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$invoice_no";
+        //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
+        $url1 = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1";
+        $url2 = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2";
 
-         //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-        $url = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text";
-        // Initialize a CURL session. 
-        $ch = curl_init();  
-        
-        // Return Page contents. 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-        
-        //grab URL and pass it to the variable. 
-        curl_setopt($ch, CURLOPT_URL, $url); 
-        
-        $result = curl_exec($ch); 
+        // create both cURL resources
+        $ch1 = curl_init();
+        $ch2 = curl_init();
+
+        // set URL and other appropriate options
+        curl_setopt($ch1, CURLOPT_URL, $url1);
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch2, CURLOPT_URL, $url2);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+
+        //create the multiple cURL handle
+        $mh = curl_multi_init();
+
+        //add the two handles
+        curl_multi_add_handle($mh,$ch1);
+        curl_multi_add_handle($mh,$ch2);
+
+        //execute the multi handle
+        do {
+            $status = curl_multi_exec($mh, $active);
+            if ($active) {
+                curl_multi_select($mh);
+            }
+        } while ($active && $status == CURLM_OK);
+
+        //close the handles
+        curl_multi_remove_handle($mh, $ch1);
+        curl_multi_remove_handle($mh, $ch2);
+        curl_multi_close($mh);
 
 
         echo "<script>alert('Order Placed, thanks')</script>";
 
-        echo "<script>window.history.go(-window.history.length)</script>";
-
-        echo "<script>window.open('customer/my_account','_self')</script>";
+        echo "<script>window.open('customer/order_success','_self')</script>";
         
     }else{
-        echo "<script>alert('Order Placed, thanks')</script>";
+        echo "<script>alert('Order Failed, Try Again')</script>";
     
         echo "<script>window.open('./','_self')</script>";
     }

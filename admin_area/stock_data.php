@@ -78,7 +78,7 @@ if(isset($_POST['show'])){
 
     if($_POST['status']=='All'){
 
-        $status = "order_status in ('Order Placed' , 'Delivered' , 'Out For Delivery' , 'Cancelled' , 'Refunded')";
+        $status = "order_status in ('Order Placed', 'Packed'  , 'Delivered' , 'Out For Delivery' , 'Cancelled' , 'Refunded')";
     }else{
 
     $status = "order_status='".$_POST['status']."'";
@@ -86,7 +86,7 @@ if(isset($_POST['show'])){
 
     $counter = 0;
 
-    $get_invoice = "SELECT DISTINCT(invoice_no) FROM customer_orders where $status and order_date between '$from' and '$to'";
+    $get_invoice = "SELECT * FROM customer_orders where $status and order_date between '$from' and '$to'";
 
     $run_invoice = mysqli_query($con,$get_invoice);
 
@@ -127,7 +127,6 @@ if(isset($_POST['show'])){
             $landmark = $row_add['customer_landmark'];
             $phase = $row_add['customer_phase'];
             $address = $row_add['customer_address'];
-
             
             $get_pro = "select * from products where product_id='$pro_id'";
 
@@ -138,6 +137,15 @@ if(isset($_POST['show'])){
             $pro_name = $row_pro['product_title'];
             $pro_desc = $row_pro['product_desc'];
             $pro_price = $row_pro['product_price'];
+            $client_id = $row_pro['client_id'];
+
+            $get_client = "select * from clients where client_id='$client_id'";
+
+            $run_client = mysqli_query($con,$get_client);
+
+            $row_client = mysqli_fetch_array($run_client);
+
+            $client = $row_client['client_shop'];
 
     $margin =$due_amount*0.05;
     $counter = $counter+1;
@@ -145,6 +153,7 @@ if(isset($_POST['show'])){
     echo "
     <tr>
         <td class='text-center'>$counter</td>
+        <td class='text-center'>$client</td>
         <td class='text-center'>$status</td>
         <td class='text-center'>$invoice_no</td>
         <td class='text-center'>$order_date</td>

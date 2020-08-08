@@ -9,7 +9,7 @@
             <!-- nav -->
                 <ul class="nav bg-white cartloc ">
                     <li class="nav-item">
-                        <a class="nav-link" href="store">
+                        <a class="nav-link" onClick="window.history.back()">
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -22,7 +22,7 @@
     <!-- breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb pt-1">
-                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="./">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Cart</li>
             </ol>
         </nav>
@@ -139,8 +139,8 @@
 
         <div class="container" style="display:<?php if($count>0){echo"none";}else{echo"block";} ?>;">
                     <div class="row">
-                        <div class="col-lg"><img src="admin_area/other_images/cart_lobo.png" class="img-fluid w-75 mx-auto d-block" alt="..."></div>
-                        <div class="col-lg"><h5 class="order_again">Lobo is waiting for your order</h5></div>
+                        <div class="col-lg"><img src="https://ik.imagekit.io/wrnear2017/externals/cart_lobo_ubaRBzNNRn.png" class="img-fluid w-75 mx-auto d-block" alt="..."></div>
+                        <div class="col-lg"><h5 class="order_again">We are waiting for your order</h5></div>
                         <div class="col-lg px-5"><a href="store" class="btn btn-warning btn-block order_again_bottom d-block p-1">Start Shopping</a></div>
                     </div>
                 </div>
@@ -162,8 +162,8 @@
 ?>
 
 <!-- bill Section -->
-    <div class="container bg-white mt-2 mb-5 fixed-bottom" style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
-        <table class="table table-sm table-borderless bill_section ">
+    <div class="container bg-white mt-2 mb-5 fixed-bottom" style="display:<?php //if($count>0){echo"block";}else{echo"none";} ?>;">
+        <!-- <table class="table table-sm table-borderless bill_section ">
             <tbody>
                 <thead>
                 <tr>
@@ -172,32 +172,32 @@
                 </thead>
                 <tr>
                     <th scope="row" class="bill_sub_total">Item Total:</th>
-                    <td class="bill_sub_total text-center">₹ <?php echo $total; ?></td>
+                    <td class="bill_sub_total text-center">₹ <?php //echo $total; ?></td>
                 </tr>
-                <tr style="display:<?php if($del_charges>0){echo"table-row";}else{echo"none";} ?>;">
+                <tr style="display:<?php //if($del_charges>0){echo"table-row";}else{echo"none";} ?>;">
                     <th scope="row" class="bill_charges" >Delivery Charges:</th>
-                    <td class="bill_charges text-center">₹ <?php echo $del_charges; ?></td>
+                    <td class="bill_charges text-center">₹ <?php //echo $del_charges; ?></td>
                 </tr>
                 <tr>
                     <th scope="row" class="bill_total">TOTAL:</th>
-                    <td class="bill_total text-center">₹ <?php echo $total+$del_charges; ?></td>
+                    <td class="bill_total text-center">₹ <?php //echo $total+$del_charges; ?></td>
                 </tr>
             </tbody>
-        </table>
-        <h5 class="save_total text-center <?php if($save_total>0){echo "show";}else{echo "d-none";} ?>" >You saved ₹<?php echo $you_save; ?> on this order</h5>
+        </table> -->
     </div>
     
   
 <!-- bill Section -->
 
 <!-- checkout float -->
-    <div class="container-fluid fixed-bottom " style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
+    <div class="container-fluid fixed-bottom px-0" style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
+     <h5 class="save_total text-center bg-white py-2 mb-0 <?php if($save_total>0){echo "show";}else{echo "d-none";} ?>" >You saved ₹<?php echo $you_save; ?> on this order</h5>
         <div class="row cart_bottom">
-            <div class="col-6 pl-3">
+            <div class="col-6 pl-4">
                 <h5 class="item_count pt-1 mb-0"><?php echo $count; ?> Items</h4>
-                <h4 class="item_cost mb-0">₹ <?php echo $total+$del_charges; ?></h3>
+                <h4 class="item_cost mb-0">Total : ₹ <?php echo $total+$del_charges; ?></h3>
             </div>
-            <div class="col-6 p-0">
+            <div class="col-6 pr-2">
                 <?php if($min_price>$total){
 
                     $required = $min_price-$total;
@@ -211,6 +211,7 @@
                     ";
 
                 }else{
+                    
                     echo "
                     
                     <a href='checkout' class='btn btn-success pull-right bill_checkout'>

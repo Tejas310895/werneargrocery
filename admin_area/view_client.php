@@ -10,66 +10,63 @@
 
     <div class="row">
            <div class="col-lg-6 col-md-6">
-           <h2 class="card-title">TAX HSN CODE LIBRARY</h2>
+           <h2 class="card-title">VENDOR</h2>
            </div>
            <div class="col-lg-6 col-md-6">
-            <a href="index.php?insert_hsn" class="btn btn-primary pull-right">Add New</a>
+            <a href="index.php?insert_client" class="btn btn-primary pull-right">Add New</a>
            </div>
        </div>
        <div class="row">
        <div class="col-lg-12 col-md-12">
-                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="example" class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr class="text-center">
                     <th>Sl.No</th>
-                    <th>HSN CODE</th>
-                    <th>Description</th> 
-                    <th>CGST%</th>
-                    <th>SGST%</th>
-                    <th>IGST%</th>
-                    <th>CESS%</th>
+                    <th>Client Name</th>
+                    <th>Shop Name</th> 
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>GSTN</th>
+                    <th>PRODUCT TYPE</th>
                     <th class="text-left">Actions</th>
                 </tr>
             </thead>
             <tbody class="text-center">
                 <?php 
                 
-                    $get_hsn = "select * from taxes";
+                    $get_client = "select * from clients";
         
-                    $run_hsn = mysqli_query($con,$get_hsn);
+                    $run_client = mysqli_query($con,$get_client);
                     
                     $counter=0;
 
-                    while($run_hsn_section=mysqli_fetch_array($run_hsn)){
+                    while($row_client=mysqli_fetch_array($run_client)){
                         
-                        $tax_id = $run_hsn_section['tax_id'];
-
-                        $hsn_code = $run_hsn_section['hsn_code'];
-
-                        $cgst = $run_hsn_section['cgst'];
-
-                        $sgst = $run_hsn_section['sgst'];
-
-                        $igst = $run_hsn_section['igst'];
-
-                        $cess = $run_hsn_section['cess'];
-                        
-                        $tax_for = substr($run_hsn_section['tax_for'],0,100);
+                        $client_id = $row_client['client_id'];
+                        $client_name = $row_client['client_name'];
+                        $client_shop = $row_client['client_shop'];
+                        $client_email = $row_client['client_email'];
+                        $client_phone = $row_client['client_phone'];
+                        $client_address = $row_client['client_address'];
+                        $client_gstn = $row_client['client_gstn'];
+                        $client_pro_type = $row_client['client_pro_type'];
                 
                 ?>
                 <tr>
                 <td ><?php echo ++$counter; ?></td>
-                <td ><?php echo $hsn_code; ?></td>
-                <td ><?php echo $tax_for; ?></td>
-                <td ><?php echo $cgst; ?></td>
-                <td ><?php echo $sgst; ?></td>
-                <td ><?php echo $igst; ?></td>
-                <td ><?php echo $cess; ?></td>
+                <td ><?php echo $client_name; ?></td>
+                <td ><?php echo $client_shop; ?></td>
+                <td ><?php echo $client_email; ?></td>
+                <td ><?php echo $client_phone; ?></td>
+                <td ><?php echo $client_address; ?></td>
+                <td ><?php echo $client_gstn; ?></td>
+                <td ><?php echo $client_pro_type; ?></td>
                 <td class="td-actions text-center">
-                        <a  href="index.php?edit_hsn=<?php echo $tax_id; ?>" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                        <a  href="index.php?edit_client=<?php echo $client_id; ?>" rel="tooltip" class="btn btn-success btn-sm btn-icon">
                             <i class="tim-icons icon-settings"></i>
                         </a>
-                        <a href="index.php?delete_hsn=<?php echo $tax_id; ?>" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+                        <a href="index.php?delete_client=<?php echo $client_id; ?>" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
                             <i class="tim-icons icon-simple-remove"></i>
                         </a>
                     </td>

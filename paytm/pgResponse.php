@@ -60,24 +60,45 @@ if($isValidChecksum == "TRUE") {
 
 				//$text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
 
-				$textd = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Successful%20of%20-%20$TXNAMOUNT";
-
+				$text1d = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Successful%20of%20-%20$TXNAMOUNT";
+				$text2d = "Prepaid%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
 				//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-				$url = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$textd";
-				// Initialize a CURL session. 
-				$ch = curl_init();  
-				
-				// Return Page contents. 
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-				
-				//grab URL and pass it to the variable. 
-				curl_setopt($ch, CURLOPT_URL, $url); 
-				
-				$result = curl_exec($ch); 
+				$url1d = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1d";
+				$url2d = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2d";
 
+				// create both cURL resources
+				$ch1 = curl_init();
+				$ch2 = curl_init();
+
+				// set URL and other appropriate options
+				curl_setopt($ch1, CURLOPT_URL, $url1d);
+				curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch2, CURLOPT_URL, $url2d);
+				curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+
+				//create the multiple cURL handle
+				$mh = curl_multi_init();
+
+				//add the two handles
+				curl_multi_add_handle($mh,$ch1);
+				curl_multi_add_handle($mh,$ch2);
+
+				//execute the multi handle
+				do {
+					$status = curl_multi_exec($mh, $active);
+					if ($active) {
+						curl_multi_select($mh);
+					}
+				} while ($active && $status == CURLM_OK);
+
+				//close the handles
+				curl_multi_remove_handle($mh, $ch1);
+				curl_multi_remove_handle($mh, $ch2);
+				curl_multi_close($mh);
+		
 				echo "<script>alert('Payment Successfull')</script>";
 
-				echo "<script>window.open('../customer/my_account','_self')</script>";
+				echo "<script>window.open('../customer/order_success','_self')</script>";
 			}
 	}
 		//Process your transaction here as success transaction.
@@ -104,20 +125,41 @@ if($isValidChecksum == "TRUE") {
 		$c_contact = $row_contact['customer_contact'];
 
 
-		$textf = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Failed%20no%20worries%20pay%20on%20delivery";
+		$text1f = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Failed%20no%20worries%20pay%20on%20delivery";
+		$text2f = "Payment%20Failed%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
+        //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
+        $url1f = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1f";
+        $url2f = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2f";
 
-		//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-		$urlf = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$textf";
-		// Initialize a CURL session. 
-		$ch = curl_init();  
-		
-		// Return Page contents. 
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-		
-		//grab URL and pass it to the variable. 
-		curl_setopt($ch, CURLOPT_URL, $urlf); 
-		
-		$result = curl_exec($ch); 
+        // create both cURL resources
+        $ch1 = curl_init();
+        $ch2 = curl_init();
+
+        // set URL and other appropriate options
+        curl_setopt($ch1, CURLOPT_URL, $url1f);
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch2, CURLOPT_URL, $url2f);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+
+        //create the multiple cURL handle
+        $mh = curl_multi_init();
+
+        //add the two handles
+        curl_multi_add_handle($mh,$ch1);
+        curl_multi_add_handle($mh,$ch2);
+
+        //execute the multi handle
+        do {
+            $status = curl_multi_exec($mh, $active);
+            if ($active) {
+                curl_multi_select($mh);
+            }
+        } while ($active && $status == CURLM_OK);
+
+        //close the handles
+        curl_multi_remove_handle($mh, $ch1);
+        curl_multi_remove_handle($mh, $ch2);
+        curl_multi_close($mh);
 
 		echo "<script>alert('Payment Failed')</script>";
 
@@ -154,20 +196,41 @@ else {
 	$c_contact = $row_contact['customer_contact'];
 
 
-	$textfn = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Failed%20no%20worries%20pay%20on%20delivery";
-
+	$text1n = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Failed%20no%20worries%20pay%20on%20delivery";
+	$text2n = "Payment%20Failed%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
 	//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-	$urlfn = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$textfn";
-	// Initialize a CURL session. 
-	$ch = curl_init();  
-	
-	// Return Page contents. 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	
-	//grab URL and pass it to the variable. 
-	curl_setopt($ch, CURLOPT_URL, $urlfn); 
-	
-	$result = curl_exec($ch); 
+	$url1n = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1n";
+	$url2n = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2n";
+
+	// create both cURL resources
+	$ch1 = curl_init();
+	$ch2 = curl_init();
+
+	// set URL and other appropriate options
+	curl_setopt($ch1, CURLOPT_URL, $url1n);
+	curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch2, CURLOPT_URL, $url2n);
+	curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+
+	//create the multiple cURL handle
+	$mh = curl_multi_init();
+
+	//add the two handles
+	curl_multi_add_handle($mh,$ch1);
+	curl_multi_add_handle($mh,$ch2);
+
+	//execute the multi handle
+	do {
+		$status = curl_multi_exec($mh, $active);
+		if ($active) {
+			curl_multi_select($mh);
+		}
+	} while ($active && $status == CURLM_OK);
+
+	//close the handles
+	curl_multi_remove_handle($mh, $ch1);
+	curl_multi_remove_handle($mh, $ch2);
+	curl_multi_close($mh);
 
 	echo "<script>alert('Payment failed')</script>";
 

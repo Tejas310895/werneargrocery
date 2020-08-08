@@ -9,7 +9,7 @@
             <!-- nav -->
                 <ul class="nav bg-white cartloc ">
                     <li class="nav-item">
-                        <a class="nav-link" href="./">
+                        <a class="nav-link" onClick="window.history.back()">
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -22,7 +22,7 @@
     <!-- breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb pt-1">
-                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="./">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Register</li>
             </ol>
         </nav>
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label>Mobile No.</label>
-            <input type="number"  minlength="10" maxlength="10" class="form-control" id="name" name="c_contact" aria-describedby="emailHelp" placeholder="Enter Number" required>
+            <input type="number" onKeyPress="if(this.value.length==10) return false;"  class="form-control" id="mobile" name="c_contact" aria-describedby="emailHelp" placeholder="Enter Number" required title="3 characters minimum">
         </div>
         <div class="form-group">
             <label>Email address</label>
@@ -131,7 +131,7 @@ if(isset($_POST['register'])){
 
         echo "<script>alert('You have Registered Sucessfully')</script>";
 
-        echo "<script>window.open('cart','_self')</script>";
+        echo "<script>window.history.go(-3)</script>";
 
     }else{
 
@@ -141,7 +141,7 @@ if(isset($_POST['register'])){
 
         echo "<script>alert('You have Registered Sucessfully')</script>";
 
-        echo "<script>window.open('./','_self')</script>";
+        echo "<script>window.history.go(-3)</script>";
 
     }
     

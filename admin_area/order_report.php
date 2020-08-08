@@ -25,6 +25,7 @@
                     <select class="form-control status" id="status" required>
                         <option>All</option>
                         <option>Order Placed</option>
+                        <option>Packed</option>
                         <option>Out For Delivery</option>
                         <option>Delivered</option>
                         <option>Cancelled</option>
@@ -43,6 +44,7 @@
 	<thead>
 		<tr>
             <th>Sl.No</th>
+            <th>CLIENT</th>
             <th>STATUS</th>
             <th>ORD ID</th>
             <th>ORDER DATE</th>
