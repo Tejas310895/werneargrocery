@@ -8,6 +8,7 @@ body{
     background-color: rgb(255, 246, 233);
     overflow-x: hidden;
     overscroll-behavior: none;
+    width: 100%;
 }
 
 
