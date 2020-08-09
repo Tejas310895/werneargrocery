@@ -170,7 +170,7 @@ gridheading">
         <?php delete_index_cart(); ?>
         <?php
         
-            $get_store = "select * from store LIMIT 0,7";
+            $get_store = "select * from store ORDER BY RAND() LIMIT 0,7";
             
             $run_store = mysqli_query($con,$get_store);
             
