@@ -60,7 +60,7 @@ if($isValidChecksum == "TRUE") {
 
 				//$text = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$invoice_no";
 
-				$text1d = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Successful%20of%20-%20$TXNAMOUNT";
+				$text1d = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%0APayment%20Successful%20of%20-%20$TXNAMOUNT%20Call%209867765397%20For%20Support";
 				$text2d = "Prepaid%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
 				//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
 				$url1d = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1d";
@@ -125,7 +125,7 @@ if($isValidChecksum == "TRUE") {
 		$c_contact = $row_contact['customer_contact'];
 
 
-		$text1f = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Failed%20no%20worries%20pay%20on%20delivery";
+		$text1f = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%0APayment%20Failed%20no%20worries%20pay%20on%20delivery%20Call%209867765397%20For%20Support";
 		$text2f = "Payment%20Failed%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
         //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
         $url1f = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1f";
@@ -196,7 +196,7 @@ else {
 	$c_contact = $row_contact['customer_contact'];
 
 
-	$text1n = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20http://www.wernear.in/customer/order_view?invoice_no=$ORDERID%0APayment%20Failed%20no%20worries%20pay%20on%20delivery";
+	$text1n = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%0APayment%20Failed%20no%20worries%20pay%20on%20delivery%20Call%209867765397%20For%20Support";
 	$text2n = "Payment%20Failed%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
 	//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
 	$url1n = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1n";
