@@ -98,7 +98,7 @@
                       <li class="nav-item">
                         <?php 
                         
-                        $get_c_count = "select distinct ip_add from cart";
+                        $get_c_count = "select distinct ip_add,user_id from cart";
 
                         $run_c_count = mysqli_query($con,$get_c_count);
 

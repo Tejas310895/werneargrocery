@@ -56,7 +56,7 @@
 
                           $invoice_id = $row_invoice['invoice_no'];
 
-                          $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
+                          $get_orders = "select * from customer_orders where invoice_no='$invoice_id' and product_status='Deliver'";
 
                           $run_orders = mysqli_query($con,$get_orders);
 
@@ -74,7 +74,7 @@
 
                           $order_status = $row_orders['order_status'];
 
-                          $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
+                          $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
 
                           $run_total = mysqli_query($con,$get_total);
 
@@ -146,7 +146,28 @@
                                       <?php if($txn_status==='TXN_SUCCESS'){echo "PAID ONLINE";}else{echo "TAKE CASH";} ?>
                                     </h6>
                                     <h3 class="card-subtitle mt-2 pull-right">
-                                      <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-  
+                                      <?php echo $order_count; ?> Items -  ₹<?php echo $total+$del_charges; ?>/-  <br>
+                                      REFUND OF ₹<?php 
+                                      
+                                      $get_refund = "SELECT sum(due_amount) AS refund FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Undeliver'";
+
+                                      $run_refund = mysqli_query($con,$get_refund);
+
+                                      $row_refund = mysqli_fetch_array($run_refund);
+
+                                      $refund = $row_refund['refund'];
+
+                                      if($refund>1){
+
+                                        echo "$refund";
+
+                                      }else{
+
+                                        echo '0';
+
+                                      }
+                                      
+                                      ?>/- 
                                     </h3>
                                   </div>
                                 </div>
@@ -166,7 +187,7 @@
                                               <h3 class="modal-title" id="exampleModalLabel">ARE YOU SURE YOU WANT TO CANCEL</h3>
                                             </div>
                                             <div class="modal-footer">
-                                              <a href="" type="button" class="btn btn-primary">YES</a>
+                                              <a href="process_order.php?cancel_order=<?php echo $invoice_id;?>" type="button" class="btn btn-primary">YES</a>
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
                                             </div>
                                           </div>
@@ -240,6 +261,7 @@
                                                   <th class="text-center">PACK</th>
                                                   <th class="text-center">QTY</th>
                                                   <th class="text-right">PRICE</th>
+                                                  <th class="text-right">Status</th>
                                               </tr>
                                           </thead>
                                           <tbody>
@@ -257,6 +279,8 @@
                                           $pro_id = $row_pro_id['pro_id'];
 
                                           $qty = $row_pro_id['qty'];
+
+                                          $pro_status = $row_pro_id['product_status'];
 
                                           $get_pro = "select * from products where product_id='$pro_id'";
 
@@ -294,6 +318,7 @@
                                                   <td class="text-center"><?php echo $pro_desc; ?></td>
                                                   <td class="text-center"><?php echo $qty; ?> x ₹ <?php echo $pro_price; ?></td>
                                                   <td class="text-right">₹ <?php echo $sub_total; ?></td>
+                                                  <td class="text-right"><?php echo $pro_status; ?></td>
                                               </tr>
                                               <?php } ?>
                                           </tbody>

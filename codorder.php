@@ -53,8 +53,8 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $sub_total = $row_products['product_price']*$pro_qty;
 
-        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status) 
-        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',now(),'$date','$status')";
+        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,product_status) 
+        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',now(),'$date','$status','Deliver')";
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
@@ -73,7 +73,7 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $invoice_no = $invoice_no;
         
-        $text1 = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20click%20here%20to%20View%20Details%20:-%20https://www.wernear.in//customer/order_view?invoice_no=$invoice_no";
+        $text1 = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20Call%209867765397%20For%20Support";
         $text2 = "Postpaid%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$invoice_no";
         //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
         $url1 = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1";

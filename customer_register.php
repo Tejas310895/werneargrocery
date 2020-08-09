@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label>Mobile No.</label>
-            <input type="number" onKeyPress="if(this.value.length==10) return false;"  class="form-control" id="mobile" name="c_contact" aria-describedby="emailHelp" placeholder="Enter Number" required title="3 characters minimum">
+            <input type="number" onKeyPress="if(this.value.length==10) return false;"  class="form-control" id="mobile" name="c_contact" aria-describedby="emailHelp" placeholder="Enter Mobile Number" required title="3 characters minimum">
         </div>
         <div class="form-group">
             <label>Email address</label>
