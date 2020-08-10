@@ -258,7 +258,6 @@
                                         <table class="table">
                                           <thead>
                                               <tr>
-                                                  <th class="text-center">Sl.no.</th>
                                                   <th class="text-center">VENDOR</th>
                                                   <th class="text-center">IMAGE</th>
                                                   <th class="text-center">ITEMS</th>
@@ -323,7 +322,6 @@
 
                                           ?>
                                               <tr>
-                                                  <td class="text-center"><?php echo ++$counter; ?></td>
                                                   <td class="text-center"><?php echo $client_name; ?></td>
                                                   <td class="text-center">
                                                     <img src="<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="40px">
