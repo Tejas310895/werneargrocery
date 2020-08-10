@@ -64,7 +64,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="admin_images/wrnlogo.png">
   <link rel="icon" type="image/png" href="admin_images/wrnlogo.png">
   <title>
-    Black Dashboard by Creative Tim
+    WRN DASHBOARD
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />

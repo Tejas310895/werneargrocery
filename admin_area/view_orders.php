@@ -262,7 +262,6 @@
                                                   <th class="text-center">VENDOR</th>
                                                   <th class="text-center">IMAGE</th>
                                                   <th class="text-center">ITEMS</th>
-                                                  <th class="text-center">PACK</th>
                                                   <th class="text-center">QTY</th>
                                                   <th class="text-right">PRICE</th>
                                                   <th class="text-right">Status</th>
@@ -327,10 +326,9 @@
                                                   <td class="text-center"><?php echo ++$counter; ?></td>
                                                   <td class="text-center"><?php echo $client_name; ?></td>
                                                   <td class="text-center">
-                                                    <img src="<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
+                                                    <img src="<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="40px">
                                                   </td>
-                                                  <td class="text-center"><?php echo $pro_title; ?></td>
-                                                  <td class="text-center"><?php echo $pro_desc; ?></td>
+                                                  <td class="text-center"><?php echo $pro_title; ?><br><?php echo $pro_desc; ?></td>
                                                   <td class="text-center"><?php echo $qty; ?> x ₹ <?php echo $pro_price; ?></td>
                                                   <td class="text-right">₹ <?php echo $sub_total; ?></td>
                                                   <td class="text-right"><?php echo $pro_status; ?></td>
