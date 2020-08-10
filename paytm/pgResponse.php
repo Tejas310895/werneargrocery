@@ -98,7 +98,7 @@ if($isValidChecksum == "TRUE") {
 		
 				echo "<script>alert('Payment Successfull')</script>";
 
-				echo "<script>window.open('../customer/order_success','_self')</script>";
+				echo "<script>window.open('../customer/pay_success','_self')</script>";
 			}
 	}
 		//Process your transaction here as success transaction.
@@ -163,7 +163,7 @@ if($isValidChecksum == "TRUE") {
 
 		echo "<script>alert('Payment Failed')</script>";
 
-		echo "<script>window.open('../','_self')</script>";
+		echo "<script>window.open('../customer/pay_failed','_self')</script>";
 	}
 
 	// if (isset($_POST) && count($_POST)>0 )
@@ -234,7 +234,7 @@ else {
 
 	echo "<script>alert('Payment failed')</script>";
 
-		echo "<script>window.open('../')</script>";
+		echo "<script>window.open('../customer/pay_failed')</script>";
 	//Process transaction as suspicious.
 }
 
