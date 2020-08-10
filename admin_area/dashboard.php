@@ -233,6 +233,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                     <thead>
                                         <tr>
                                             <th class="text-center">Sl.no.</th>
+                                            <th class="text-center">VENDOR</th>
                                             <th class="text-center">IMAGE</th>
                                             <th class="text-center">ITEMS</th>
                                             <th class="text-center">PACK</th>
@@ -269,12 +270,23 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                     $pro_price = $row_pro['product_price'];
 
                                     $pro_desc = $row_pro['product_desc'];
+
+                                    $client_id = $row_pro['client_id'];
                                     
                                     $sub_total = $pro_price * $qty;
+
+                                    $get_client = "select * from clients where client_id='$client_id'";
+
+                                    $run_client = mysqli_query($con,$get_client);
+
+                                    $row_client = mysqli_fetch_array($run_client);
+
+                                    $client_name = $row_client['client_shop'];
                                     
                                     ?>
                                         <tr>
                                             <td class="text-center"><?php echo ++$counter; ?></td>
+                                            <td class="text-center"><?php echo $client_name; ?></td>
                                             <td class="text-center">
                                               <img src="<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
                                             </td>

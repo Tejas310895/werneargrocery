@@ -174,7 +174,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <button id="show_details" class="btn btn-success card-link pull-left mt-2" data-toggle="modal" data-target="#KK<?php echo $invoice_id; ?>">View</button>
-                                        <a href="print.php?print=<?php echo $invoice_id; ?>" target="_blank" id="show_details" class="btn btn-info card-link pull-left mt-2 text-white" >Bill</a>
+                                        <a href="print.php?print=<?php echo $invoice_id; ?>" target="_blank" id="show_details" class="btn btn-info card-link pull-left mt-2 text-white" >Delivery Statement</a>
                                     </div>
                                     <div class="col-lg-6">
                                       <div class="row">
@@ -214,32 +214,35 @@
                                           ?>
                                         </div>
                                       </div>
-                                        <!-- <form action="process_order.php?update_order=<?php //echo $invoice_id; ?>" class="form-group pull-right" method="post">
-                                            <div class="input-group">
-                                              <select class="form-control mt-2" name="status">
+                                    </div>
+                                    <div class="w-100">
+                                    <div class="col-12">
+                                    <div class="form-group">
+                                        <form action="clientbill.php" method="get" target="_blank">
+                                            <input type="hidden" name="bill" value="<?php echo $invoice_id; ?>">
+                                              <select class="form-control mt-2" name="client">
                                               <?php 
                                               
-                                              // $get_status = "select * from customer_orders where invoice_no='$invoice_id'";
+                                              $get_client = "select * from clients";
 
-                                              // $run_status = mysqli_query($con,$get_status);
+                                              $run_client = mysqli_query($con,$get_client);
 
-                                              // $row_status = mysqli_fetch_array($run_status);
+                                              while($row_client = mysqli_fetch_array($run_client)){
 
-                                              // $status = $row_status['order_status'];
+                                              $client_id = $row_client['client_id'];
 
-                                              // echo "<option>$status</option>";
+                                              $client_name = $row_client['client_shop'];
+
+                                              echo "<option value='$client_id'>$client_name</option>";
+
+                                              }
                                               
                                               ?>
-                                                <option>Out For Delivery</option>
-                                                <option>Delivered</option>
-                                                <option>Cancelled</option>
-                                                <option>Refunded</option>
                                               </select>
-                                              <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit">Update Order</button>
-                                              </div>
-                                            </div>
-                                        </form> -->
+                                                <button class="btn btn-primary w-100" type="submit">Client Bill</button>
+                                        </form>
+                                        </div>
+                                        </div>
                                     </div>
                                   <!-- Modal -->
                                   <div class="modal modal-black fade" id="KK<?php echo $invoice_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -256,6 +259,7 @@
                                           <thead>
                                               <tr>
                                                   <th class="text-center">Sl.no.</th>
+                                                  <th class="text-center">VENDOR</th>
                                                   <th class="text-center">IMAGE</th>
                                                   <th class="text-center">ITEMS</th>
                                                   <th class="text-center">PACK</th>
@@ -295,6 +299,8 @@
                                           $pro_price = $row_pro['product_price'];
 
                                           $pro_desc = $row_pro['product_desc'];
+
+                                          $client_id = $row_pro['client_id'];
                                           
                                           $sub_total = $pro_price * $qty;
 
@@ -308,9 +314,18 @@
 
                                           $del_charges = $row_min['del_charges'];
 
+                                          $get_client = "select * from clients where client_id='$client_id'";
+
+                                          $run_client = mysqli_query($con,$get_client);
+
+                                          $row_client = mysqli_fetch_array($run_client);
+
+                                          $client_name = $row_client['client_shop'];
+
                                           ?>
                                               <tr>
                                                   <td class="text-center"><?php echo ++$counter; ?></td>
+                                                  <td class="text-center"><?php echo $client_name; ?></td>
                                                   <td class="text-center">
                                                     <img src="<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
                                                   </td>

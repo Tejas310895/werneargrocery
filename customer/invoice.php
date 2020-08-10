@@ -412,7 +412,7 @@ if(isset($_GET['pdf'])){
 				<thead>
 					<tr>
                         <th class="unit">Sl.No</th>
-                        <th class="desc">Description</th>
+                        <th class="desc">Items</th>
                         <th class="qty">HSN CODE</th>
                         <th class="unit">Unit price</th>
 						<th class="qty">Quantity</th>
@@ -495,7 +495,14 @@ if(isset($_GET['pdf'])){
                 $tax_cess = 0;
                 }
 
-                $discount = $mrp-$pro_price;
+                if($mrp<=0){
+
+					$discount=0;
+
+				}else{
+
+					$discount=($mrp-$pro_price)*$qty;
+				}
 
                 $get_min = "select * from admins";
 
@@ -512,15 +519,15 @@ if(isset($_GET['pdf'])){
                         <td class="unit"><?php echo ++$counter;?></td>
 						<td class="desc"><h3><?php echo $pro_title;?></h3><?php echo"$pro_desc";?></td>
                         <td class="qty"><?php echo $pro_hsn;?></td>
-                        <td class="unit"><?php echo$pro_price;?></td>
+                        <td class="unit"><?php echo$pro_price.'.00';?></td>
                         <td class="qty"><?php echo $qty;?></td>
                         <td class="unit"><?php echo number_format(round((ceil($taxable*100)/100),1),2);?></td>
-                        <td class="unit"><?php echo $discount;?></td>
+                        <td class="unit"><?php echo $discount.'.00';?></td>
                         <td class="unit"><?php if($cgst>0){echo $cgst.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>
                         <td class="unit"><?php if($sgst>0){echo $sgst.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>
                         <td class="unit"><?php if($igst>0){echo $igst.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>
                         <td class="unit"><?php if($cess>0){echo $cess.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>
-						<td class="total"><?php echo $sub_total;?></td>
+						<td class="total"><?php echo $sub_total.'.00';?></td>
                     </tr>
                 <?php } ?>
 				</tbody>
@@ -531,7 +538,7 @@ if(isset($_GET['pdf'])){
 						<tr>
 							<td class="desc"></td>
 							<td class="unit" colspan="2">GRAND TOTAL:</td>
-							<td class="total">Rs. <?php echo $total+$del_charges; ?></td>
+							<td class="total">Rs. <?php echo $total+$del_charges.'.00'; ?></td>
 						</tr>
 					</tbody>
 				</table>

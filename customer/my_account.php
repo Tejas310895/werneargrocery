@@ -263,11 +263,15 @@ session_start();
 
             $invoice_id = $row_invoice['invoice_no'];
 
+            $get_order_count = "select * from customer_orders where invoice_no='$invoice_id' and product_status='Deliver'";
+
+            $run_order_count = mysqli_query($con,$get_order_count);
+
+            $row_order_count = mysqli_num_rows($run_order_count);
+
             $get_order_pro =  "select * from customer_orders where invoice_no='$invoice_id'";
 
             $run_order_pro = mysqli_query($con,$get_order_pro);
-
-            $row_order_count = mysqli_num_rows($run_order_pro);
 
             $row_order_pro = mysqli_fetch_array($run_order_pro);
 
@@ -281,7 +285,7 @@ session_start();
 
             $order_status = $row_order_pro['order_status'];
 
-            $get_order_sum = "SELECT sum(due_amount) AS order_sum FROM customer_orders WHERE invoice_no='$invoice_id'";
+            $get_order_sum = "SELECT sum(due_amount) AS order_sum FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
 
             $run_order_sum = mysqli_query($con,$get_order_sum);
 

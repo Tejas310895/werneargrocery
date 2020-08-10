@@ -3,9 +3,11 @@
 include("includes/db.php");
 
 
-if(isset($_GET['print'])){
+if(isset($_GET['bill'])){
 
-    $invoice_id = $_GET['print'];
+    $invoice_id = $_GET['bill'];
+
+    $client = $_GET['client'];
 
     $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
 
@@ -107,19 +109,16 @@ if(isset($_GET['print'])){
 	<div class="container-fluid px-4">
 		<div class="row py-1">
 			<div class="col-2 px-0">
-				<img src="admin_images/dashlogo.png" alt="" class="img-fluid border-3">
+				<img src="admin_images/dashlogo.png" alt="" class="img-fluid border-3 ml-3">
 			</div>
 			<div class="col-10">
-				<h5 class="mb-0"><strong>Delivery Statement (Ordered On : <?php echo date("d/M/Y", strtotime($date)); ?> )</strong></h5>
-				<h5 class="mb-0"><strong>Name :</strong> <?php echo $c_name; ?> / <strong>Mobile :</strong> +91 <?php echo $c_contact; ?> / <strong>Address :</strong><?php echo $customer_address; ?>, <?php echo $customer_landmark; ?>, <?php echo $customer_phase; ?>, <?php echo $customer_city; ?>. </h5>
+				<h5 class="mb-0 mt-4 ml-3"><strong>Delivery Statement (Ordered On : <?php echo date("d/M/Y", strtotime($date)); ?> )</strong></h5>
 			</div>
 		</div>
 		<table class="table table-bordered mt-2 head">
 		<thead>
 		<tr>
 		<th  style="border:3px solid #000;">Order ID</th><th style="border:3px solid #000;"><?php echo $invoice_id; ?></th>
-		<th style="border:3px solid #000;">Amount Payable</th><th style="border:3px solid #000;">Rs.<?php echo $total; ?></th>
-		<th style="border:3px solid #000;">Payment Mode</th><th style="border:3px solid #000;"><?php if($txn_status==='TXN_SUCCESS'){echo "PREPAID";}else{echo "POSTPAID";} ?></th>
 		<th style="border:3px solid #000;">Delivery Slot</th><th style="border:3px solid #000;"><?php echo date("d/M/Y", strtotime($del_date)); ?></th>
 		</tr>
 		</thead>
@@ -132,7 +131,6 @@ if(isset($_GET['print'])){
 				<th style="width:5%;">Sl.No</th>
 				<th style="width:60%;">ITEM</th>
 				<th style="width:5%;">QUANTITY</th>
-				<th style="width:15%;">SAVING</th>
 				<th style="width:15%;">TOTAL</th>
 			</thead>
 			<tbody>
@@ -152,7 +150,7 @@ if(isset($_GET['print'])){
 
 				$product_status = $row_pro_id['product_status'];
 
-				$get_pro = "select * from products where product_id='$pro_id'";
+				$get_pro = "select * from products where product_id='$pro_id' and client_id='$client'";
 
 				$run_pro = mysqli_query($con,$get_pro);
 
@@ -191,7 +189,6 @@ if(isset($_GET['print'])){
 						<td class='text-center'>$counter</td>
 						<td>$pro_title $pro_desc</td>
 						<td class='text-center'>$qty</td>
-						<td class='text-center'>$discount.00</td>
 						<td class='text-center'>$sub_total.00</td>
 						</tr>
 						";	
@@ -216,18 +213,9 @@ if(isset($_GET['print'])){
 				?>		
 			</tbody>
 			<tbody>
-				<tr style="border-top:3px solid #000;">
-				    <th colspan="4" class="text-right">GRAND TOTAL :</th>
-					<th class="text-center">Rs. <?php echo $total; ?>.00</th>	
-				</tr>
 			</tbody>
 		</table>
 		<div class="row">
-			<div class="col-12">
-				<h5 style="font-size:1rem;font-family:Courgette;">Note :</h5>
-				<h5 style="font-size:1rem;font-family:Courgette;">For tax invoice: https://www.wernear.in/customer/order_view?invoice_no=772077224553</h5>
-				<h5 style="font-size:1rem;font-family:Courgette;">For online payments refunds will be given online only not cash refunds will be given.</h5>
-			</div>
 			<div class="col-12">
 				<hr class="mb-0" style="border-top:1px solid #999;height:10px;">
 				<h5 style="font-size:1rem;font-family:Raleway;text-align:center;">WERNEAR TECHNOLOGIES, Dombivali East, 421204. GSTN:27AADFW3376J1ZR</h5>

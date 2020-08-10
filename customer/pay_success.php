@@ -54,7 +54,8 @@ session_start();
         <div class="row">
             <div class="col-12">
                 <img src="../admin_area/admin_images/correct.svg" alt="" class="mx-auto d-block" width="50px">
-                <h3 class="mb-0 text-center mt-4" style="font-family:Laila;font-size:1.5rem;">Order Successfully Placed</h3>
+                <h3 class="mb-0 text-center mt-4" style="font-family:Laila;font-size:1.5rem;">Payment Successful</h3>
+                <h3 class="mb-0 text-center mt-1" style="font-family:Laila;font-size:1.5rem;">Order Successfully Placed</h3>
                 <img src="../admin_area/admin_images/ordersuc.jpg" alt="" class="img-fluid px-5">
                 <h3 class="mb-0 text-center mt-1" style="font-family:Quantico;font-size:1.5rem;">Your Order Will Be <br>Delivered Soon</h3>
             </div>
