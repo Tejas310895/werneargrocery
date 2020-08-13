@@ -159,7 +159,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $order_date = $row_orders['order_date'];
 
-                    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
+                    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
 
                     $run_total = mysqli_query($con,$get_total);
 
@@ -232,13 +232,13 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                   <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Sl.no.</th>
                                             <th class="text-center">VENDOR</th>
                                             <th class="text-center">IMAGE</th>
                                             <th class="text-center">ITEMS</th>
                                             <th class="text-center">PACK</th>
                                             <th class="text-center">QTY</th>
                                             <th class="text-right">PRICE</th>
+                                            <th class="text-right">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -257,6 +257,12 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                                     $qty = $row_pro_id['qty'];
 
+                                    $sub_total = $row_pro_id['due_amount'];
+
+                                    $pro_price = $sub_total/$qty;  
+                                    
+                                    $pro_status = $row_pro_id['product_status'];
+
                                     $get_pro = "select * from products where product_id='$pro_id'";
 
                                     $run_pro = mysqli_query($con,$get_pro);
@@ -267,13 +273,13 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                                     $pro_img1 = $row_pro['product_img1'];
 
-                                    $pro_price = $row_pro['product_price'];
+                                    // $pro_price = $row_pro['product_price'];
 
                                     $pro_desc = $row_pro['product_desc'];
 
                                     $client_id = $row_pro['client_id'];
                                     
-                                    $sub_total = $pro_price * $qty;
+                                    // $sub_total = $pro_price * $qty;
 
                                     $get_client = "select * from clients where client_id='$client_id'";
 
@@ -285,15 +291,15 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                     
                                     ?>
                                         <tr>
-                                            <td class="text-center"><?php echo ++$counter; ?></td>
                                             <td class="text-center"><?php echo $client_name; ?></td>
                                             <td class="text-center">
                                               <img src="<?php echo $pro_img1; ?>" alt="" class="img-thumbnail border-0" width="60px">
                                             </td>
                                             <td class="text-center"><?php echo $pro_title; ?></td>
                                             <td class="text-center"><?php echo $pro_desc; ?></td>
-                                            <td class="text-center"><?php echo $qty; ?> x ₹ <?php echo $pro_price; ?></td>
-                                            <td class="text-right">₹ <?php echo $sub_total; ?></td>
+                                            <td class="text-center"><?php echo $qty; ?> x ₹<?php echo $pro_price; ?></td>
+                                            <td class="text-right">₹<?php echo $sub_total; ?></td>
+                                            <td class="text-right"><?php echo $pro_status; ?></td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
@@ -301,7 +307,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-primary text-left" data-dismiss="modal">Close</button>
-                                    <h3 class="card-title">Total - ₹ <?php echo $total; ?>/-</h3>
+                                    <h3 class="card-title">Total - ₹<?php echo $total; ?>/-</h3>
                                   </div>
                                 </div>
                               </div>

@@ -282,6 +282,10 @@
 
                                           $qty = $row_pro_id['qty'];
 
+                                          $sub_total = $row_pro_id['due_amount'];
+
+                                          $pro_price = $sub_total/$qty;                                  
+
                                           $pro_status = $row_pro_id['product_status'];
 
                                           $get_pro = "select * from products where product_id='$pro_id'";
@@ -294,13 +298,13 @@
 
                                           $pro_img1 = $row_pro['product_img1'];
 
-                                          $pro_price = $row_pro['product_price'];
+                                          // $pro_price = $row_pro['product_price'];
 
                                           $pro_desc = $row_pro['product_desc'];
 
                                           $client_id = $row_pro['client_id'];
                                           
-                                          $sub_total = $pro_price * $qty;
+                                          // $sub_total = $pro_price * $qty;
 
                                           $get_min = "select * from admins";
 

@@ -417,7 +417,6 @@ if(isset($_GET['pdf'])){
                         <th class="unit">Unit price</th>
 						<th class="qty">Quantity</th>
                         <th class="unit">Taxable Value</th>
-                        <th class="unit">Discount</th>
                         <th class="unit">CGST% Amount</th>
                         <th class="unit">SGST% Amount</th>
                         <th class="unit">IGST% Amount</th>
@@ -438,7 +437,11 @@ if(isset($_GET['pdf'])){
 
                 $pro_id = $row_pro_id['pro_id'];
 
-                $qty = $row_pro_id['qty'];
+				$qty = $row_pro_id['qty'];
+				
+				$sub_total = $row_pro_id['due_amount'];
+
+				$pro_price = $sub_total/$qty;
 
                 $get_pro = "select * from products where product_id='$pro_id'";
 
@@ -448,7 +451,7 @@ if(isset($_GET['pdf'])){
 
                 $pro_title = $row_pro['product_title'];
 
-                $pro_price = $row_pro['product_price'];
+                // $pro_price = $row_pro['product_price'];
 
                 $pro_desc = $row_pro['product_desc'];
 
@@ -464,7 +467,7 @@ if(isset($_GET['pdf'])){
 
                 $cess = $row_pro['product_cess'];
             
-                $sub_total = $pro_price * $qty;
+                // $sub_total = $pro_price * $qty;
 
                 if(($igst<=0) && ($cess<=0)){
                 $taxable = $sub_total/((($cgst+$sgst)/100)+1);
@@ -495,15 +498,6 @@ if(isset($_GET['pdf'])){
                 $tax_cess = 0;
                 }
 
-                if($mrp<=0){
-
-					$discount=0;
-
-				}else{
-
-					$discount=($mrp-$pro_price)*$qty;
-				}
-
                 $get_min = "select * from admins";
 
                 $run_min = mysqli_query($con,$get_min);
@@ -522,7 +516,6 @@ if(isset($_GET['pdf'])){
                         <td class="unit"><?php echo$pro_price.'.00';?></td>
                         <td class="qty"><?php echo $qty;?></td>
                         <td class="unit"><?php echo number_format(round((ceil($taxable*100)/100),1),2);?></td>
-                        <td class="unit"><?php echo $discount.'.00';?></td>
                         <td class="unit"><?php if($cgst>0){echo $cgst.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>
                         <td class="unit"><?php if($sgst>0){echo $sgst.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>
                         <td class="unit"><?php if($igst>0){echo $igst.'% '.number_format(round((floor($tax_cgst*100)/100),1),2);}else{echo 0;};?></td>

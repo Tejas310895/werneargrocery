@@ -77,11 +77,6 @@ session_start();
 <!-- Order Details -->
 
     <div class="container bg-white mt-0 pt-1 px-1" style="overflow-y:auto;height:76vh;">
-    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb py-1">
-        <li class="breadcrumb-item active" aria-current="page">Delivered Items</li>
-    </ol>
-    </nav>
     <?php 
 
     if(isset($_GET['invoice_no'])){
@@ -120,15 +115,22 @@ session_start();
 
         $qty = $row_pro_id['qty'];
 
-        $product_status = $row_pro_id['product_status'];
+        $sub_total = $row_pro_id['due_amount'];
 
+        if($row_pro_id['product_status']==='Deliver'){
+            $product_status = 'Delivered';
+            $sta_color = 'text-success';
+        }else{
+            $product_status = 'Undelivered';
+            $sta_color = 'text-danger';
+        }
         $get_pro = "select * from products where product_id='$pro_id'";
 
         $run_pro = mysqli_query($con,$get_pro);
 
         while($row_pro = mysqli_fetch_array($run_pro)){
 
-            $total =0;
+            // $total =0;
 
             $pro_title = $row_pro['product_title'];
 
@@ -138,11 +140,10 @@ session_start();
 
             $pro_price = $row_pro['product_price'];
 
-            $sub_total = $row_pro['product_price']*$qty;
+            // $sub_total = $row_pro['product_price']*$qty;
             
-            $total += $sub_total;
+            // $total += $sub_total;
 
-            if($product_status==='Deliver'){
 
             echo "
 
@@ -157,36 +158,13 @@ session_start();
                     <div class='col-1 px-0 pt-3'>
                         <p class='view_qty'>X $qty</p>
                     </div>
-                    <div class='col-4 px-0 pt-3'>
-                        <h5 class='view_total text-center'>₹ $sub_total</h5>
+                    <div class='col-4 px-0 pt-1'>
+                        <h5 class='view_total text-center mb-0'>₹ $sub_total</h5>
+                        <p class='text-center mb-0 $sta_color'>$product_status</p>
                     </div>
                 </div>
             
             ";
-
-            }else{
-
-                echo "
-
-                <div class='row '>
-                        <div class='col-3'>
-                            <img class='img-thumbnail mb-2 border-0' src='$pro_img1' alt=''>
-                        </div>
-                        <div class='col-4 px-0'>
-                            <h5 class='view_title mt-0 mb-0'>$pro_title</h5>
-                            <p class='view_qty'>$pro_desc</p>
-                        </div>
-                        <div class='col-1 px-0 pt-3'>
-                            <p class='view_qty'>X $qty</p>
-                        </div>
-                        <div class='col-4 px-0 pt-3'>
-                            <h5 class='view_total text-center'>N/A</h5>
-                        </div>
-                    </div>
-                
-                ";    
-
-            }
 
 
             }

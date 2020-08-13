@@ -150,19 +150,23 @@ if(isset($_GET['bill'])){
 
 				$product_status = $row_pro_id['product_status'];
 
+				$sub_total = $row_pro_id['due_amount'];
+
+				$pro_price = $sub_total/$qty;  
+
 				$get_pro = "select * from products where product_id='$pro_id' and client_id='$client'";
 
 				$run_pro = mysqli_query($con,$get_pro);
 
 				while($row_pro = mysqli_fetch_array($run_pro)){
 
-					$total =0;
+					// $total =0;
 
 					$pro_title = $row_pro['product_title'];
 
 					$pro_desc = $row_pro['product_desc'];
 
-					$pro_price = $row_pro['product_price'];
+					// $pro_price = $row_pro['product_price'];
 
 					$mrp = $row_pro['price_display'];
 
@@ -175,9 +179,9 @@ if(isset($_GET['bill'])){
 						$discount=($mrp-$pro_price)*$qty;
 					} 
 
-					$sub_total = $row_pro['product_price']*$qty;
+					// $sub_total = $row_pro['product_price']*$qty;
 					
-					$total += $sub_total;
+					// $total += $sub_total;
 
 					$counter = ++$counter;
 

@@ -152,6 +152,10 @@ if(isset($_GET['print'])){
 
 				$product_status = $row_pro_id['product_status'];
 
+				$sub_total = $row_pro_id['due_amount'];
+
+				$pro_price = $sub_total/$qty;
+
 				$get_pro = "select * from products where product_id='$pro_id'";
 
 				$run_pro = mysqli_query($con,$get_pro);
@@ -164,7 +168,7 @@ if(isset($_GET['print'])){
 
 					$pro_desc = $row_pro['product_desc'];
 
-					$pro_price = $row_pro['product_price'];
+					// $pro_price = $row_pro['product_price'];
 
 					$mrp = $row_pro['price_display'];
 
@@ -177,7 +181,7 @@ if(isset($_GET['print'])){
 						$discount=($mrp-$pro_price)*$qty;
 					} 
 
-					$sub_total = $row_pro['product_price']*$qty;
+					// $sub_total = $row_pro['product_price']*$qty;
 					
 					$total += $sub_total;
 
