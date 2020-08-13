@@ -22,7 +22,7 @@ if(isset($_POST['view'])){
 
     $counter = 0;
 
-    $get_bstock = "SELECT distinct pro_id from customer_orders where order_status='Delivered' and order_date between '$from' and '$to'";
+    $get_bstock = "SELECT distinct pro_id from customer_orders where order_status='Delivered' and product_status='Deliver' and order_date between '$from' and '$to'";
 
     $run_bstock = mysqli_query($con,$get_bstock);
                         
@@ -55,6 +55,8 @@ if(isset($_POST['view'])){
     $pro_title = $row_prodet['product_title'];
 
     $pro_desc = $row_prodet['product_desc'];
+
+    $pro_price = $row_prodet['product_price'];
 
     $pro_price = $row_prodet['product_price'];
 
@@ -92,7 +94,7 @@ if(isset($_POST['show'])){
 
     $counter = 0;
 
-    $get_invoice = "SELECT * FROM customer_orders where $status and order_date between '$from' and '$to'";
+    $get_invoice = "SELECT * FROM customer_orders where  $status and order_date between '$from' and '$to'";
 
     $run_invoice = mysqli_query($con,$get_invoice);
 
@@ -106,7 +108,7 @@ if(isset($_POST['show'])){
 
             $row_pro_inc=mysqli_fetch_array($run_pro_inc);
 
-            $status = $row_pro_inc['order_status'];
+            $status = $row_pro_inc['product_status'];
             $order_date = $row_pro_inc['order_date'];
             $customer_id = $row_pro_inc['customer_id'];
             $add_id = $row_pro_inc['add_id'];
