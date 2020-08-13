@@ -57,7 +57,7 @@ session_start();
                 <h3 class="mb-0 text-center mt-3" style="font-family:Laila;font-size:1.5rem;">Payment Failed</h3>
                 <h3 class="mb-0 text-center mt-0" style="font-family:Laila;font-size:1.5rem;">Order Successfully Placed</h3>
                 <img src="../admin_area/admin_images/ordersuc.jpg" alt="" class="img-fluid px-5">
-                <h3 class="mb-0 text-center mt-1" style="font-family:Quantico;font-size:1.3rem;">Order will be delivered on time<br>If You want to cancle the order<br>Call Us @ 9867765397/Chat</h3>
+                <h3 class="mb-0 text-center mt-1" style="font-family:Quantico;font-size:1.1rem;">Order will be delivered on time<br>If You want to cancle the order<br>Call Us @ 9867765397/Chat</h3>
             </div>
             <div class="w-100"></div>
             <div class="row fixed-bottom">
