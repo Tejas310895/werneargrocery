@@ -162,7 +162,7 @@ if(isset($_GET['print'])){
 
 				while($row_pro = mysqli_fetch_array($run_pro)){
 
-					$total =0;
+					// $total =0;
 
 					$pro_title = $row_pro['product_title'];
 
@@ -183,7 +183,7 @@ if(isset($_GET['print'])){
 
 					// $sub_total = $row_pro['product_price']*$qty;
 					
-					$total += $sub_total;
+					// $total += $sub_total;
 
 					$counter = ++$counter;
 
