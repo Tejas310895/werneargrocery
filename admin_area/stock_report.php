@@ -32,6 +32,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Sl.No</th>
+                                    <th>Client</th>
                                     <th>Product</th>
                                     <th>Type</th>
                                     <th>Bulk Quantity</th>
