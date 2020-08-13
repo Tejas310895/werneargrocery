@@ -396,6 +396,7 @@ if(isset($_GET['pdf'])){
 					<p style="font-size:1.2rem;font-weight:bold;">INVOICE TO:</p>
                     <p class="name"><?php echo"$c_name";?></p>
                     <p class="name">+91 <?php echo"$c_contact";?></p>
+                    <p class="name"><?php echo"$c_email";?></p>
 					<p style="font-size:1.1rem;text-transform:capitalize;font-family:Quicksand;padding-top:5px;"><?php echo"$customer_address, $customer_phase, $customer_landmark, $customer_city";?></p>
 				</div>
 				<div class="data right">
