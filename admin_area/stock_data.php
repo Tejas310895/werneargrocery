@@ -60,11 +60,23 @@ if(isset($_POST['view'])){
 
     $pro_price = $row_prodet['product_price'];
 
+    $client_id = $row_prodet['client_id'];
+
+    $get_client = "select * from clients where client_id='$client_id'";
+
+            $run_client = mysqli_query($con,$get_client);
+
+            $row_client = mysqli_fetch_array($run_client);
+
+            $client = $row_client['client_shop'];
+
+
     $counter = $counter+1;
 
     echo "
     <tr>
         <td class='text-center'> $counter </td>
+        <td class='text-center'>$client</td>
         <td class='text-center'>$pro_title</td>
         <td class='text-center'>$pro_desc</td>
         <td class='text-center'>$bulk_qty</td>
