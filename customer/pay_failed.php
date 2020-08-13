@@ -49,7 +49,7 @@ session_start();
     <link rel="stylesheet" href="styles/style.css">
     <!-- styles -->
 </head>
-<body style="background-color:#fff; padding-top:7%;">
+<body style="background-color:#fff; padding-top:5%;">
     <div class="container-fluid mt-5 share">
         <div class="row">
             <div class="col-12">
