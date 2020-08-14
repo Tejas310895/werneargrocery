@@ -80,7 +80,7 @@ if(isset($_POST['view'])){
         <td class='text-center'>$pro_title</td>
         <td class='text-center'>$pro_desc</td>
         <td class='text-center'>$bulk_qty</td>
-        <td class='text-center'>$bulk_qty x $pro_price</td>
+        <td class='text-center'>$bulk_qty</td>
         <td class='text-center'>$bulk_price</td>
     </tr>
     ";
