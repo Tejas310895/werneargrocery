@@ -40,7 +40,7 @@ if(isset($_GET['cancel_order'])){
 
     $c_contact = $row_contact['customer_contact'];
   
-    $update_status_del = "UPDATE customer_orders SET order_status='Cancelled',product_status='Deliver' WHERE invoice_no='$update_order'";
+    $update_status_del = "UPDATE customer_orders SET order_status='Cancelled',product_status='Undeliver' WHERE invoice_no='$update_order'";
   
     $run_status_del = mysqli_query($con,$update_status_del);
   
