@@ -8,9 +8,9 @@
 
 if(isset($_POST['view'])){
 
-    $from = $_POST['start'];
+    $from = date('d/M/Y,h:i:s a',strtotime($_POST['start']));
 
-    $to = $_POST['end'];
+    $to = date('d/M/Y,h:i:s a',strtotime($_POST['end']));
 
     $a = 'Order Placed';
 
