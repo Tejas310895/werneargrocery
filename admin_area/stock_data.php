@@ -22,7 +22,7 @@ if(isset($_POST['view'])){
 
     $counter = 0;
 
-    $get_bstock = "SELECT distinct pro_id from customer_orders where order_status='Delivered' and product_status='Deliver' and order_date between '$from' and '$to'";
+    $get_bstock = "SELECT distinct pro_id from customer_orders where order_status='Delivered' and product_status='Deliver' and order_date>='$from' and order_date<='$to'";
 
     $run_bstock = mysqli_query($con,$get_bstock);
                         
@@ -30,7 +30,7 @@ if(isset($_POST['view'])){
 
     $pro_id = $row_bstock['pro_id'];
 
-    $get_qtysum = "SELECT SUM(qty) AS bulk_qty FROM customer_orders where pro_id='$pro_id' and order_status='Delivered' and product_status='Deliver' and order_date between '$from' and '$to'";
+    $get_qtysum = "SELECT SUM(qty) AS bulk_qty FROM customer_orders where pro_id='$pro_id' and order_status='Delivered' and product_status='Deliver' and order_date>='$from' and order_date<='$to'";
 
     $run_qtysum = mysqli_query($con,$get_qtysum);
 
@@ -38,7 +38,7 @@ if(isset($_POST['view'])){
 
     $bulk_qty = $row_qtysum['bulk_qty'];
 
-    $get_pricesum = "SELECT SUM(due_amount) AS total_price FROM customer_orders where pro_id='$pro_id' and order_status='Delivered' and product_status='Deliver' and order_date between '$from' and '$to'";
+    $get_pricesum = "SELECT SUM(due_amount) AS total_price FROM customer_orders where pro_id='$pro_id' and order_status='Delivered' and product_status='Deliver' and order_date>='$from' and order_date<='$to'";
 
     $run_pricesum = mysqli_query($con,$get_pricesum);
 
