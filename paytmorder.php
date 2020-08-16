@@ -53,10 +53,10 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
         $sub_total = $row_products['product_price']*$pro_qty;
 
-        $hsn = $row_products['hsn'];
+        $client_id = $row_products['client_id'];
 
-        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,product_status) 
-        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',NOW(),'$date','$status','Deliver')";
+        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,product_status,client_id) 
+        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',NOW(),'$date','$status','Deliver','$client_id')";
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
