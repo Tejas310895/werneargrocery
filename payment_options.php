@@ -16,9 +16,9 @@ $session_email = $_SESSION['customer_email'];
 
           date_default_timezone_set('Asia/Kolkata');
           
-          $todaymin = date("Y-m-d", strtotime("+ 1 day"));
+        //   $todaymin = date("Y-m-d", strtotime("+ 1 day"));
           
-          $todaymax = date("Y-m-d", strtotime("+ 7 day"));
+        //   $todaymax = date("Y-m-d", strtotime("+ 7 day"));
           
           ?>
 
@@ -88,9 +88,9 @@ $session_email = $_SESSION['customer_email'];
                     </select>
                 </div>
                 <div class="form-group my-4">
-                <h5 class="add_head my-3">Schedule your Delivery</h5>
-                <input type="date" class="form-control select_address" name="date" id="datepicker" min="<?php echo $todaymin; ?>" max="<?php echo $todaymax; ?>" required>
-                </div>
+                <!-- <h5 class="add_head my-3">Schedule your Delivery</h5> -->
+                <input type="hidden" class="form-control select_address" name="date" id="datepicker" value="<?php echo date("Y-m-d"); ?>">
+                <!-- </div> -->
                 <div class="alert alert-primary mb-3 px-2 py-1">
                     <img src="admin_area/admin_images/cod.png" width="20">
                     <label class="form-check-label cod_text" for="exampleRadios1">

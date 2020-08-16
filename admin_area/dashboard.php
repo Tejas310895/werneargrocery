@@ -259,6 +259,8 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                                     $sub_total = $row_pro_id['due_amount'];
 
+                                    $client_id = $row_pro_id['client_id'];
+
                                     $pro_price = $sub_total/$qty;  
                                     
                                     $pro_status = $row_pro_id['product_status'];
@@ -276,8 +278,6 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                     // $pro_price = $row_pro['product_price'];
 
                                     $pro_desc = $row_pro['product_desc'];
-
-                                    $client_id = $row_pro['client_id'];
                                     
                                     // $sub_total = $pro_price * $qty;
 
