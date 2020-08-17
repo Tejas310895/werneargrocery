@@ -83,7 +83,7 @@
 
                         $save_total += $save;
 
-                        $you_save = $save_total-$total;
+                        $you_save = $total-$save_total;
 
             if($count>0){
 
