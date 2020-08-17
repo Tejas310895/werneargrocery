@@ -321,7 +321,7 @@ session_start();
                                         
                                             if($txn_status==='TXN_SUCCESS'){echo 'PAID ONLINE';}
                                             elseif($order_status==='Delivered'){echo 'PAID OFFLINE'; }
-                                            elseif ($order_status==='Cancelled'&$txn_status!==='TXN_SUCCESS'){echo 'Cancelled';}
+                                            elseif ($order_status==='Cancelled'&$txn_status!='TXN_SUCCESS'){echo 'Cancelled';}
                                             elseif ($order_status==='Order Placed'){echo 'PAY CASH OR OFFLINE MODE';}
                                             elseif ($order_status==='Cancelled'&$txn_status==='TXN_SUCCESS'){echo 'REFUNDED';}
                                             ?>
