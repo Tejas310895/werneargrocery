@@ -178,7 +178,7 @@ session_start();
     }
 
     ?>
-            <div class="row fixed-bottom px-3" style="background-color:#999;">
+            <div class="row fixed-bottom px-3 <?php if($row_total['sum_total']>=1){echo 'show';}else{echo 'd-none';}?>" style="background-color:#999;">
                 <div class="<?php if($order_status==='Delivered'){echo "col-4";}else{echo"col-6";} ?>">
                     <h5 class="total_sum text-left mb-0 mt-2">Total:</h5>
                 </div>
