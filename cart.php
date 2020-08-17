@@ -205,7 +205,7 @@
                     echo "
                     
                     <a class='btn btn-success pull-right bill_checkout' style='color:#fff;'>
-                    Add Rs.$required More
+                    Add ₹$required More
                     </a>
                     
                     ";
