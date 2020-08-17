@@ -9,6 +9,8 @@ if(isset($_POST['c_id'])){
     $date = $_POST['date'];
 
     date_default_timezone_set('Asia/Kolkata');
+
+    $today = date("Y-m-d H:i:s");
 }
 
 $get_contact = "select * from customers where customer_id='$customer_id'";
@@ -56,7 +58,7 @@ while($row_cart = mysqli_fetch_array($run_cart)){
         $client_id = $row_products['client_id'];
 
         $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,product_status,client_id) 
-        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty',now(),'$date','$status','Deliver','$client_id')";
+        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty','$today','$date','$status','Deliver','$client_id')";
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
