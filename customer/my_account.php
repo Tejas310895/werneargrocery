@@ -540,7 +540,7 @@ session_start();
                 <div class="card-body py-1">
                     <div class="card sup_body mb-2" style="max-width: 100%;">
                             <div class="card-body py-1">
-                                <a href="tel:9867765397"><h5 class="sup_title mt-2">+91 9867765397</h5></a>
+                                <a href="tel:9019196792"><h5 class="sup_title mt-2">+91 9019196792</h5></a>
                                 <a href="mailto:tshirsat700@gmail.com"><p class="sup_desc mb-0">tshirsat700@gmail.com</p></a>
                             </div>
                         </div>
