@@ -319,7 +319,7 @@ session_start();
                                         <p class="card-text mb-0  <?php if($txn_status==='TXN_SUCCESS'){echo 'text-success';}else{echo 'text-danger'; } ?>" style="font-size:0.7rem;font-weight:bold;">
                                         <?php 
                                         
-                                            if($txn_status==='TXN_SUCCESS'&$order_status==='Delivered'){echo 'PAID ONLINE';}
+                                            if($txn_status==='TXN_SUCCESS'){echo 'PAID ONLINE';}
                                             elseif($order_status==='Delivered'){echo 'PAID OFFLINE'; }
                                             elseif ($order_status==='Cancelled'){echo 'Cancelled';}
                                             elseif ($order_status==='Order Placed'){echo 'PAY CASH OR OFFLINE MODE';}
