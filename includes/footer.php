@@ -45,11 +45,6 @@ window.addEventListener('load', function() {
 		window.location = "desktop"; 
 	}
 });
-window.addEventListener('resize', function() {
-    if (window.innerWidth >= 700) {
-		window.location = "desktop"; 
-	}
-});
 </script>
 <script>
 // Add event listener offline to detect network loss.
