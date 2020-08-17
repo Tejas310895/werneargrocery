@@ -88,7 +88,7 @@ session_start();
         <!-- breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb pt-1">
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                    <li class="breadcrumb-item active" aria-current="page"> <a href="../">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Account</li>
                 </ol>
             </nav>
