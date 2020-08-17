@@ -121,7 +121,7 @@ while($row_cart = mysqli_fetch_array($run_cart)){
     }else{
         echo "<script>alert('Order Failed, Try Again')</script>";
     
-        echo "<script>window.open('./','_self')</script>";
+        echo "<script>window.history.go(-2)</script>";
     }
 
 ?>

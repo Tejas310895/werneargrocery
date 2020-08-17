@@ -102,7 +102,7 @@ if($run_customer_order){
 
     echo "<script>alert('Order Failed')</script>";
 
-    echo "<script>window.open('cart','_self')</script>";
+    echo "<script>window.history.go(-2)</script>";
 
 }
 
