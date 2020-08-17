@@ -5,8 +5,8 @@
 ?>
 <script>
 window.addEventListener('resize', function() {
-	if (window.innerWidth <= 700) {
-		window.location.replace= "./"; 
+	if (window.innerWidth < 700) {
+		window.location= "./";
 	}
 });
 </script>
