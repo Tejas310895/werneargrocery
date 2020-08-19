@@ -170,7 +170,7 @@ gridheading">
         <?php delete_index_cart(); ?>
         <?php
         
-            $get_store = "select * from store ORDER BY RAND() LIMIT 0,7";
+            $get_store = "SELECT * from store where store_id in ('240','241','242','231','81','35','36') order by store_id desc";
             
             $run_store = mysqli_query($con,$get_store);
             
