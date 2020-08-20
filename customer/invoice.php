@@ -546,7 +546,7 @@ if(isset($_GET['pdf'])){
 				<div>WERNEAR TECHNOLOGIES,</div>
                 <div>Dombivali East - 421204</div>
                 <div>Maharastra</div>
-                <div>Phone :+91 9867765397</div>
+                <div>Phone :+91 9019196792</div>
                 <div>Mail :info@wernear.in</div>
                 <div>GSTIN : 27AADFW3376J1ZR</div>
 			</div>
