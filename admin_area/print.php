@@ -234,7 +234,7 @@ if(isset($_GET['print'])){
 			</div>
 			<div class="col-12">
 				<hr class="mb-0" style="border-top:1px solid #999;height:10px;">
-				<h5 style="font-size:1rem;font-family:Raleway;text-align:center;">WERNEAR TECHNOLOGIES, Dombivali East, 421204. GSTN:27AADFW3376J1ZR</h5>
+				<h5 style="font-size:1rem;font-family:Raleway;text-align:center;">WERNEAR TECHNOLOGIES, Dombivali East, 421204. GSTIN:27AADFW3376J1ZR</h5>
 			</div>
 		</div>
 	</div>
