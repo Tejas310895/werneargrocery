@@ -223,13 +223,19 @@
                                               <select class="form-control mt-2" name="client">
                                               <?php 
                                               
-                                              $get_client = "select * from clients";
+                                              $get_client_id = "select * from customer_orders where invoice_no='$invoice_id'";
 
+                                              $run_client_id = mysqli_query($con,$get_client_id);
+
+                                              while($row_client_id = mysqli_fetch_array($run_client_id)){
+
+                                              $client_id = $row_client_id['client_id'];
+
+                                              $get_client = "select * from clients where client_id='$client_id'";
+                                              
                                               $run_client = mysqli_query($con,$get_client);
 
-                                              while($row_client = mysqli_fetch_array($run_client)){
-
-                                              $client_id = $row_client['client_id'];
+                                              $row_client = mysqli_fetch_array($run_client);
 
                                               $client_name = $row_client['client_shop'];
 
