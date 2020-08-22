@@ -66,8 +66,8 @@ if($isValidChecksum == "TRUE") {
 				// $url1d = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1d";
 				// $url2d = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2d";
 				$url1d = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1d&number=+91$c_contact";
-				$url2d = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2d&number=+919867765397";	
-				
+				$url2d = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2d&number=+919867765397";
+							
 				// create both cURL resources
 				$ch1 = curl_init();
 				$ch2 = curl_init();
@@ -133,8 +133,8 @@ if($isValidChecksum == "TRUE") {
         // $url1f = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1f";
 		// $url2f = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2f";
 		$url1f = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1f&number=+91$c_contact";
-		$url2f = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2f&number=+919867765397";	
-
+		$url2f = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2f&number=+919867765397";
+	
         // create both cURL resources
         $ch1 = curl_init();
         $ch2 = curl_init();
