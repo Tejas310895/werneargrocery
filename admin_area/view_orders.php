@@ -66,7 +66,7 @@
 
                           $c_id = $row_orders['customer_id'];
 
-                          $date = $row_orders['order_date'];
+                          $date = $row_orders['del_date'];
 
                           $add_id = $row_orders['add_id'];
 
@@ -128,7 +128,7 @@
                             <div class="card-body card_shadow mx-3 mt-2 mb-0">
                                 <div class="row">
                                   <div class="col"><h4 class="card-text mb-2">Order on - <?php echo date('d/M/Y,h:i:s a',strtotime($order_date)); ?></h4></div>
-                                  <div class="col"><h4 class="card-title pull-right">Delivery by - <?php echo $date; ?></h4></div>
+                                  <div class="col"><h4 class="card-title pull-right">Delivery by - <?php echo date('d/M/Y,h:i:s a',strtotime($date)); ?></h4></div>
                                 </div>
                                 <div class="row">
                                   <div class="col">
