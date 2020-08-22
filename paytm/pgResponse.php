@@ -63,9 +63,11 @@ if($isValidChecksum == "TRUE") {
 				$text1d = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%0APayment%20Successful%20of%20-%20$TXNAMOUNT%20Call%209019196792%20For%20Support";
 				$text2d = "Prepaid%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
 				//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-				$url1d = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1d";
-				$url2d = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2d";
-
+				// $url1d = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1d";
+				// $url2d = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2d";
+				$url1d = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1d&number=+91$c_contact";
+				$url2d = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2d&number=+919867765397";	
+				
 				// create both cURL resources
 				$ch1 = curl_init();
 				$ch2 = curl_init();
@@ -128,8 +130,10 @@ if($isValidChecksum == "TRUE") {
 		$text1f = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%0APayment%20Failed%20no%20worries%20pay%20on%20delivery%20Call%209019196792%20For%20Support";
 		$text2f = "Payment%20Failed%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
         //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-        $url1f = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1f";
-        $url2f = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2f";
+        // $url1f = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1f";
+		// $url2f = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2f";
+		$url1f = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1f&number=+91$c_contact";
+		$url2f = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2f&number=+919867765397";	
 
         // create both cURL resources
         $ch1 = curl_init();
@@ -199,9 +203,10 @@ else {
 	$text1n = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%0APayment%20Failed%20no%20worries%20pay%20on%20delivery%20Call%209019196792%20For%20Support";
 	$text2n = "Payment%20Failed%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$ORDERID";
 	//echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-	$url1n = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1n";
-	$url2n = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2n";
-
+	// $url1n = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text1n";
+	// $url2n = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=919867765397&textmessage=$text2n";
+	$url1n = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1n&number=+91$c_contact";
+	$url2n = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2n&number=+919867765397";
 	// create both cURL resources
 	$ch1 = curl_init();
 	$ch2 = curl_init();
