@@ -163,7 +163,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $order_date = $row_orders['order_date'];
 
-                    if($order_status==='Delivered'){
+                    if($status==='Delivered'){
 
                       $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
