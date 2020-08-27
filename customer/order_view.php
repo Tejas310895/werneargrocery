@@ -188,12 +188,12 @@ session_start();
                 <div class="<?php if($order_status==='Delivered'){echo "col-4";}else{echo"col-6";} ?>">
                     <h5 class="total_sum text-left mb-0 mt-2">Total:</h5>
                 </div>
-                <div class="<?php if($order_status==='Delivered'){echo "col-4";}else{echo"col-6";} ?>">
+                <div class="col-6 <?php //if($order_status==='Delivered'){echo "col-4";}else{echo"col-6";} ?>">
                     <h5 class="total_sum text-right py-2">₹ <?php echo $row_total['sum_total']+$del_charges; ?></h5>
                 </div>
-                <div class="col-4 bg-warning px-0 <?php if($order_status==='Delivered'){echo "show";}else{echo"d-none";} ?>">
-                    <a href="invoice?pdf=<?php echo $_GET['invoice_no']; ?>" class="btn px-1 pt-3 pb-0" style="font-size:1.2rem;padding-top:12px!important;color:#fff;" download><i class="fas fa-download"></i> INVOICE</a>
-                </div>
+                <!-- <div class="col-4 bg-warning px-0 <?php //if($order_status==='Delivered'){echo "show";}else{echo"d-none";} ?>">
+                    <a href="invoice?pdf=<?php //echo $_GET['invoice_no']; ?>" class="btn px-1 pt-3 pb-0" style="font-size:1.2rem;padding-top:12px!important;color:#fff;" download><i class="fas fa-download"></i> INVOICE</a>
+                </div> -->
             </div>
     </div>
 
