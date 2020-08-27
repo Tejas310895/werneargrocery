@@ -117,6 +117,12 @@ session_start();
 
         $sub_total = $row_pro_id['due_amount'];
 
+        if($order_status==='Delivered'){
+            $pro_visible = 'show';
+        }else{
+            $pro_visible = 'd-none';
+        }
+
         if($row_pro_id['product_status']==='Deliver'){
             $product_status = 'Delivered';
             $sta_color = 'text-success';
@@ -160,7 +166,7 @@ session_start();
                     </div>
                     <div class='col-4 px-0 pt-1'>
                         <h5 class='view_total text-center mb-0'>₹ $sub_total</h5>
-                        <p class='text-center mb-0 $sta_color'>$product_status</p>
+                        <p class='text-center mb-0 $sta_color $pro_visible'>$product_status</p>
                     </div>
                 </div>
             
