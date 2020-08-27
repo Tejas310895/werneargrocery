@@ -149,8 +149,6 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $run_orders = mysqli_query($con,$get_orders);
 
-                    $order_count = mysqli_num_rows($run_orders);
-
                     $row_orders = mysqli_fetch_array($run_orders);
 
                     $c_id = $row_orders['customer_id'];
@@ -162,6 +160,24 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                     $status = $row_orders['order_status'];
 
                     $order_date = $row_orders['order_date'];
+
+                    if($status==='Delivered'){
+
+                    $get_orders = "select * from customer_orders where invoice_no='$invoice_id' and product_status='Deliver'";
+
+                    $run_orders = mysqli_query($con,$get_orders);
+
+                    $order_count = mysqli_num_rows($run_orders);
+
+                    }else{
+
+                      $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
+
+                      $run_orders = mysqli_query($con,$get_orders);
+  
+                      $order_count = mysqli_num_rows($run_orders);  
+
+                    }
 
                     if($status==='Delivered'){
 
