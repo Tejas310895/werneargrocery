@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Kolkata');
 
 $today = date("Y-m-d");
 
-$get_total_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Delivered'";
+$get_total_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Delivered' and product_status='Deliver'";
 
 $run_total_sales = mysqli_query($con,$get_total_sales);
 
@@ -29,7 +29,7 @@ $row_today_sales = mysqli_fetch_array($run_today_sales);
 
 $today_sales = $row_today_sales['total'];
 
-$get_total_count = "SELECT DISTINCT invoice_no FROM customer_orders where order_status='Delivered' and product_status='Deliver'";
+$get_total_count = "SELECT DISTINCT invoice_no FROM customer_orders where order_status='Delivered'";
 
 $run_total_count = mysqli_query($con,$get_total_count);
 
@@ -163,13 +163,25 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $order_date = $row_orders['order_date'];
 
-                    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
+                    if($order_status==='Delivered'){
 
-                    $run_total = mysqli_query($con,$get_total);
+                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
-                    $row_total = mysqli_fetch_array($run_total);
+                      $run_total = mysqli_query($con,$get_total);
+  
+                      $row_total = mysqli_fetch_array($run_total);
+  
+                      $total = $row_total['total'];
 
-                    $total = $row_total['total'];
+                    }else{
+                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
+
+                      $run_total = mysqli_query($con,$get_total);
+  
+                      $row_total = mysqli_fetch_array($run_total);
+  
+                      $total = $row_total['total'];
+                    }
 
                     $get_customer = "select * from customers where customer_id='$c_id'";
 
