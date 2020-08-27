@@ -21,7 +21,7 @@ $row_total_sales = mysqli_fetch_array($run_total_sales);
 
 $total_sales = $row_total_sales['total'];
 
-$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date='now()' AND order_status='Delivered'";
+$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
 
 $run_today_sales = mysqli_query($con,$get_today_sales);
 
