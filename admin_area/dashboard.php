@@ -9,9 +9,9 @@
         ?>
 <?php 
 
-date_default_timezone_set('Asia/Kolkata');
+// date_default_timezone_set('Asia/Kolkata');
 
-$today = date("Y-m-d");
+// $today = date("Y-m-d");
 
 $get_total_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Delivered'";
 
@@ -21,7 +21,7 @@ $row_total_sales = mysqli_fetch_array($run_total_sales);
 
 $total_sales = $row_total_sales['total'];
 
-$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date=now() AND order_status='Delivered'";
+$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date='now()' AND order_status='Delivered'";
 
 $run_today_sales = mysqli_query($con,$get_today_sales);
 
@@ -78,7 +78,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-category">Daily Sales</h5>
-                <h3 class="card-title"><i class="tim-icons icon-coins"></i>₹ 1<?php if($today_sales>0){echo $today_sales;}else{echo '0';} ?> </h3>
+                <h3 class="card-title"><i class="tim-icons icon-coins"></i>₹ <?php if($today_sales>0){echo $today_sales;}else{echo '0';} ?> </h3>
               </div>
             </div>
           </div>
