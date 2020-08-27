@@ -29,7 +29,7 @@ $row_today_sales = mysqli_fetch_array($run_today_sales);
 
 $today_sales = $row_today_sales['total'];
 
-$get_total_count = "SELECT DISTINCT invoice_no FROM customer_orders where order_status='Delivered'";
+$get_total_count = "SELECT DISTINCT invoice_no FROM customer_orders where order_status='Delivered' and product_status='Deliver'";
 
 $run_total_count = mysqli_query($con,$get_total_count);
 
@@ -163,7 +163,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $order_date = $row_orders['order_date'];
 
-                    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
+                    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
                     $run_total = mysqli_query($con,$get_total);
 
