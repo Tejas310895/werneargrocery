@@ -165,7 +165,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     if($status==='Delivered'){
 
-                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
+                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
 
                       $run_total = mysqli_query($con,$get_total);
   
@@ -174,7 +174,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                       $total = $row_total['total'];
 
                     }else{
-                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
+                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
                       $run_total = mysqli_query($con,$get_total);
   
