@@ -229,7 +229,7 @@ if(isset($_GET['print'])){
 		<div class="row">
 			<div class="col-12">
 				<h5 style="font-size:1rem;font-family:Courgette;">Note :</h5>
-				<h5 style="font-size:1rem;font-family:Courgette;">For tax invoice: https://www.wernear.in/customer/order_view?invoice_no=772077224553</h5>
+				<h5 style="font-size:1rem;font-family:Courgette;">For tax invoice: https://www.wernear.in/customer/order_view?invoice_no=<?php echo $invoice_id; ?></h5>
 				<h5 style="font-size:1rem;font-family:Courgette;">For online payments refunds shall be processed online, no cash refunds will be allowed.</h5>
 			</div>
 			<div class="col-12">
