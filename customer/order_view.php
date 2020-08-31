@@ -117,7 +117,7 @@ session_start();
 
         $sub_total = $row_pro_id['due_amount'];
 
-        if($order_status==='Delivered' && $order_status==='Cancelled'){
+        if($order_status==='Delivered' || $order_status==='Cancelled'){
             $pro_visible = 'show';
         }else{
             $pro_visible = 'd-none';
