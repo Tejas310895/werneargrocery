@@ -159,7 +159,7 @@ if(isset($_POST['show'])){
 
             $pro_name = $row_pro['product_title'];
             $pro_desc = $row_pro['product_desc'];
-            $pro_price = $row_pro['product_price'];
+            //$pro_price = $row_pro['product_price'];
 
             $get_client = "select * from clients where client_id='$client_id'";
 
