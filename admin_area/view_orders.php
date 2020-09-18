@@ -179,20 +179,7 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                       <div class="col-6">
-                                      <button type="button" class="btn btn-danger <?php if($order_status==='Order Placed'){echo"show";}else {echo"d-none";} ?>" data-toggle="modal" data-target="#cancle">Cancle Order</button>
-                                      <div class="modal fade" id="cancle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h3 class="modal-title" id="exampleModalLabel">ARE YOU SURE YOU WANT TO CANCEL</h3>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <a href="process_order.php?cancel_order=<?php echo $invoice_id;?>" type="button" class="btn btn-primary">YES</a>
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+                                          <a type="button" class="btn btn-danger" href="process_order.php?cancel_order=<?php echo $invoice_id;?>" onclick="return confirm('Are you sure?')">Cancle Order</a>
                                         </div>
                                         <div class="col-6">
                                           <?php 
