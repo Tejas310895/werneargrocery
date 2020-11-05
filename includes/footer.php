@@ -41,9 +41,7 @@ $(function() {
 <script src="js/bootstrap.js"></script>
 <script>
 window.addEventListener('load', function() {
-    if (window.innerWidth >= 700) {
-		window.location = "desktop"; 
-	}
+		window.location = "maintenance"; 
 });
 </script>
 <script>
