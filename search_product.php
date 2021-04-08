@@ -91,11 +91,6 @@ if(isset($_GET['pro_id'])){
         color:#999 !important;
     }
 
-    .form-control:focus{
-        border-color: none;
-        box-shadow: none;
-    }
-
     </style>
     <!-- styles -->
 </head>
@@ -105,12 +100,14 @@ if(isset($_GET['pro_id'])){
     <div class="row">
         <div class="col-2 pr-0 py-1"> <a onClick="window.history.back()"><i class="fas fa-arrow-left" style="color:#999;font-size:1.7rem;"></i></a> </div>
         <div class="col-10 pl-0">
+            <form action="search_product" method="post">
                 <div class="input-group mb-1 px-0">
                     <input type="text" name="search" class="form-control border-0 search" placeholder="Search your product">
                         <!-- <div class="input-group-append">
                             <button type="submit" name="submit" class="btn"><i class="fas fa-search"></i></button>
                         </div> -->
                 </div>
+            </form>
         </div>
     </div>
 </div>

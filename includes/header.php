@@ -1,7 +1,6 @@
 <?php 
-
     session_start();
-    
+    ob_start();
     include("includes/db.php");
     include("functions/function.php");
 
@@ -30,16 +29,15 @@ if(isset($_GET['pro_id'])){
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="The best online grocery store in palava. We can fulfill all your grocery needs ranging from grains,pulses,kitchen needs to fresh vegetables and fruits"/>
+    <meta name="description" content="This diwali save big on your grocery orders,Get upto 50% discount on all grocery products with free home delivery."/>
     <link rel="shortcut icon" type="image/png" href="../admin_area/admin_images/wrnlogo.png"/>
-    <title>Wernear Online Supermarket</title>
+    <title>Order Your Grocerys in palava | Upto 50% Off On All Grocery Products</title>
     <!-- google font -->
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Jost' rel='stylesheet'>
@@ -50,14 +48,16 @@ if(isset($_GET['pro_id'])){
     <link href='https://fonts.googleapis.com/css?family=Concert+One' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Noto+Serif' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Laila' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet'>
     <!-- google font -->
     <!-- bootstrap link -->
     <link rel="stylesheet" href="styles/bootstrap.min.css" >
     <link rel="stylesheet" href="styles/bootstrap.css" >
     <!-- bootstrap link -->
     <!-- swiper -->
-    <link rel="stylesheet" href="styles/swiper.css">
-    <link rel="stylesheet" href="styles/swiper.min.css">
+    <link rel="stylesheet" href="styles/swiper.css?version=25">
+    <link rel="stylesheet" href="styles/swiper.min.css?version=25">
     <!-- swiper -->
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
@@ -69,14 +69,14 @@ if(isset($_GET['pro_id'])){
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
     <script>
-    // jQuery(function($) {
-    //     var today = new Date();
-    //     $("#datepicker").datepicker({
-    //        dateFormat: "dd-mm-yy",
-    //        minDate: today.getHours() >= 17 ? 2 : 1
+    jQuery(function($) {
+        var today = new Date();
+        $("#datepicker").datepicker({
+           dateFormat: "dd-mm-yy",
+           minDate: today.getHours() >= 17 ? 2 : 1
         
-    //      });
-    // });
+         });
+    });
     </script>
     <script>
     // function saves scroll position
@@ -96,12 +96,12 @@ if(isset($_GET['pro_id'])){
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- date -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css?version=16">
+    <link rel="stylesheet" href="styles/style.css?version=28">
     <!-- styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175472538-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-478QX8CECH"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}

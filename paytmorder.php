@@ -56,11 +56,50 @@ while($row_cart = mysqli_fetch_array($run_cart)){
     while($row_products = mysqli_fetch_array($run_products)){
 
         $sub_total = $row_products['product_price']*$pro_qty;
+        $vendor_sub_total = $row_products['venor_price']*$pro_qty;
 
         $client_id = $row_products['client_id'];
 
-        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,product_status,client_id) 
-        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty','$today','$date','$status','Deliver','$client_id')";
+        $ord_pro_hsn = $row_products['product_hsn'];
+        $ord_pro_cgst = $row_products['product_cgst'];
+        $ord_pro_sgst = $row_products['product_sgst'];
+        $ord_pro_igst = $row_products['product_igst'];
+        $ord_pro_cess = $row_products['product_cess'];
+
+        $insert_customer_order = "insert into customer_orders (customer_id,
+                                                               add_id,
+                                                               pro_id,
+                                                               due_amount,
+                                                               vendor_due_amount,
+                                                               invoice_no,
+                                                               qty,
+                                                               order_date,
+                                                               del_date,
+                                                               order_status,
+                                                               product_status,
+                                                               client_id,
+                                                               ord_pro_hsn,
+                                                               ord_pro_cgst,
+                                                               ord_pro_sgst,
+                                                               ord_pro_igst,
+                                                               ord_pro_cess) 
+                                                        values ('$customer_id',
+                                                                '$add_id',
+                                                                '$pro_id',
+                                                                '$sub_total',
+                                                                '$vendor_sub_total',
+                                                                '$invoice_no',
+                                                                '$pro_qty',
+                                                                '$today',
+                                                                '$today',
+                                                                '$status',
+                                                                'Deliver',
+                                                                '$client_id',
+                                                                '$ord_pro_hsn',
+                                                                '$ord_pro_cgst',
+                                                                '$ord_pro_sgst',
+                                                                '$ord_pro_igst',
+                                                                '$ord_pro_cess')";
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
@@ -75,6 +114,51 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
     }
 
+}
+
+if($run_customer_order){
+
+    $get_dis_total = "select sum(due_amount) as dis_total from customer_orders WHERE invoice_no='$invoice_no'";
+    $run_dis_total = mysqli_query($con,$get_dis_total);
+    $row_dis_total = mysqli_fetch_array($run_dis_total);
+
+    $dis_total = $row_dis_total['dis_total'];
+
+    $get_user_order_count = "SELECT customer_id,invoice_no FROM customer_orders WHERE customer_id='$customer_id' GROUP BY customer_id,invoice_no";
+    $run_user_orders_count = mysqli_query($con,$get_user_order_count);
+    $user_orders_count = mysqli_num_rows($run_user_orders_count);
+
+    if($user_orders_count==1 && $dis_total>300){
+     $insert_discount = "insert into customer_discounts (invoice_no,discount_type,discount_amount,discount_date) values ('$invoice_no','First Order Discount','25','$today')";
+     $run_insert_discount = mysqli_query($con,$insert_discount);
+    }
+    
+}
+
+if($run_customer_order){
+    
+    $get_del_total = "select sum(due_amount) as del_total from customer_orders WHERE invoice_no='$invoice_no'";
+    $run_del_total = mysqli_query($con,$get_del_total);
+    $row_del_total = mysqli_fetch_array($run_del_total);
+
+    $del_total = $row_del_total['del_total'];
+
+    $get_del_charges = "select * from admins";
+    $run_del_charges = mysqli_query($con,$get_del_charges);
+    $row_del_charges = mysqli_fetch_array($run_del_charges);
+
+    $del_charges = $row_del_charges['del_charges'];
+
+    if($del_total<300){
+        $insert_del_charges = "insert into order_charges (invoice_id,del_charges,updated_date) values ('$invoice_no','$del_charges','$today')";
+        $run_insert_del_charges = mysqli_query($con,$insert_del_charges);
+    }
+}
+
+if($run_customer_order){
+
+    $insert_call = "insert into cron_call (invoice_no,cron_call_status,updated_date) values ('$invoice_no','false','$today')";
+    $run_insert_call = mysqli_query($con,$insert_call);     
 }
 
 if($run_customer_order){

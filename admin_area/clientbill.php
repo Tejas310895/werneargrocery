@@ -89,12 +89,22 @@ if(isset($_GET['bill'])){
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
 	<title>Bill</title>
 	<style>
-		@media print{
-			.table,thead{
-				border:2px solid #000;
-			}
-		}
-	</style>
+
+    @media print {
+         *{width: 100mm;}
+
+         .table{
+            padding-left:0px;
+             width: 100mm;
+             }
+            /* td.table{
+                width:20%;
+            } */
+
+         }
+
+
+ </style>
 	<script>
         window.onload = function () {
             window.print();
@@ -106,41 +116,40 @@ if(isset($_GET['bill'])){
     </script>
 </head>
 <body>
-	<div class="container-fluid px-4">
-		<div class="row py-1">
-			<div class="col-2 px-0">
-				<img src="admin_images/dashlogo.png" alt="" class="img-fluid border-3 ml-3">
-			</div>
-			<div class="col-10">
-				<h5 class="mb-0 mt-4 ml-3"><strong>Delivery Statement (Ordered On : <?php echo date("d/M/Y", strtotime($date)); ?> )</strong></h5>
-			</div>
-		</div>
-		<table class="table table-bordered mt-2 head">
-		<thead>
-		<tr>
-		<th  style="border:3px solid #000;">Order ID</th><th style="border:3px solid #000;"><?php echo $invoice_id; ?></th>
-		<th style="border:3px solid #000;">Delivery Slot</th><th style="border:3px solid #000;"><?php echo date("d/M/Y", strtotime($del_date)); ?></th>
-		</tr>
-		</thead>
-		</table>
-		<table class="table table-bordered mt-2">
-		    <thead class="text-center">
-			   <th colspan="5">Delivered Items</th>
-			</thead>
-			<thead class="text-center">
-				<th style="width:5%;">Sl.No</th>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-12">
+        <!-- <img src="admin_images/karlogob.png" alt="" class="border-0 d-block mx-auto pt-4" width="100%"> -->
+        <h4 class="text-center">Id : <?php echo $invoice_id; ?></h4>
+        <br>
+        <h4>Date : <?php echo date('d/M/Y',strtotime($date)); ?></h4>
+        <h4>Name : <?php echo $c_name; ?></h4>
+        <!-- <h4>Payment Mode : <?php //if($txn_status=='TXN_SUCCESS'){echo"ONLINE";}else{echo"CASH";} ; ?></h4> -->
+    </div>
+    </div>
+    <div class="col-12 px-0">
+    <table class="table table-lg">
+        <thead class="text-center">
+            <tr>
+                <th style="width:5%;">Sl.No</th>
 				<th style="width:60%;">ITEM</th>
 				<th style="width:5%;">QUANTITY</th>
 				<th style="width:15%;">TOTAL</th>
-			</thead>
-			<tbody>
+            </tr>
+        </thead>
+        <tbody class="text-center" style="font-weight:bold;">
 			<?php
 
 				$get_pro_id = "select * from customer_orders where invoice_no='$invoice_id'";
 
 				$run_pro_id = mysqli_query($con,$get_pro_id);
 
-				$counter = 0;
+                $counter = 0;
+                
+                $get_sum = "select SUM(due_amount) as order_total from customer_orders where invoice_no='$invoice_id' and client_id='$client' and product_status='Deliver'";
+                $run_sum = mysqli_query($con,$get_sum);
+                $row_sum = mysqli_fetch_array($run_sum);
+                $order_total = $row_sum['order_total'];
 
 				while($row_pro_id = mysqli_fetch_array($run_pro_id)){
 					
@@ -190,10 +199,10 @@ if(isset($_GET['bill'])){
 						echo "
 
 						<tr>
-						<td class='text-center'>$counter</td>
-						<td>$pro_title $pro_desc</td>
-						<td class='text-center'>$qty</td>
-						<td class='text-center'>$sub_total.00</td>
+						    <td class='text-center'>$counter</td>
+							<td style='width:70%;'' class='text-left'>$pro_title $pro_desc</td>
+							<td >$qty</td>
+							<td>₹ $sub_total</td>
 						</tr>
 						";	
 
@@ -203,9 +212,9 @@ if(isset($_GET['bill'])){
 
 						<tr>
 						<td class='text-center'>$counter</td>
-						<td>$pro_title $pro_desc</td>
-						<td class='text-center'>$qty</td>
-						<td class='text-center' colspan='2'><strong>Undelivered</strong></td>
+						<td style='width:70%;'' class='text-left'>$pro_title $pro_desc</td>
+						<td >$qty</td>
+						<td><strong>Undelivered</strong></td>
 						</tr>
 						";	
 
@@ -214,17 +223,21 @@ if(isset($_GET['bill'])){
 					}
 
 				}
-				?>		
+				?>
+                <tr>
+                <th colspan="3" class="text-right">Total :</th>
+                <th>₹ <?php echo $order_total;?></th>
+                </tr>
 			</tbody>
 			<tbody>
 			</tbody>
 		</table>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-12">
-				<hr class="mb-0" style="border-top:1px solid #999;height:10px;">
+                 <hr class="mb-0" style="border-top:1px solid #999;height:10px;">
 				<h5 style="font-size:1rem;font-family:Raleway;text-align:center;">WERNEAR TECHNOLOGIES, Dombivali East, 421204. GSTN:27AADFW3376J1ZR</h5>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <?php
 
 
-session_start();
+// session_start();
 
-    if(!isset($_SESSION['customer_email'])){
+    if(!isset($_COOKIE['wrnuser'])){
 
         echo "<script>window.open('../checkout.php','_self')</script>";
 
@@ -19,9 +19,9 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The best online grocery store in palava. We can fulfill all your grocery needs ranging from grains,pulses,kitchen needs to fresh vegetables and fruits"/>
+    <meta name="description" content="The best online grocery store in Karwar. We can fulfill all your grocery needs ranging from grains,pulses,kitchen needs to fresh vegetables and fruits"/>
     <link rel="shortcut icon" type="image/png" href="../admin_area/admin_images/wrnlogo.png"/>
-    <title>Wernear Grocery</title>
+    <title>Karwar Grocery</title>
     <!-- google font -->
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Jost' rel='stylesheet'>
@@ -48,10 +48,11 @@ session_start();
     <link rel="stylesheet" href="styles/style.css?version=2">
     <!-- styles -->
 
+    <!-- Chatra {literal} -->
 <!-- Chatra {literal} -->
 <script>
     (function(d, w, c) {
-        w.ChatraID = 'Wd4a7RX9vgyRxaS3P';
+        w.ChatraID = 'kdwYKgEGqr7Fjn5ty';
         var s = d.createElement('script');
         w[c] = w[c] || function() {
             (w[c].q = w[c].q || []).push(arguments);
@@ -61,6 +62,7 @@ session_start();
         if (d.head) d.head.appendChild(s);
     })(document, window, 'Chatra');
 </script>
+<!-- /Chatra {/literal} -->
 <!-- /Chatra {/literal} -->
 
 </head>
@@ -75,7 +77,7 @@ session_start();
                 <!-- nav -->
                     <ul class="nav bg-white accounttop ">
                         <li class="nav-item">
-                            <a class="nav-link" href="../">
+                            <a class="nav-link" onClick="window.history.back()">
                                 <i style="font-size: 1.5rem;" class="fas fa-arrow-left"></i>
                             </a>
                         </li>
@@ -88,7 +90,7 @@ session_start();
         <!-- breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb pt-1">
-                    <li class="breadcrumb-item active" aria-current="page"> <a href="../">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Home</li>
                     <li class="breadcrumb-item active" aria-current="page">Account</li>
                 </ol>
             </nav>
@@ -103,9 +105,9 @@ session_start();
             <div class="col-10 px-4">
                 <?php 
                 
-                $c_email = $_SESSION['customer_email'];
+                $c_id = $_COOKIE['wrnuser'];
 
-                $get_user = "select * from customers where customer_email='$c_email'";
+                $get_user = "select * from customers where customer_id='$c_id'";
 
                 $run_user = mysqli_query($con,$get_user);
 
@@ -168,7 +170,7 @@ session_start();
 
                 if(isset($_POST['insertuser'])){
 
-                    $c_mail = $_SESSION['customer_email'];
+                    $c_id = $_COOKIE['wrnuser'];
 
                     $c_name = $_POST['c_name'];
 
@@ -180,7 +182,7 @@ session_start();
 
                     $c_newpass = password_hash($_POST['c_newpass'], PASSWORD_DEFAULT);
                     
-                    $get_user_id = "select * from customers where customer_email='$c_mail'";
+                    $get_user_id = "select * from customers where customer_id='$c_id'";
 
                     $run_user_id = mysqli_query($con,$get_user_id);
 
@@ -223,22 +225,22 @@ session_start();
 
     <?php 
 
-        $session_email = $_SESSION['customer_email'];
+        // $session_email = $_SESSION['customer_email'];
 
-        $get_c_id = "select * from customers where customer_email='$session_email'";
+        // $get_c_id = "select * from customers where customer_email='$session_email'";
 
-        $run_c_id = mysqli_query($con,$get_c_id);
+        // $run_c_id = mysqli_query($con,$get_c_id);
 
-        $row_c_id = mysqli_fetch_array($run_c_id);
+        // $row_c_id = mysqli_fetch_array($run_c_id);
 
-        $c_id = $row_c_id['customer_id'];
+        //$c_id = $row_c_id['customer_id'];
 
     ?>
 
 <!-- customer id -->
 
 <!-- user account my_orders -->
-    <div class="accordion bg-white" id="accordionExample">
+<div class="accordion bg-white" id="accordionExample">
         <div class="card main_card">
             <button class="btn btn_order" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 <div class="card-header order_header" id="headingOne">
@@ -247,13 +249,13 @@ session_start();
             </button>
             <?php
 
-            $get_min = "select * from admins";
+            // $get_min = "select * from admins";
 
-            $run_min = mysqli_query($con,$get_min);
+            // $run_min = mysqli_query($con,$get_min);
 
-            $row_min = mysqli_fetch_array($run_min);
+            // $row_min = mysqli_fetch_array($run_min);
 
-            $del_charges = $row_min['del_charges'];
+            // $del_charges = $row_min['del_charges'];
             
             $get_invoice = "select distinct invoice_no from customer_orders where customer_id='$c_id' order by order_id DESC";
 
@@ -301,6 +303,19 @@ session_start();
 
             $txn_status = $row_txn['STATUS'];
 
+            $get_discount = "select * from customer_discounts where invoice_no='$invoice_id'";
+            $run_discount = mysqli_query($con,$get_discount);
+            $row_discount = mysqli_fetch_array($run_discount);
+
+            $discount_type = $row_discount['discount_type'];
+            $discount_amount = $row_discount['discount_amount'];
+
+            $get_del_charges = "select * from order_charges where invoice_id='$invoice_id'";
+            $run_del_charges = mysqli_query($con,$get_del_charges);
+            $row_del_charges = mysqli_fetch_array($run_del_charges);
+    
+            $del_charges = $row_del_charges['del_charges'];
+
             ?>
             <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body bg-white py-1">
@@ -314,14 +329,14 @@ session_start();
                             <div class="card-body py-1">
                                 <div class="row">
                                     <div class="col-9">
-                                        <h5 class="card-title mb-0"><?php echo $row_order_count; ?> Items Delivered</h5>
-                                        <h4 class="card-title mb-0 <?php if($order_sum>=1){echo 'show';}else{echo 'd-none';}?>">₹ <?php echo  $order_sum+$del_charges; ?></h4>
+                                        <h5 class="card-title mb-0"><?php echo $row_order_count; ?> Items <?php echo $order_status; ?></h5>
+                                        <h4 class="card-title mb-0 <?php if($order_sum>=1){echo 'show';}else{echo 'd-none';}?>">₹ <?php echo  $order_sum-$discount_amount; ?><?php if($del_charges>0){echo "+".$del_charges;}?></h4>
                                         <p class="card-text mb-0  <?php if($txn_status==='TXN_SUCCESS'){echo 'text-success';}else{echo 'text-danger'; } ?>" style="font-size:0.7rem;font-weight:bold;">
                                         <?php 
                                         
-                                            if($txn_status==='TXN_SUCCESS' && ($order_status==='Delivered' || $order_status==='Order Placed' || $order_status==='Packed' || $order_status==='Out for Delivery')){echo 'PAID ONLINE';}
+                                            if($txn_status==='TXN_SUCCESS'){echo 'PAID ONLINE';}
                                             elseif($order_status==='Delivered'){echo 'PAID OFFLINE'; }
-                                            // elseif ($order_status==='Cancelled'&$txn_status!='TXN_SUCCESS'){echo 'Cancelled';}
+                                            elseif ($order_status==='Cancelled'&$txn_status!='TXN_SUCCESS'){echo 'Cancelled';}
                                             elseif ($order_status==='Order Placed'){echo 'PAY CASH OR OFFLINE MODE';}
                                             elseif ($order_status==='Cancelled'&$txn_status==='TXN_SUCCESS'){echo 'REFUNDED';}
                                             ?>
@@ -356,15 +371,15 @@ session_start();
                  
                 <?php 
 
-                $c_mail = $_SESSION['customer_email'];
+                // $c_mail = $_SESSION['customer_email'];
                 
-                $get_customer_id = "select * from customers where customer_email='$c_mail'";
+                // $get_customer_id = "select * from customers where customer_email='$c_mail'";
 
-                $run_customer_id = mysqli_query($con,$get_customer_id);
+                // $run_customer_id = mysqli_query($con,$get_customer_id);
 
-                $row_customer_id = mysqli_fetch_array($run_customer_id);
+                // $row_customer_id = mysqli_fetch_array($run_customer_id);
 
-                $c_id = $row_customer_id['customer_id'];
+                // $c_id = $row_customer_id['customer_id'];
 
                 $get_address = "select * from customer_address where customer_id='$c_id'";
 
@@ -393,8 +408,8 @@ session_start();
                                 <div class="row py-0 my-0">
                                     <div class="col-9"><h5 class="add_title mt-2"><?php echo $add_type; ?></h5></div>
                                         <div class="col-3 mt-2 text-right">
-                                            <a href="my_account?delete_address=<?php echo $add_id; ?>"><i style=" font-size:1.5rem; color:#999;" class="fas fa-trash-alt"></i>
-                                            </a>
+                                            <!-- <a href="my_account?delete_address=<?php //echo $add_id; ?>"><i style=" font-size:1.5rem; color:#999;" class="fas fa-trash-alt"></i>
+                                            </a> -->
                                         </div>
                                     </div>
                                   <p class="add_desc"><?php echo $customer_address."</br>".$customer_phase." ,".$customer_landmark." ,".$customer_city; ?></p>
@@ -480,7 +495,7 @@ session_start();
 
             if(isset($_POST['insertadd'])){
 
-                $c_mail = $_SESSION['customer_email'];
+                $c_id = $_COOKIE['wrnuser'];
 
                 $c_city = $_POST['c_city'];
 
@@ -492,7 +507,7 @@ session_start();
 
                 $add_type = $_POST['add_type'];
                 
-                $get_user_id = "select * from customers where customer_email='$c_mail'";
+                $get_user_id = "select * from customers where customer_id='$c_id'";
 
                 $run_user_id = mysqli_query($con,$get_user_id);
 
@@ -540,7 +555,7 @@ session_start();
                 <div class="card-body py-1">
                     <div class="card sup_body mb-2" style="max-width: 100%;">
                             <div class="card-body py-1">
-                                <a href="tel:9019196792"><h5 class="sup_title mt-2">+91 9019196792</h5></a>
+                            <a href="tel:9019196792"><h5 class="sup_title mt-2">+91 9019196792</h5></a>
                                 <a href="mailto:tshirsat700@gmail.com"><p class="sup_desc mb-0">tshirsat700@gmail.com</p></a>
                             </div>
                         </div>
@@ -601,7 +616,7 @@ session_start();
                         <div class="row pb-2">
                             <div class="col-12"><h5 class="lg_title text-center">Are You Sure? </h5></div>
                             <div class="col-6"><a href="my_account.php" class="btn btn-success text-white pull-right">No</a></div>
-                            <div class="col-6"><a href="logout.php" class="btn btn-danger text-white pull-left">Yes</a></div>
+                            <div class="col-6"><a href="../logout.php" class="btn btn-danger text-white pull-left">Yes</a></div>
                         </div>
                     </div>
                 </div>

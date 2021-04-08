@@ -4,11 +4,14 @@ include("includes/db.php");
 
 if(isset($_GET['update_order'])){
 
+  date_default_timezone_set('Asia/Kolkata');
+  $today = date("Y-m-d H:i:s");
+
   $update_order = $_GET['update_order'];
 
   $status = $_GET['status'];
 
-  $update_status_del = "UPDATE customer_orders SET order_status='$status' WHERE invoice_no='$update_order'";
+  $update_status_del = "UPDATE customer_orders SET order_status='$status',del_date='$today' WHERE invoice_no='$update_order'";
 
   $run_status_del = mysqli_query($con,$update_status_del);
 
@@ -22,9 +25,9 @@ if(isset($_GET['update_order'])){
 
 if(isset($_GET['cancel_order'])){
 
-    $update_order = $_GET['cancel_order'];
+    $cancel_order = $_GET['cancel_order'];
 
-    $get_id = "select * from customer_orders where invoice_no='$update_order'";
+    $get_id = "select * from customer_orders where invoice_no='$cancel_order'";
 
     $run_id = mysqli_query($con,$get_id);
 
@@ -40,7 +43,7 @@ if(isset($_GET['cancel_order'])){
 
     $c_contact = $row_contact['customer_contact'];
   
-    $update_status_del = "UPDATE customer_orders SET order_status='Cancelled',product_status='Undeliver' WHERE invoice_no='$update_order'";
+    $update_status_del = "UPDATE customer_orders SET order_status='Cancelled',product_status='Undeliver' WHERE invoice_no='$cancel_order'";
   
     $run_status_del = mysqli_query($con,$update_status_del);
   
@@ -49,11 +52,11 @@ if(isset($_GET['cancel_order'])){
   
       echo "<script>window.open('index.php?view_orders','_self')</script>";
 
-      $text = "Your%20Order%20with%20Order%20Id%20$update_order%20is%20been%20Cancelled%20Call%209019196792%20For%20Support";
+      $text = "Your%20Order%20with%20Order%20Id%20$update_order%20is%20been%20Cancelled%20Call%207292916394%20For%20Support";
 
       //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-     //$url = "http://api.bulksmsplans.com/api/SendSMS?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text";
-     $url = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text&number=+91$c_contact";
+    //  $url = "http://api.bulksmsplans.com/api/SendSMS?api_id=API31873059460&api_password=W3cy615F&sms_type=T&encoding=T&sender_id=VRNEAR&phonenumber=91$c_contact&textmessage=$text";
+    $url = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text&number=+91$c_contact";
      // Initialize a CURL session. 
      $ch = curl_init();  
      
@@ -236,6 +239,66 @@ if(isset($_GET['cancel_order'])){
   
   }
 
+  if(isset($_GET['minus_order'])){
+
+    $invoice_id = $_GET['minus_order'];
+
+    $pro_id = $_GET['minuspro_id'];
+
+    $pro_price = $_GET['minusper_pro'];
+
+    $update_minus = "update customer_orders set qty=qty-1, due_amount=due_amount-'$pro_price' where invoice_no='$invoice_id' and pro_id='$pro_id'";
+
+    $run_update_minus = mysqli_query($con,$update_minus);
+
+    if($run_update_minus){
+  
+      echo "<script>alert('Order Updated')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+    }else{
+
+      echo "<script>alert('Try Again')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+
+    }
+  
+  
+  }
+
+  if(isset($_GET['plus_order'])){
+
+    $invoice_id = $_GET['plus_order'];
+
+    $pro_id = $_GET['pluspro_id'];
+
+    $pro_price = $_GET['plusper_pro'];
+
+    $update_plus = "update customer_orders set qty=qty+1,due_amount=due_amount+'$pro_price' where invoice_no='$invoice_id' and pro_id='$pro_id'";
+
+    $run_update_plus = mysqli_query($con,$update_plus);
+
+    if($run_update_plus){
+  
+      echo "<script>alert('Add Updated')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+    }else{
+
+      echo "<script>alert('Try Again')</script>";
+  
+      echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
+
+
+    }
+  
+  
+  }
+
   if(isset($_GET['deliver_order'])){
 
     $invoice_id = $_GET['deliver_order'];
@@ -259,10 +322,68 @@ if(isset($_GET['cancel_order'])){
       echo "<script>window.open('index.php?confirm_order=$invoice_id','_self')</script>";
 
 
-    }
-  
-  
+    }   
   }
 
+  if(isset($_POST['bill_diff'])){
+
+    $invoice_id = $_POST['bill_diff'];
+
+    $diff_value = $_POST['bill_diff_value'];
+
+    $client_id = $_POST['client_id'];
+
+    date_default_timezone_set('Asia/Kolkata');
+    $today = date("Y-m-d H:i:s");
+
+    $insert_bill_diff = "insert into bill_controller (client_id,
+                                                      invoice_no,
+                                                      bill_amount,
+                                                      bill_controller_type,
+                                                      updated_date) 
+                                                      values 
+                                                      ('$client_id',
+                                                       '$invoice_id',
+                                                       '$diff_value',
+                                                       'value_diff',
+                                                       '$today')";
+    $run_insert_bill_diff = mysqli_query($con,$insert_bill_diff);
+
+    if($run_insert_bill_diff){
+
+      echo "<script>alert('bill Updated Successfully')</script>";
+      echo "<script>window.open('index.php?view_orders','_self')</script>";
+
+    }else{
+
+      echo "<script>alert('bill Update Failed')</script>";
+      echo "<script>window.open('index.php?view_orders','_self')</script>";
+      
+    }
+
+  }
+
+  if(isset($_POST['del_bill_diff'])){
+
+    $invoice_id = $_POST['del_bill_diff'];
+
+    $del_client_id = $_POST['del_client_id'];
+
+    $del_bill_diff = "delete from bill_controller where invoice_no='$invoice_id' and client_id='$del_client_id'";
+    $run_del_bill_diff = mysqli_query($con,$del_bill_diff);
+
+    if($run_del_bill_diff){
+
+      echo "<script>alert('bill deleted Successfully')</script>";
+      echo "<script>window.open('index.php?view_orders','_self')</script>";
+
+    }else{
+
+      echo "<script>alert('bill delete Failed')</script>";
+      echo "<script>window.open('index.php?view_orders','_self')</script>";
+      
+    }
+
+  }
 
 ?>

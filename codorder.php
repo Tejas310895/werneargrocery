@@ -6,7 +6,7 @@ if(isset($_POST['c_id'])){
 
     $add_id = $_POST['add_id'];
 
-    $date = $_POST['date'];
+    //$date = $_POST['date'];
 
     date_default_timezone_set('Asia/Kolkata');
 
@@ -20,6 +20,7 @@ $run_contact = mysqli_query($con,$get_contact);
 $row_contact = mysqli_fetch_array($run_contact);
 
 $c_contact = $row_contact['customer_contact'];
+$c_name = $row_contact['customer_name'];
 
 $get_unique = "SELECT * from customer_orders order by order_id DESC LIMIT 1";
 
@@ -29,15 +30,13 @@ $row_unique = mysqli_fetch_array($run_unique);
 
 $unique_num = $row_unique['order_id'];
 
-$ip_add = getRealIpUser();
-
 $user_id = getuserid();
 
 $status = "Order Placed";
 
 $invoice_no = $unique_num.mt_rand();
 
-$select_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
+$select_cart = "select * from cart where user_id='$user_id'";
 
 $run_cart = mysqli_query($con,$select_cart);
 
@@ -54,15 +53,54 @@ while($row_cart = mysqli_fetch_array($run_cart)){
     while($row_products = mysqli_fetch_array($run_products)){
 
         $sub_total = $row_products['product_price']*$pro_qty;
+        $vendor_sub_total = $row_products['venor_price']*$pro_qty;
 
         $client_id = $row_products['client_id'];
 
-        $insert_customer_order = "insert into customer_orders (customer_id,add_id,pro_id,due_amount,invoice_no,qty,order_date,del_date,order_status,product_status,client_id) 
-        values ('$customer_id','$add_id',' $pro_id','$sub_total','$invoice_no','$pro_qty','$today','$date','$status','Deliver','$client_id')";
+        $ord_pro_hsn = $row_products['product_hsn'];
+        $ord_pro_cgst = $row_products['product_cgst'];
+        $ord_pro_sgst = $row_products['product_sgst'];
+        $ord_pro_igst = $row_products['product_igst'];
+        $ord_pro_cess = $row_products['product_cess'];
+
+        $insert_customer_order = "insert into customer_orders (customer_id,
+                                                               add_id,
+                                                               pro_id,
+                                                               due_amount,
+                                                               vendor_due_amount,
+                                                               invoice_no,
+                                                               qty,
+                                                               order_date,
+                                                               del_date,
+                                                               order_status,
+                                                               product_status,
+                                                               client_id,
+                                                               ord_pro_hsn,
+                                                               ord_pro_cgst,
+                                                               ord_pro_sgst,
+                                                               ord_pro_igst,
+                                                               ord_pro_cess) 
+                                                        values ('$customer_id',
+                                                                '$add_id',
+                                                                '$pro_id',
+                                                                '$sub_total',
+                                                                '$vendor_sub_total',
+                                                                '$invoice_no',
+                                                                '$pro_qty',
+                                                                '$today',
+                                                                '$today',
+                                                                '$status',
+                                                                'Deliver',
+                                                                '$client_id',
+                                                                '$ord_pro_hsn',
+                                                                '$ord_pro_cgst',
+                                                                '$ord_pro_sgst',
+                                                                '$ord_pro_igst',
+                                                                '$ord_pro_cess')";
 
         $run_customer_order = mysqli_query($con,$insert_customer_order);
 
-        $delete_cart = "delete from cart where ip_add='$ip_add' AND user_id='$user_id'";
+        $delete_cart = "delete from cart where user_id='$user_id'";
 
         $run_delete = mysqli_query($con,$delete_cart);
 
@@ -72,16 +110,65 @@ while($row_cart = mysqli_fetch_array($run_cart)){
 
     }
 }
+    if($run_customer_order){
+
+        $get_dis_total = "select sum(due_amount) as dis_total from customer_orders WHERE invoice_no='$invoice_no'";
+        $run_dis_total = mysqli_query($con,$get_dis_total);
+        $row_dis_total = mysqli_fetch_array($run_dis_total);
+
+        $dis_total = $row_dis_total['dis_total'];
+
+        $get_user_order_count = "SELECT customer_id,invoice_no FROM customer_orders WHERE customer_id='$customer_id' GROUP BY customer_id,invoice_no";
+        $run_user_orders_count = mysqli_query($con,$get_user_order_count);
+        $user_orders_count = mysqli_num_rows($run_user_orders_count);
+
+        if($user_orders_count==1 && $dis_total>300){
+         $insert_discount = "insert into customer_discounts (invoice_no,discount_type,discount_amount,discount_date) values ('$invoice_no','First Order Discount','25','$today')";
+         $run_insert_discount = mysqli_query($con,$insert_discount);
+        }
+        
+    }
+
+    if($run_customer_order){
+        
+        $get_del_total = "select sum(due_amount) as del_total from customer_orders WHERE invoice_no='$invoice_no'";
+        $run_del_total = mysqli_query($con,$get_del_total);
+        $row_del_total = mysqli_fetch_array($run_del_total);
+
+        $del_total = $row_del_total['del_total'];
+
+        $get_del_charges = "select * from admins";
+        $run_del_charges = mysqli_query($con,$get_del_charges);
+        $row_del_charges = mysqli_fetch_array($run_del_charges);
+
+        $del_charges = $row_del_charges['del_charges'];
+
+        if($del_total<300){
+            $insert_del_charges = "insert into order_charges (invoice_id,del_charges,updated_date) values ('$invoice_no','$del_charges','$today')";
+            $run_insert_del_charges = mysqli_query($con,$insert_del_charges);
+        }
+    }
 
     if($run_customer_order){
 
-        $invoice_no = $invoice_no;
+        $insert_call = "insert into cron_call (invoice_no,cron_call_status,updated_date) values ('$invoice_no','false','$today')";
+        $run_insert_call = mysqli_query($con,$insert_call);     
+    }
+
+    if($run_customer_order){
+        
+        $key = "EALz6t0ZsHkQ9WPx";
+        $senderid="VRNEAR";	$route= 1;
         
         $text1 = "Thank%20You,%20Your%20Order%20is%20Placed%20Successfully,%20Call%209019196792%20For%20Support";
-        $text2 = "Postpaid%20Order%20Received-https://www.wernear.in/admin_area/print.php?print=$invoice_no";
+        $text2 = "New%20Order%20received%20on%20the%20portal";
         //echo $url = "https://smsapi.engineeringtgr.com/send/?Mobile=9636286923&Password=DEZIRE&Message=".$m."&To=".$tel."&Key=parasnovxRI8SYDOwf5lbzkZc6LC0h"; 
-        $url1 = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1&number=+91$c_contact";
-        $url2 = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2&number=+919867765397";
+        // $url1="http://weberleads.in/http-api.php?username=TEJAS97&password=pwd5634&senderid=WEBERL&route=2&number=$c_contact&message=$text1";
+        // $url2="http://weberleads.in/http-api.php?username=TEJAS97&password=pwd5634&senderid=WEBERL&route=2&number=7892916394&message=$text2";
+        // $url1 = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text1&number=+91$c_contact";
+        // $url2 = "http://www.bulksmsplans.com/api/send_sms_multi?api_id=APIMerR2yHK34854&api_password=wernear_11&sms_type=Transactional&sms_encoding=text&sender=VRNEAR&message=$text2&number=+917892916394";
+        $url1 = "https://www.hellotext.live/vb/apikey.php?apikey=$key&senderid=$senderid&route=$route&number=$c_contact&message=$text1";
+        $url2 = "https://www.hellotext.live/vb/apikey.php?apikey=$key&senderid=$senderid&route=$route&number=9867765397&message=$text2";
 
         // create both cURL resources
         $ch1 = curl_init();
@@ -113,7 +200,6 @@ while($row_cart = mysqli_fetch_array($run_cart)){
         curl_multi_remove_handle($mh, $ch2);
         curl_multi_close($mh);
 
-
         echo "<script>alert('Order Placed, thanks')</script>";
 
         echo "<script>window.open('customer/order_success','_self')</script>";
@@ -123,5 +209,4 @@ while($row_cart = mysqli_fetch_array($run_cart)){
     
         echo "<script>window.history.go(-2)</script>";
     }
-
 ?>

@@ -20,13 +20,13 @@
 
 			$total = $row_total['total'];
 
-			$get_min = "select * from admins";
+			$get_min = "select sum(del_charges) as charge_total from order_charges where invoice_id='$invoice_no'";
 
 			$run_min = mysqli_query($con,$get_min);
 
 			$row_min = mysqli_fetch_array($run_min);
 
-			$del_charges = $row_min['del_charges'];
+			$del_charges = $row_min['charge_total'];
 
 			$TXN_AMOUNT = $total+$del_charges;
 		
@@ -39,9 +39,7 @@
 
         echo "<script>window.open('customer/my_account','_self')</script>";
 	}
-	header("Pragma: no-cache");
-	header("Cache-Control: no-cache");
-	header("Expires: 0");
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

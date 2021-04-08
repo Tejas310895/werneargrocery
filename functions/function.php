@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost','u464233779_grocery','Sugandha@11','u464233779_grocery');
+$db = mysqli_connect('localhost:3308','root','','wrngrocery');
 /// begin getRealIpUser functions ///
 
 function getRealIpUser(){
@@ -22,11 +22,11 @@ function getRealIpUser(){
         // of the local machine getHostByName() 
         // gets the corresponding IP 
         $localIP = getHostByName(getHostName()); 
-            
+        
         // Displaying the address  
         return $localIP; 
-            
-            
+  
+
     
 }
 
@@ -35,10 +35,10 @@ function getRealIpUser(){
 /// Begin getuserid functions ///
 
 function getuserid(){
-
+    
     global $db;
 
-    if(!isset($_SESSION['customer_email'])){
+    if(!isset($_COOKIE['wrnuser'])){
     session_id();
 
     $new_sessionid = session_id();
@@ -47,15 +47,15 @@ function getuserid(){
 
     }else{
 
-        $customer_email = $_SESSION['customer_email'];
+        // $customer_email = $_SESSION['customer_email'];
 
-        $get_c_id = "select * from customers where customer_email='$customer_email'";
+        // $get_c_id = "select * from customers where customer_email='$customer_email'";
 
-        $run_c_id = mysqli_query($db,$get_c_id);
+        // $run_c_id = mysqli_query($db,$get_c_id);
 
-        $row_c_id = mysqli_fetch_array($run_c_id);
+        // $row_c_id = mysqli_fetch_array($run_c_id);
 
-        $customer_id = $row_c_id['customer_id'];
+        $customer_id = $_COOKIE['wrnuser'];
 
         return $customer_id;
     }
@@ -79,10 +79,30 @@ function add_cart(){
         $p_id = $_GET['add_cart'];
         
         $store_id = $_GET['store_id'];
+
+        $get_stock = "select * from products where product_id='$p_id'";
+
+        $run_stock = mysqli_query($db,$get_stock);
+
+        $row_stock = mysqli_fetch_array($run_stock);
+
+        $stock = $row_stock['product_stock'];
+
+        $p_name = $row_stock['product_title'];
         
         $check_product = "select * from cart where ip_add='$ip_add' AND user_id='$user_id' AND p_id='$p_id'";
         
         $run_check = mysqli_query($db,$check_product);
+
+        $row_check = mysqli_fetch_array($run_check);
+
+        $p_qty = $row_check['qty'];
+
+        if($p_qty>=$stock){
+
+            echo "<script>alert('Your Requested Quantity for $p_name is not available')</script>";
+
+        }else{
         
         if(mysqli_num_rows($run_check)>0){
             
@@ -101,6 +121,8 @@ function add_cart(){
             echo "<script>window.open('shop?store_id=$store_id','_self')</script>";
             
         }
+
+    }
         
     }
     
@@ -110,86 +132,108 @@ function add_cart(){
 
 /// begin add_cat_cart functions ///
 
-function add_cat_cart(){
-    
-    global $db;
-    
-    if(isset($_GET['add_cat_cart'])){
+    function add_cat_cart(){
         
-        $ip_add = getRealIpUser();
+        global $db;
         
-        $p_id = $_GET['add_cat_cart'];
-        
-        $cat_id = $_POST['cat_id'];
-        
-        // $product_qty = $_POST['product_qty'];
-        
-        $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
-        
-        $run_check = mysqli_query($db,$check_product);
-        
-        if(mysqli_num_rows($run_check)>0){
+        if(isset($_GET['add_cat_cart'])){
             
-            $update_qty= "update cart set qty=qty+1 where p_id='$p_id'";
+            $ip_add = getRealIpUser();
+            
+            $p_id = $_GET['add_cat_cart'];
+            
+            $cat_id = $_POST['cat_id'];
+            
+            // $product_qty = $_POST['product_qty'];
 
-            $run_update_qty = mysqli_query($db,$update_qty);
+            $get_stock = "select * from products where product_id='$p_id'";
 
-            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+            $run_stock = mysqli_query($db,$get_stock);
+
+            $row_stock = mysqli_fetch_array($run_stock);
+
+            $stock = $row_stock['product_stock'];
+
+            $p_name = $row_stock['product_title'];
             
-        }else{
+            $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
             
-            $query = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip_add','1')";
+            $run_check = mysqli_query($db,$check_product);
+
+            $row_check = mysqli_fetch_array($run_check);
+
+            $p_qty = $row_check['qty'];
+
+            if($p_qty>=$stock){
+
+                echo "<script>alert('Your Requested Quantity for $p_name is not available')</script>";
+
+            }else{
             
-            $run_query = mysqli_query($db,$query);
-            
-            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+            if(mysqli_num_rows($run_check)>0){
+                
+                $update_qty= "update cart set qty=qty+1 where p_id='$p_id'";
+
+                $run_update_qty = mysqli_query($db,$update_qty);
+
+                echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+                
+            }else{
+                
+                $query = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip_add','1')";
+                
+                $run_query = mysqli_query($db,$query);
+                
+                echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+                
+            }
+
+        }
             
         }
         
     }
-    
-}
 
 /// finish add_cat_cart functions ///
 
 /// begin add_index_cart functions ///
 
-function add_index_cart(){
-    
-    global $db;
-    
-    if(isset($_GET['add_index_cart'])){
+    function add_index_cart(){
         
-        $ip_add = getRealIpUser();
+        global $db;
         
-        $p_id = $_GET['add_index_cart'];
-        
-        // $product_qty = $_POST['product_qty'];
-        
-        $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
-        $run_check = mysqli_query($db,$check_product);
-        
-        if(mysqli_num_rows($run_check)>0){
+        if(isset($_GET['add_index_cart'])){
             
-            $update_qty= "update cart set qty=qty+1 where p_id='$p_id'";
+            $ip_add = getRealIpUser();
+            
+            $p_id = $_GET['add_index_cart'];
+            
+            // $product_qty = $_POST['product_qty'];
+            
+            $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
+            $run_check = mysqli_query($db,$check_product);
+            
+            if(mysqli_num_rows($run_check)>0){
+                
+                $update_qty= "update cart set qty=qty+1 where p_id='$p_id'";
 
-            $run_update_qty = mysqli_query($db,$update_qty);
+                $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('index.php','_self')</script>";
-            
-        }else{
-            
-            $query = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip_add','1')";
-            
-            $run_query = mysqli_query($db,$query);
-            
-            echo "<script>window.open('index.php','_self')</script>";
+                echo "<script>window.open('index.php','_self')</script>";
+                
+            }else{
+                
+                $query = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip_add','1')";
+                
+                $run_query = mysqli_query($db,$query);
+                
+                echo "<script>window.open('index.php','_self')</script>";
+                
+            }
             
         }
         
     }
-    
-}
 
 /// finish add_index_cart functions ///
 
@@ -202,16 +246,35 @@ function add_checkout(){
     if(isset($_GET['add_checkout'])){
         
         $ip_add = getRealIpUser();
-        
+
         $user_id = getuserid();
         
         $p_id = $_GET['add_checkout'];
         
+        $get_stock = "select * from products where product_id='$p_id'";
+
+            $run_stock = mysqli_query($db,$get_stock);
+
+            $row_stock = mysqli_fetch_array($run_stock);
+
+            $stock = $row_stock['product_stock'];
+
+            $p_name = $row_stock['product_title'];
+
         // $product_qty = $_POST['product_qty'];
         
         $check_product = "select * from cart where ip_add='$ip_add' AND user_id='$user_id' AND p_id='$p_id'";
         $run_check = mysqli_query($db,$check_product);
-        
+        $row_check = mysqli_fetch_array($run_check);
+
+        $p_qty = $row_check['qty'];
+
+        if($p_qty>=$stock){
+
+            echo "<script>alert('Your Requested Quantity for $p_name is not available')</script>";
+
+        }else{
+
         if(mysqli_num_rows($run_check)>0){
             
             $update_qty= "update cart set qty=qty+1 where p_id='$p_id' AND user_id='$user_id'";
@@ -221,6 +284,8 @@ function add_checkout(){
             echo "<script>window.open('cart','_self')</script>";
             
         }
+
+    }
         
     }
     
@@ -277,89 +342,89 @@ function delete_cart(){
 
 /// begin delete_cat_cart functions ///
 
-function delete_cat_cart(){
+    function delete_cat_cart(){
 
-    global $db;
+        global $db;
 
-    if(isset($_GET['delete_cat_cart'])){
+        if(isset($_GET['delete_cat_cart'])){
 
-        $ip_add = getRealIpUser();
+            $ip_add = getRealIpUser();
 
-        $p_id = $_GET['delete_cat_cart'];
+            $p_id = $_GET['delete_cat_cart'];
 
-        $cat_id = $_POST['cat_id'];
+            $cat_id = $_POST['cat_id'];
 
-        $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
-        
-        $run_check = mysqli_query($db,$check_cart);
+            $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
+            
+            $run_check = mysqli_query($db,$check_cart);
 
-        $row_check = mysqli_fetch_array($run_check);
+            $row_check = mysqli_fetch_array($run_check);
 
-        $qty = $row_check['qty'];
+            $qty = $row_check['qty'];
 
-        if($qty>1){
+            if($qty>1){
 
-            $update_qty= "update cart set qty=qty-1 where p_id='$p_id'";
+                $update_qty= "update cart set qty=qty-1 where p_id='$p_id'";
 
-            $run_update_qty = mysqli_query($db,$update_qty);
+                $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+                echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
 
-        }else{
+            }else{
 
-            $delete_qty= "delete from cart where p_id='$p_id'";
+                $delete_qty= "delete from cart where p_id='$p_id'";
 
-            $run_delete_qty = mysqli_query($db,$delete_qty);
+                $run_delete_qty = mysqli_query($db,$delete_qty);
 
-            echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
+                echo "<script>window.open('shop.php?cat=$cat_id','_self')</script>";
 
+            }
         }
-    }
 
-}
+    }
 
 /// finish delete_cat_cart functions ///
 
 /// begin delete_index_cart functions ///
 
-function delete_index_cart(){
+    function delete_index_cart(){
 
-    global $db;
+        global $db;
 
-    if(isset($_GET['delete_index_cart'])){
+        if(isset($_GET['delete_index_cart'])){
 
-        $ip_add = getRealIpUser();
+            $ip_add = getRealIpUser();
 
-        $p_id = $_GET['delete_index_cart'];
+            $p_id = $_GET['delete_index_cart'];
 
-        $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
-        
-        $run_check = mysqli_query($db,$check_cart);
+            $check_cart = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
+            
+            $run_check = mysqli_query($db,$check_cart);
 
-        $row_check = mysqli_fetch_array($run_check);
+            $row_check = mysqli_fetch_array($run_check);
 
-        $qty = $row_check['qty'];
+            $qty = $row_check['qty'];
 
-        if($qty>1){
+            if($qty>1){
 
-            $update_qty= "update cart set qty=qty-1 where p_id='$p_id'";
+                $update_qty= "update cart set qty=qty-1 where p_id='$p_id'";
 
-            $run_update_qty = mysqli_query($db,$update_qty);
+                $run_update_qty = mysqli_query($db,$update_qty);
 
-            echo "<script>window.open('index.php','_self')</script>";
+                echo "<script>window.open('index.php','_self')</script>";
 
-        }else{
+            }else{
 
-            $delete_qty= "delete from cart where p_id='$p_id'";
+                $delete_qty= "delete from cart where p_id='$p_id'";
 
-            $run_delete_qty = mysqli_query($db,$delete_qty);
+                $run_delete_qty = mysqli_query($db,$delete_qty);
 
-            echo "<script>window.open('index.php','_self')</script>";
+                echo "<script>window.open('index.php','_self')</script>";
 
+            }
         }
-    }
 
-}
+    }
 
 /// finish delete_index_cart functions ///
 
@@ -523,7 +588,7 @@ function getCats(){
         
         echo "
         
-        <a href='store?cat=$cat_id' class='pn-ProductNav_Link'>$cat_title</a>
+        <a href='store?cat=$cat_id' aria-selected='' class='pn-ProductNav_Link'>$cat_title</a>
         
         ";
         
@@ -627,11 +692,11 @@ function items(){
 
     global $db;
 
-    $ip_add = getRealIpUser();
+    //$ip_add = getRealIpUser();
 
     $user_id = getuserid();
 
-    $get_items = "select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
+    $get_items = "select * from cart where user_id='$user_id'";
 
     $run_items = mysqli_query($db,$get_items);
 
@@ -649,13 +714,13 @@ function total_price(){
 
     global $db;
 
-    $ip_add = getRealIpUser();
+    //$ip_add = getRealIpUser();
 
     $user_id = getuserid();
 
     $total = 0;
 
-    $select_cart = " select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
+    $select_cart = " select * from cart where user_id='$user_id'";
 
     $run_cart = mysqli_query($db,$select_cart);
 
@@ -691,11 +756,11 @@ function diaplay_cart(){
 
     global $db;
 
-    $ip_add = getRealIpUser();
+    //$ip_add = getRealIpUser();
 
     $user_id = getuserid();
 
-    $show_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
+    $show_cart = "select * from cart where user_id='$user_id'";
 
     $run_show_cart = mysqli_query($db,$show_cart);
     

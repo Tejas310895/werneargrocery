@@ -2,98 +2,175 @@
 
 include("includes/db.php");
 
-
 if(isset($_GET['print'])){
+  $invoice_no = $_GET['print'];
+  date_default_timezone_set('Asia/Kolkata');
+$today = date("Y-m-d H:i:s");
 
-    $invoice_id = $_GET['print'];
+$get_total = "SELECT sum(due_amount) AS total FROM customer_orders where invoice_no='$invoice_no' and product_status='Deliver'";
+$run_total = mysqli_query($con,$get_total);
+$row_total = mysqli_fetch_array($run_total);
 
-    $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
+$total = $row_total['total'];
 
-    $run_orders = mysqli_query($con,$get_orders);
+$get_details = "select * from customer_orders where invoice_no='$invoice_no'";
+$run_details = mysqli_query($con,$get_details);
+$row_details = mysqli_fetch_array($run_details);
 
-    //$order_count = mysqli_num_rows($run_orders);
+$customer_id = $row_details['customer_id'];
+$add_id = $row_details['add_id'];
+$order_date = $row_details['order_date'];
+$client_id = $row_details['client_id'];
 
-    $row_orders = mysqli_fetch_array($run_orders);
+$get_customer = "select * from customers where customer_id='$customer_id'";
+$run_customer = mysqli_query($con,$get_customer);
+$row_customer = mysqli_fetch_array($run_customer);
 
-    $c_id = $row_orders['customer_id'];
+$customer_name = $row_customer['customer_name'];
+$customer_contact = $row_customer['customer_contact'];
 
-    $date = $row_orders['order_date'];
+$get_add = "select * from customer_address where add_id='$add_id'";
+$run_add = mysqli_query($con,$get_add);
+$row_add = mysqli_fetch_array($run_add);
 
-    $add_id = $row_orders['add_id'];
+$customer_city = $row_add['customer_city'];
+$customer_landmark = $row_add['customer_landmark'];
+$customer_phase = $row_add['customer_phase'];
+$customer_address = $row_add['customer_address'];
 
-    $del_date = $row_orders['del_date'];
+$get_min = "select * from admins";
+$run_min = mysqli_query($con,$get_min);
+$row_min = mysqli_fetch_array($run_min);
+$min_price = $row_min['min_order'];
+// $del_charges = $row_min['del_charges'];
+        
+$get_del_charges = "select * from order_charges where invoice_id='$invoice_no'";
+$run_del_charges = mysqli_query($con,$get_del_charges);
+$row_del_charges = mysqli_fetch_array($run_del_charges);
 
-    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
+$del_charges = $row_del_charges['del_charges'];
 
-    $run_total = mysqli_query($con,$get_total);
+$get_discount = "select * from customer_discounts where invoice_no='$invoice_no'";
+$run_discount = mysqli_query($con,$get_discount);
+$row_discount = mysqli_fetch_array($run_discount);
 
-    $row_total = mysqli_fetch_array($run_total);
-
-    $total = $row_total['total'];
-
-    $get_customer = "select * from customers where customer_id='$c_id'";
-
-    $run_customer = mysqli_query($con,$get_customer);
-
-    $row_customer = mysqli_fetch_array($run_customer);
-
-    $c_name = $row_customer['customer_name'];
-
-    $c_contact = $row_customer['customer_contact'];
-
-    $get_add = "select * from customer_address where add_id='$add_id'";
-
-    $run_add = mysqli_query($con,$get_add);
-
-    $row_add = mysqli_fetch_array($run_add);
-
-    $customer_address = $row_add['customer_address'];
-
-    $customer_phase = $row_add['customer_phase'];
-
-    $customer_landmark = $row_add['customer_landmark'];
-
-    $customer_city = $row_add['customer_city'];
-
-    $get_min = "select * from admins";
-
-    $run_min = mysqli_query($con,$get_min);
-
-    $row_min = mysqli_fetch_array($run_min);
-
-    $min_price = $row_min['min_order'];
-
-    $del_charges = $row_min['del_charges'];
-
-    $get_txn = "select * from paytm where ORDERID='$invoice_id'";
-
-    $run_txn = mysqli_query($con,$get_txn);
-
-    $row_txn = mysqli_fetch_array($run_txn);
-
-    $txn_status = $row_txn['STATUS'];
-
-
-}
+$discount_type = $row_discount['discount_type'];
+$discount_amount = $row_discount['discount_amount'];
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
-	<title>Bill</title>
-	<style>
-		@media print{
-			.table,thead{
-				border:2px solid #000;
-			}
-		}
-	</style>
-	<script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet'>
+    <style>
+            body{
+                font-family:Josefin Sans;
+            }
+            #invoice-POS h1 {
+            font-size: 1.5em;
+            color: #222;
+            }
+            #invoice-POS h2 {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            }
+            #invoice-POS h3 {
+            font-size: 1.2em;
+            font-weight: 300;
+            line-height: 2em;
+            }
+            #invoice-POS p {
+            font-size: 0.6em;
+            color: #000;
+            line-height: 1em;
+            }
+            #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+            /* Targets all id with 'col-' */
+            border-bottom: 1px solid #EEE;
+            }
+            #invoice-POS #top {
+            min-height: 100px;
+            }
+            #invoice-POS #mid {
+            min-height: 80px;
+            }
+            #invoice-POS #bot {
+            min-height: 50px;
+            }
+            /* #invoice-POS #top .logo {
+            height: 60px;
+            width: 60px;
+            background: url(../admin_area/admin_images/karlogob.png) no-repeat;
+            background-size: 60px 60px;
+            } */
+            #invoice-POS .clientlogo {
+            float: left;
+            height: 60px;
+            width: 60px;
+            background: url(../admin_area/admin_images/karlogob.png) no-repeat;
+            background-size: 60px 60px;
+            border-radius: 50px;
+            }
+            #invoice-POS .info {
+            display: block;
+            margin-left: 0;
+            text-align:center;
+            font-weight:bold;
+            font-size: 1rem;
+            }
+            #invoice-POS .title {
+            float: right;
+            }
+            #invoice-POS .title p {
+            text-align: right;
+            }
+            #invoice-POS table {
+            width: 100%;
+            border-collapse: collapse;
+            }
+            #invoice-POS .tabletitle {
+            font-size: 1rem;
+            /* background: #EEE; */
+            }
+            #invoice-POS .service {
+            border-bottom: 1px solid #EEE;
+            font-size: 1rem;
+            color:#000;
+            }
+            #invoice-POS .item {
+            width: 24mm;
+            }
+            #invoice-POS .itemtext {
+            /* font-size: 0.5 rem; */
+            margin-top: 7px;
+            margin-bottom: 7px;
+            }
+            #invoice-POS #legalcopy {
+            margin-top: 5mm;
+            }
+            #legal{
+                font-size:1rem !important;
+            }
+
+            #item_type{
+              text-align:left !important;
+            }
+            @media print 
+                        {
+                        /* @page
+                        {
+                            size: 100mm 100mm;
+                            /* size: portrait; */
+                            /* margin: 2mm 0mm 0mm 0mm; */
+                        /* } */
+                        .pagebreak { page-break-before: always; }
+                        }
+    </style>
+    <script>
         window.onload = function () {
             window.print();
         }
@@ -104,45 +181,65 @@ if(isset($_GET['print'])){
     </script>
 </head>
 <body>
-	<div class="container-fluid px-4">
-		<div class="row py-1">
-			<div class="col-2 px-0">
-				<img src="admin_images/dashlogo.png" alt="" class="img-fluid border-3">
-			</div>
-			<div class="col-10">
-				<h5 class="mb-0"><strong>Delivery Statement (Ordered On : <?php echo date("d/M/Y", strtotime($date)); ?> )</strong></h5>
-				<h5 class="mb-0"><strong>Name :</strong> <?php echo $c_name; ?> / <strong>Mobile :</strong> +91 <?php echo $c_contact; ?> / <strong>Address :</strong><?php echo $customer_address; ?>, <?php echo $customer_landmark; ?>, <?php echo $customer_phase; ?>, <?php echo $customer_city; ?>. </h5>
-			</div>
-		</div>
-		<table class="table table-bordered mt-2 head">
-		<thead>
-		<tr>
-		<th  style="border:3px solid #000;">Order ID</th><th style="border:3px solid #000;"><?php echo $invoice_id; ?></th>
-		<th style="border:3px solid #000;">Amount Payable</th><th style="border:3px solid #000;">Rs.<?php echo $total; ?></th>
-		<th style="border:3px solid #000;">Payment Mode</th><th style="border:3px solid #000;"><?php if($txn_status==='TXN_SUCCESS'){echo "PREPAID";}else{echo "POSTPAID";} ?></th>
-		<th style="border:3px solid #000;">Delivery Slot</th><th style="border:3px solid #000;"><?php echo date("d/M/Y", strtotime($del_date)); ?></th>
-		</tr>
-		</thead>
-		</table>
-		<table class="table table-bordered mt-2">
-		    <thead class="text-center">
-			   <th colspan="5">Delivered Items</th>
-			</thead>
-			<thead class="text-center">
-				<th style="width:5%;">Sl.No</th>
-				<th style="width:60%;">ITEM</th>
-				<th style="width:5%;">QUANTITY</th>
-				<th style="width:15%;">SAVING</th>
-				<th style="width:15%;">TOTAL</th>
-			</thead>
-			<tbody>
-			<?php
+<div class="pagebreak mt-1 ml-1">
+  <div id="invoice-POS">
+  <center>
+  <img src="admin_images/dashlogo.png" alt="" width="120px">
+  </center>
+    <!-- <center id="top">
+      <div class="logo">
+      </div>
+    </center> -->
+    <div id="mid">
+      <div class="info">
+        <h2>ORDER STATEMENT</h2>
+        <h2>Order id : <?php echo $invoice_no; ?> </br>
+            Date : <?php echo date('d/M/Y h:i a',strtotime($order_date)); ?> </br>
+            Name : <?php echo $customer_name; ?></br>
+            Phone   : <?php echo $customer_contact; ?></br>
+            Address : <?php echo $customer_address.",".$customer_phase.",".$customer_landmark.",".$customer_city; ?></br>
+        </h2>
+      </div>
+    </div><!--End Invoice Mid-->
+    
+    <div id="bot" style="text-align:center;">
 
-				$get_pro_id = "select * from customer_orders where invoice_no='$invoice_id'";
+					<div id="table">
+						<table>
+							<tr class="tabletitle">
+								<td class="item"><h2 class="my-0">Item</h2></td>
+								<td class="Hours"><h2 class="my-0">Qty</h2></td>
+								<td class="Rate"><h2 class="my-0">Sub Total</h2></td>
+							</tr>
+      <?php 
 
-				$run_pro_id = mysqli_query($con,$get_pro_id);
+        $get_client_id = "SELECT distinct(client_id) from customer_orders where invoice_no='$invoice_no'";
+        $run_client_id = mysqli_query($con,$get_client_id);
+        while($row_client_id=mysqli_fetch_array($run_client_id)){
+
+            $client_id = $row_client_id['client_id'];
+
+            $get_product_type = "select * from clients where client_id='$client_id'";
+            $run_product_type = mysqli_query($con,$get_product_type);
+            $row_product_type = mysqli_fetch_array($run_product_type);
+
+            $product_type = $row_product_type['client_pro_type'];
+            
+            echo"
+            <tr>
+            <th colspan='3' class='item_type' style='font-size:0.6rem;text-align:left;padding:10px 10px 0px 10px;text-transform: uppercase;background-color:#F0F0F0;'>$product_type</th>
+            </tr>
+            ";
+       ?>
+        <tbody class="text-center" style="font-weight:bold;">
+      <?php
+				$get_pro_id = "select * from customer_orders where invoice_no='$invoice_no' and client_id='$client_id'";
+
+                $run_pro_id = mysqli_query($con,$get_pro_id);
+                
 
 				$counter = 0;
+                $you_saved = 0;
 
 				while($row_pro_id = mysqli_fetch_array($run_pro_id)){
 					
@@ -172,7 +269,7 @@ if(isset($_GET['print'])){
 
 					$mrp = $row_pro['price_display'];
 
-					if($mrp<=0){
+					if($mrp<$pro_price){
 
 						$discount=0;
 
@@ -181,65 +278,78 @@ if(isset($_GET['print'])){
 						$discount=($mrp-$pro_price)*$qty;
 					} 
 
-					// $sub_total = $row_pro['product_price']*$qty;
+					//$sub_total = $row_pro['product_price']*$qty;
 					
-					// $total += $sub_total;
+					//$total += $sub_total;
 
-					$counter = ++$counter;
+                    $counter = ++$counter;
+                    $you_saved += $discount;
 
 					if($product_status==='Deliver'){
 
-						echo "
-
-						<tr>
-						<td class='text-center'>$counter</td>
-						<td>$pro_title $pro_desc</td>
-						<td class='text-center'>$qty</td>
-						<td class='text-center'>$discount.00</td>
-						<td class='text-center'>$sub_total.00</td>
-						</tr>
-						";	
+            echo "
+            
+              <tr class='service'>
+								<td class='tableitem'><p class='itemtext'>$pro_title $pro_desc</p></td>
+								<td class='tableitem'><p class='itemtext'>$qty</p></td>
+								<td class='tableitem'><p class='itemtext'>$sub_total.00</p></td>
+							</tr>
+            
+            ";
 
 					}else {
 
 						echo "
-
-						<tr>
-						<td class='text-center'>$counter</td>
-						<td>$pro_title $pro_desc</td>
-						<td class='text-center'>$qty</td>
-						<td class='text-center' colspan='2'><strong>Undelivered</strong></td>
-						</tr>
+              <tr class='service'>
+								<td class='tableitem'><p class='itemtext'>$pro_title $pro_desc</p></td>
+								<td class='tableitem'><p class='itemtext'>$qty</p></td>
+								<td class='tableitem'><p class='itemtext'>Cancelled</p></td>
+							</tr>
 						";	
 
 					}
 
 					}
 
-				}
-				?>		
-			</tbody>
-			<tbody>
-				<tr style="border-top:3px solid #000;">
-				    <th colspan="4" class="text-right">GRAND TOTAL :</th>
-					<th class="text-center">Rs. <?php echo $total; ?>.00</th>	
-				</tr>
-			</tbody>
-		</table>
-		<div class="row">
-			<div class="col-12">
-				<h5 style="font-size:1rem;font-family:Courgette;">Note :</h5>
-				<h5 style="font-size:1rem;font-family:Courgette;">For tax invoice: https://www.wernear.in/customer/order_view?invoice_no=<?php echo $invoice_id; ?></h5>
-				<h5 style="font-size:1rem;font-family:Courgette;">For online payments refunds shall be processed online, no cash refunds will be allowed.</h5>
-			</div>
-			<div class="col-12">
-				<hr class="mb-0" style="border-top:1px solid #999;height:10px;">
-				<h5 style="font-size:1rem;font-family:Raleway;text-align:center;">WERNEAR TECHNOLOGIES, Dombivali East, 421204. GSTIN:27AADFW3376J1ZR</h5>
-			</div>
-		</div>
-	</div>
+                }
+			?>
+      <?php } ?>
+
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate"><h2>Item Total</h2></td>
+								<td class="payment"><h2><?php echo $total; ?>.00</h2></td>
+							</tr>
+              <?php if($del_charges>0){?>
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate"><h2>Delivery Charges</h2></td>
+								<td class="payment"><h2><?php echo $del_charges; ?>.00</h2></td>
+							</tr>
+              <?php } ?>
+              <?php if($discount_amount>0){?>
+              <tr class="tabletitle">
+              <td></td>
+              <td class="text-right"><h2><?php echo $discount_type; ?><h2></td>
+              <td><h2>-<?php echo $discount_amount; ?><h2></td>
+              </tr>
+              <?php } ?>
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate"><h2>Grand Total</h2></td>
+								<td class="payment"><h2><?php echo ($total+$del_charges)-$discount_amount; ?>.00</h2></td>
+							</tr>
+
+						</table>
+					</div><!--End Table-->
+					<div id="legalcopy">
+						<p class="legal"><strong>Thank You!</strong> <br> Order Again : www.karwars.in.
+						</p>
+					</div>
+
+				</div><!--End InvoiceBot-->
+  </div><!--End Invoice-->
+  </div>
 </body>
 </html>
-
-
-
+<?php } ?>

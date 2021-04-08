@@ -17,7 +17,7 @@
 
                         <?php 
                         
-                        if(!isset($_SESSION['customer_email'])){
+                        if(!isset($_COOKIE['wrnuser'])){
 
                             echo "
                             <a href='checkout'>
@@ -31,19 +31,17 @@
 
                         }else{
 
-                            $c_email = $_SESSION['customer_email'];
+                            $c_id = $_COOKIE['wrnuser'];
 
-                            $get_name = "select * from customers where customer_email='$c_email'";
+                            $get_name = "select * from customers where customer_id='$c_id'";
 
                             $run_name = mysqli_query($con,$get_name);
 
                             $row_name = mysqli_fetch_array($run_name);
 
-                            $c_id = $row_name['customer_id'];
-
                             $c_name = $row_name['customer_name'];
 
-                            $get_address = "select * from customer_address where customer_id='$c_id' ";
+                            $get_address = "select * from customer_address where customer_id='$c_id'";
 
                             $run_add_count = mysqli_query($con,$get_address);
 
@@ -210,35 +208,20 @@
                         $pro_img1 = $row_products['product_img1'];
                         
                         $pro_stock = $row_products['product_stock'];
+
+                        if($price_display>0){
+                            $discount_percent = 100-round(($pro_price/$price_display)*100);
+                        }else{
+                            $discount_percent = 0;
+                        }
                         ?>
                         
                             <div class="row bg-white mt-1 py-2" id="<?php echo $pro_id;?>">
                                     <div class="col-4">
-                                        <span class="notify-badge <?php if($price_display>0){echo "show";}else{echo "d-none";}?>">
-                                        <h5 class="pro_dis_price mb-0">₹ <?php echo $price_display; ?> </h5>
+                                        <span class="notify-badge <?php if($price_display>0){echo "show";}else{echo "d-none";}?> mr-4">
+                                        <h5 class="pro_dis_batch mb-0">Save ₹<?php echo $price_display-$pro_price; ?></h5>
                                         </span>
-                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#zimg<?php echo $pro_id; ?>">
-                                            <img src="<?php echo $pro_img1; ?>" alt="..." class="img-thumbnail border-0">
-                                        </button>
-                                            <div class="modal fade" id="zimg<?php echo $pro_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img src="<?php echo $pro_img1; ?>" alt="..." class="img-fluid border-0">
-                                                    </div>
-                                                    <!-- <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div> -->
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <img src="<?php echo $pro_img1; ?>" alt="..." class="img-thumbnail border-0 mt-2">
                                     </div>
                                 <div class="col-8">
                                     <h5 class="pro_list_title"><?php echo $pro_title; ?></h5>
@@ -247,17 +230,20 @@
                                         <div class="col-6">
                                         <div class="row">
                                             <!-- <div class="col-4 px-0 <?php //if($price_display>0){echo "show";}else{echo "d-none";}?> "><h5 class="pro_dis_price">₹ <?php //echo $price_display; ?> </h5></div> -->
-                                            <div class="col-8 pr-0"><h5 class="pro_list_price">₹ <?php echo $pro_price; ?></div>
+                                            <div class="col-8 pr-0">
+                                            <h6 class="pro_dis_price mb-0 text-dark <?php if($price_display>0){echo "show";}else{echo "d-none";}?>"> MRP ₹ <?php echo $price_display; ?> </h6>
+                                            <h5 class="pro_list_price mb-0">₹ <?php echo $pro_price; ?></h5>
+                                            </div>
                                         </div>
                                         </div>
                                         <?php if($pro_stock>0){ ?>
                                         <?php 
 
-                                    $ip_add = getRealIpUser();
+                                    //$ip_add = getRealIpUser();
 
                                     $user_id = getuserid();
 
-                                    $get_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id' AND p_id='$pro_id'";
+                                    $get_cart = "select * from cart where user_id='$user_id' AND p_id='$pro_id'";
 
                                     $run_cart = mysqli_query($con,$get_cart);
 
@@ -291,16 +277,16 @@
                                 <?php }else{
 
                                         echo"
-
+                                        <div class='col-6'>
                                         <div class='row'>
-                                        <div class='col pr-0 pl-4'>
+                                        <div class='col'>
                                         <a href='customer/notify?pro_id=$pro_id' class='btn btn-danger py-0 px-1 text-center' style='font-size:15px;'>
                                         Notify Us
                                         <p class='text-center mb-0'style='font-size:8px;' >Out of Stock</p>
                                         </a>   
                                         </div>
                                         </div>
-
+                                        </div>
                                         ";
                                         }
 

@@ -5,8 +5,11 @@
 ?>
 <script>
 window.addEventListener('resize', function() {
-	if (window.innerWidth < 700) {
-		window.location= "./";
+	if (window.innerWidth <= 700) {
+		window.location.href = "./"; 
+	}
+    if (window.innerWidth >= 700) {
+		window.location.href = "desktop"; 
 	}
 });
 </script>
@@ -19,3 +22,8 @@ window.addEventListener('resize', function() {
 </div>
 
 
+<?php 
+
+include("includes/footer.php");
+
+?>

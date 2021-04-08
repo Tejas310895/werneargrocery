@@ -18,7 +18,7 @@
 
                         <?php 
                         
-                        if(!isset($_SESSION['customer_email'])){
+                        if(!isset($_COOKIE['wrnuser'])){
 
                             echo "
                             <a href='checkout.php'>
@@ -32,15 +32,13 @@
 
                         }else{
 
-                            $c_email = $_SESSION['customer_email'];
+                            $c_id = $_COOKIE['wrnuser'];
 
-                            $get_name = "select * from customers where customer_email='$c_email'";
+                            $get_name = "select * from customers where customer_id='$c_id'";
 
                             $run_name = mysqli_query($con,$get_name);
 
                             $row_name = mysqli_fetch_array($run_name);
-
-                            $c_id = $row_name['customer_id'];
 
                             $c_name = $row_name['customer_name'];
 
@@ -189,38 +187,17 @@
 
         <div class="row bg-white mt-1 py-2">
                     <div class="col-4">
-                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#zimg<?php echo $store_id; ?>">
-                            <img src="<?php echo $store_img; ?>" alt="..." class="img-thumbnail border-0">
-                        </button>
-                            <div class="modal fade" id="zimg<?php echo $store_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="<?php echo $store_img; ?>" alt="..." class="img-fluid border-0">
-                                    </div>
-                                    <!-- <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
+                        <img src="<?php echo $store_img; ?>" alt="..." class="img-thumbnail border-0">
                     </div>
                     <div class="col-8">
                             <h5 class="pro_list_title"><?php echo $store_title; ?></h5>
                             <h5 class="pro_list_desc"><?php echo $store_desc; ?></h5>
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="pro_list_price">₹ <?php echo $min_price; ?></h5>
+                                    <!-- <h5 class="pro_list_price">₹ <?php //echo $min_price; ?></h5> -->
                                 </div>
                                     <div class='col-6'>
-                                        <a href="shop?store_id=<?php echo $store_id; ?>" class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></a>
+                                        <a href="shop?store_id=<?php echo $store_id; ?>" class='btn ml-0 py-1  pull-left pro_store'>VIEW <i class="fas fa-chevron-right"></i></a>
                                     </div>
                             </div>
                         </div>
@@ -259,38 +236,17 @@
 
         <div class="row bg-white mt-1 py-2">
                     <div class="col-4">
-                    <button type="button" class="btn p-0" data-toggle="modal" data-target="#zimg<?php echo $cat_store_id; ?>">
                         <img src="<?php echo $cat_store_img; ?>" alt="..." class="img-thumbnail border-0">
-                    </button>
-                        <div class="modal fade" id="zimg<?php echo $cat_store_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="<?php echo $cat_store_img; ?>" alt="..." class="img-fluid border-0">
-                                </div>
-                                <!-- <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
                     </div>
                     <div class="col-8">
                             <h5 class="pro_list_title"><?php echo $cat_store_title; ?></h5>
                             <h5 class="pro_list_desc"><?php echo $cat_store_desc; ?></h5>
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="pro_list_price">₹ <?php echo $cat_min_price; ?></h5>
+                                    <!-- <h5 class="pro_list_price">₹ <?php //echo $cat_min_price; ?></h5> -->
                                 </div>
                                 <div class='col-6'>
-                                        <a href="shop?store_id=<?php echo $cat_store_id; ?>" class='btn ml-0 py-1  pull-left pro_store'>ADD <i class="fas fa-chevron-right"></i></a>
+                                        <a href="shop?store_id=<?php echo $cat_store_id; ?>" class='btn ml-0 py-1  pull-left pro_store'>VIEW <i class="fas fa-chevron-right"></i></a>
                                     </div>
                             </div>
                         </div>

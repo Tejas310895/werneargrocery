@@ -118,7 +118,7 @@ if(isset($_POST['show'])){
 
         // $run_pro_inc = mysqli_query($con,$get_pro_inc);
 
-            // $row_pro_inc=mysqli_fetch_array($run_pro_inc);
+        //     $row_pro_inc=mysqli_fetch_array($run_pro_inc);
 
             $status = $row_invoice['product_status'];
             $order_date = $row_invoice['order_date'];
@@ -159,7 +159,8 @@ if(isset($_POST['show'])){
 
             $pro_name = $row_pro['product_title'];
             $pro_desc = $row_pro['product_desc'];
-            //$pro_price = $row_pro['product_price'];
+            $pro_price = $row_pro['product_price'];
+            $ven_price = $row_pro['vendor_price'];
 
             $get_client = "select * from clients where client_id='$client_id'";
 
@@ -184,12 +185,34 @@ if(isset($_POST['show'])){
         <td class='text-center'>$address, $phase, $landmark, $city</td>
         <td class='text-center'>$pro_name-$pro_desc</td>
         <td class='text-center'>$pro_price</td>
+        <td class='text-center'>$ven_price</td>
         <td class='text-center'>$qty</td>
         <td class='text-center'>$due_amount</td>
     </tr>
     ";
 
 }
+
+}
+
+if(isset($_POST['add_promo'])){
+
+    $promo_id = $_POST['promo_id'];
+    $store_id = $_POST['store_id'];
+
+    $update_promo = "update promo_products set store_id='$store_id' where promo_id='$promo_id'";
+    $run_update_promo = mysqli_query($con,$update_promo);
+
+    if($run_update_promo){
+        echo "<script>alert('Promo Added')</script>";
+  
+        echo "<script>window.open('index.php?promo_store','_self')</script>";  
+    }else{
+        echo "<script>alert('Promo Failed')</script>";
+  
+        echo "<script>window.open('index.php?promo_store','_self')</script>";  
+    }
+
 
 }
 

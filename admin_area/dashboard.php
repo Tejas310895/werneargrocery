@@ -9,11 +9,7 @@
         ?>
 <?php 
 
-date_default_timezone_set('Asia/Kolkata');
-
-$today = date("Y-m-d");
-
-$get_total_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Delivered' and product_status='Deliver'";
+$get_total_sales = "SELECT sum(due_amount) AS total FROM customer_orders where order_status='Delivered'";
 
 $run_total_sales = mysqli_query($con,$get_total_sales);
 
@@ -21,7 +17,7 @@ $row_total_sales = mysqli_fetch_array($run_total_sales);
 
 $total_sales = $row_total_sales['total'];
 
-$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date='$today' AND order_status='Delivered'";
+$get_today_sales = "SELECT sum(due_amount) AS total FROM customer_orders WHERE order_date=DATE(now()) AND order_status='Delivered'";
 
 $run_today_sales = mysqli_query($con,$get_today_sales);
 
@@ -128,6 +124,8 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
             <th>ADDRESS</th>
             <th>ITEMS</th>
             <th>COST</th>
+            <th>DLC</th>
+            <th>BD</th>
             <th>PAYMENT TYPE</th>
             <th>ACTION</th>
 		</tr>
@@ -149,6 +147,8 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $run_orders = mysqli_query($con,$get_orders);
 
+                    $order_count = mysqli_num_rows($run_orders);
+
                     $row_orders = mysqli_fetch_array($run_orders);
 
                     $c_id = $row_orders['customer_id'];
@@ -161,43 +161,13 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $order_date = $row_orders['order_date'];
 
-                    if($status==='Delivered'){
+                    $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
 
-                    $get_orders = "select * from customer_orders where invoice_no='$invoice_id' and product_status='Deliver'";
+                    $run_total = mysqli_query($con,$get_total);
 
-                    $run_orders = mysqli_query($con,$get_orders);
+                    $row_total = mysqli_fetch_array($run_total);
 
-                    $order_count = mysqli_num_rows($run_orders);
-
-                    }else{
-
-                      $get_orders = "select * from customer_orders where invoice_no='$invoice_id'";
-
-                      $run_orders = mysqli_query($con,$get_orders);
-  
-                      $order_count = mysqli_num_rows($run_orders);  
-
-                    }
-
-                    if($status==='Delivered'){
-
-                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id' and product_status='Deliver'";
-
-                      $run_total = mysqli_query($con,$get_total);
-  
-                      $row_total = mysqli_fetch_array($run_total);
-  
-                      $total = $row_total['total'];
-
-                    }else{
-                      $get_total = "SELECT sum(due_amount) AS total FROM customer_orders WHERE invoice_no='$invoice_id'";
-
-                      $run_total = mysqli_query($con,$get_total);
-  
-                      $row_total = mysqli_fetch_array($run_total);
-  
-                      $total = $row_total['total'];
-                    }
+                    $total = $row_total['total'];
 
                     $get_customer = "select * from customers where customer_id='$c_id'";
 
@@ -231,6 +201,27 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
 
                     $txn_status = $row_txn['STATUS'];
 
+                    $get_discount = "select * from customer_discounts where invoice_no='$invoice_id'";
+                    $run_discount = mysqli_query($con,$get_discount);
+                    $row_discount = mysqli_fetch_array($run_discount);
+
+                    $discount_type = $row_discount['discount_type'];
+                    $discount_amount = $row_discount['discount_amount'];
+                    
+                    $get_del_charges = "select * from order_charges where invoice_id='$invoice_id'";
+                    $run_del_charges = mysqli_query($con,$get_del_charges);
+                    $row_del_charges = mysqli_fetch_array($run_del_charges);
+
+                    $del_charges = $row_del_charges['del_charges'];
+
+                    $get_bill_diff = "select * from bill_controller where invoice_no='$invoice_id'";
+                    $run_bill_diff = mysqli_query($con,$get_bill_diff);
+                    $bill_diff_total = 0;
+                    while($row_bill_diff = mysqli_fetch_array($run_bill_diff)){
+
+                    $bill_diff_amount = $row_bill_diff['bill_amount'];
+                    $bill_diff_total += $bill_diff_amount;
+                    }
                   ?>
                           <tr class="text-center">
                           <td style="font-size:0.8rem;"><?php echo $status; ?></td>
@@ -244,7 +235,9 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                               <?php echo $customer_city; ?> .
                           </td>
                           <td style="font-size:0.7rem; text-align:center;"><?php echo $order_count; ?></td>
-                          <td style="font-size:0.7rem;">₹ <?php echo $total; ?>/-</td>
+                          <td style="font-size:0.7rem;">₹ <?php echo ($total+$del_charges)-$discount_amount; ?>/-</td>
+                          <td style="font-size:0.7rem; text-align:center;"><?php if($del_charges>0){echo$del_charges;}else{echo 0;} ;?></td>
+                          <td style="font-size:0.7rem; text-align:center;"><?php if($bill_diff_total>0){echo$bill_diff_total;}else{echo 0;} ;?></td>
                           <td><?php if($txn_status=='TXN_SUCCESS'){echo"ONLINE";}else{echo"OFFLINE";} ; ?></td>
                           <td class="td-actions" >
                           <button id="show_details" class="btn btn-info btn-sm p-1" style="font-size:0.7rem;" data-toggle="modal" data-target="#KK<?php echo $invoice_id; ?>">
@@ -320,6 +313,7 @@ $cancel_count = mysqli_num_rows($run_cancel_count);
                                     $row_client = mysqli_fetch_array($run_client);
 
                                     $client_name = $row_client['client_shop'];
+
                                     
                                     ?>
                                         <tr>

@@ -3,7 +3,7 @@
 
 session_start();
 
-    if(!isset($_SESSION['customer_email'])){
+    if(!isset($_COOKIE['wrnuser'])){
 
         echo "<script>window.open('../checkout.php','_self')</script>";
 
@@ -49,7 +49,7 @@ session_start();
     <link rel="stylesheet" href="styles/style.css">
     <!-- styles -->
 </head>
-<body style="background-color:#fff; padding-top:1%;">
+<body style="background-color:#fff; padding-top:8%;">
     <div class="container-fluid mt-5 share">
         <div class="row">
             <div class="col-12">

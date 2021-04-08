@@ -2,7 +2,11 @@
 <!-- header on scroll -->
 
 <script src="js/jquery-3.5.1.slim.min.js" ></script>
-
+<script>
+    $('#btn-call').click(function() {
+    $('#div-call').animate({width:'toggle'},250);
+});
+</script>
 <script>
 
 $(function() {
@@ -25,7 +29,7 @@ $(function() {
 <!-- Initialize Swiper -->
     <script>
     var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 2.4,
+        slidesPerView: 3.4,
         spaceBetween: 65,
         freeMode: true,
         pagination: {
@@ -40,8 +44,10 @@ $(function() {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script>
-window.addEventListener('load', function() {
-		window.location = "maintenance"; 
+window.addEventListener('resize', function() {
+    if (window.innerWidth >= 700) {
+		window.location = "desktop"; 
+	}
 });
 </script>
 <script>
@@ -80,3 +86,4 @@ function showPopForOfflineConnection(){
     <script src="js/script.js"></script>
 </body>
 </html>
+<?php ob_end_flush(); ?>

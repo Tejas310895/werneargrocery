@@ -7,7 +7,7 @@
 <!-- fixed nav -->
     <div class="container-fuild fixed-top">
             <!-- nav -->
-                <ul class="nav bg-white cartloc ">
+                <ul class="nav bg-white cartloc">
                     <li class="nav-item">
                         <a class="nav-link" onClick="window.history.back()">
                             <i style="font-size: 1.8rem;" class="fas fa-arrow-left"></i>
@@ -20,12 +20,12 @@
             <!-- nav -->
 
     <!-- breadcrumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb pt-1">
-                <li class="breadcrumb-item active" aria-current="page"><a href="./">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cart</li>
-            </ol>
-        </nav>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb pt-1">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="./">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                </ol>
+            </nav>
     <!-- breadcrumb -->
 
     </div>
@@ -35,11 +35,11 @@
 
         <?php 
             
-            $ip_add = getRealIpUser();
+            //$ip_add = getRealIpUser();
 
             $user_id = getuserid();
     
-            $select_cart = "select * from cart where ip_add='$ip_add' AND user_id='$user_id'";
+            $select_cart = "select * from cart where user_id='$user_id'";
     
             $run_cart = mysqli_query($con,$select_cart);
     
@@ -83,7 +83,7 @@
 
                         $save_total += $save;
 
-                        $you_save = $total-$save_total;
+                        $you_save = $save_total-$total;
 
             if($count>0){
 
@@ -139,7 +139,7 @@
 
         <div class="container" style="display:<?php if($count>0){echo"none";}else{echo"block";} ?>;">
                     <div class="row">
-                        <div class="col-lg"><img src="https://ik.imagekit.io/wrnear2017/externals/cart_lobo_ubaRBzNNRn.png" class="img-fluid w-75 mx-auto d-block" alt="..."></div>
+                        <div class="col-lg"><img src="admin_area/other_images/cart_lobo.png" class="img-fluid w-75 mx-auto d-block" alt="..."></div>
                         <div class="col-lg"><h5 class="order_again">We are waiting for your order</h5></div>
                         <div class="col-lg px-5"><a href="store" class="btn btn-warning btn-block order_again_bottom d-block p-1">Start Shopping</a></div>
                     </div>
@@ -162,8 +162,8 @@
 ?>
 
 <!-- bill Section -->
-    <div class="container bg-white mt-2 mb-5 fixed-bottom" style="display:<?php //if($count>0){echo"block";}else{echo"none";} ?>;">
-        <!-- <table class="table table-sm table-borderless bill_section ">
+    <!-- <div class="container bg-white mt-2 mb-5 fixed-bottom" style="display:<?php //if($count>0){echo"block";}else{echo"none";} ?>;">
+        <table class="table table-sm table-borderless bill_section ">
             <tbody>
                 <thead>
                 <tr>
@@ -176,28 +176,68 @@
                 </tr>
                 <tr style="display:<?php //if($del_charges>0){echo"table-row";}else{echo"none";} ?>;">
                     <th scope="row" class="bill_charges" >Delivery Charges:</th>
-                    <td class="bill_charges text-center">₹ <?php //echo $del_charges; ?></td>
+                    <td class="bill_charges text-center">₹ <?php// echo $del_charges; ?></td>
                 </tr>
                 <tr>
                     <th scope="row" class="bill_total">TOTAL:</th>
-                    <td class="bill_total text-center">₹ <?php //echo $total+$del_charges; ?></td>
+                    <td class="bill_total text-center">₹ <?php// echo $total+$del_charges; ?></td>
                 </tr>
             </tbody>
-        </table> -->
-    </div>
+        </table>
+        <h5 class="save_total text-center <?php //if($save_total>0){echo "show";}else{echo "d-none";} ?>" >You saved ₹<?php //echo $you_save; ?> on this order</h5>
+    </div> -->
     
   
 <!-- bill Section -->
 
 <!-- checkout float -->
-    <div class="container-fluid fixed-bottom px-0" style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
-     <h5 class="save_total text-center bg-white py-2 mb-0 <?php if($save_total>0){echo "show";}else{echo "d-none";} ?>" >You saved ₹<?php echo $you_save; ?> on this order</h5>
+    <div class="container-fluid px-0 fixed-bottom " style="display:<?php if($count>0){echo"block";}else{echo"none";} ?>;">
+    <h5 class="save_total text-center bg-white mx-0 mb-0 py-2" ><?php if($total>$min_price&&$total<300){echo "Add more ".(300-$total)." for free delivery";}?>
+    
+    <?php 
+
+    if($total>300){
+    
+    if(isset($_COOKIE['wrnuser'])){
+
+        // $customer_mail = $_SESSION['customer_email'];
+
+        // $get_customer_id = "select * from customers where customer_email='$customer_mail'";
+
+        // $run_customer_id = mysqli_query($con,$get_customer_id);
+
+        // $row_customer_id = mysqli_fetch_array($run_customer_id);
+
+        $customer_id = $_COOKIE['wrnuser'];
+
+        $get_user_order_count = "SELECT * FROM customer_orders WHERE customer_id='$customer_id'";
+        $run_user_orders_count = mysqli_query($con,$get_user_order_count);
+        $user_orders_count = mysqli_num_rows($run_user_orders_count);
+
+        if($user_orders_count<1){
+            echo "<br> First User Discount Applied";
+            $discount_amount=25;
+        }else{
+            $discount_amount=0;
+        }
+    }
+
+}
+    
+    ?>
+    
+    </h5>
         <div class="row cart_bottom">
-            <div class="col-6 pl-4">
+            <div class="col-6 pl-4 pr-0">
                 <h5 class="item_count pt-1 mb-0"><?php echo $count; ?> Items</h4>
-                <h4 class="item_cost mb-0">Total : ₹ <?php echo $total+$del_charges; ?></h3>
+                <h3 class="item_cost mb-0">Total: ₹<?php echo ($total); ?><?php if(($total>$min_price)&&($total<300)){ echo "+".$del_charges."<small style='font-size:0.5rem;'>Charges</small>";}?></h3>
             </div>
-            <div class="col-6 pr-2">
+            <?php 
+            
+            if(isset($_COOKIE['wrnuser'])){
+            
+            ?>
+            <div class="col-6 pr-2 pl-0">
                 <?php if($min_price>$total){
 
                     $required = $min_price-$total;
@@ -205,13 +245,12 @@
                     echo "
                     
                     <a class='btn btn-success pull-right bill_checkout' style='color:#fff;'>
-                    Add ₹$required More
+                    Add ₹ $required More
                     </a>
                     
                     ";
 
                 }else{
-                    
                     echo "
                     
                     <a href='checkout' class='btn btn-success pull-right bill_checkout'>
@@ -223,6 +262,14 @@
                 }
                  ?>
             </div>
+            <?php }else{ ?>
+            <div class="col-6 pr-2">
+                    <a href='checkout' class='btn btn-success pull-right bill_checkout'>
+                        Login
+                    <i style='font-size:1.2rem; color:#fff;' class='fas fa-angle-double-right'></i>
+                    </a>
+            </div>
+            <?php } ?>
         </div>
     </div>
 <!-- checkout float -->
