@@ -174,7 +174,7 @@
                     $get_cat = "select * FROM products where product_price>49 and product_price<=99 and product_visibility='Y'";
                 }
                                 
-                $run_products = mysqli_query($db,$get_cat);
+                $run_products = mysqli_query($con,$get_cat);
                 
                 $count = mysqli_num_rows($run_products);
                 
