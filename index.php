@@ -464,7 +464,7 @@ if($today>='09:00' && $today<='18:00'){
     
     $get_cat = "SELECT * from categories order by cat_id asc";
 
-    $run_cat = mysqli_query($db,$get_cat);
+    $run_cat = mysqli_query($con,$get_cat);
     
     while($row_cat=mysqli_fetch_array($run_cat)){
 
