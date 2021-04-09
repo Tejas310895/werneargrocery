@@ -47,13 +47,13 @@ if(isset($_POST['add_id'])){
                 
                 $update_qty= "update cart set qty=qty+1 where p_id='$p_id' AND user_id='$user_id'";
 
-                $run_update_qty = mysqli_query($db,$update_qty);
+                $run_update_qty = mysqli_query($con,$update_qty);
             
         }else{
             
                 $query = "insert into cart (p_id,user_id,qty,exp_date) values ('$p_id','$user_id','1',NOW())";
                 
-                $run_query = mysqli_query($db,$query);
+                $run_query = mysqli_query($con,$query);
                 
             
         }
@@ -75,7 +75,7 @@ if(isset($_POST['del_id'])){
 
     $check_cart = "select * from cart where user_id='$user_id' AND p_id='$p_id'";
     
-    $run_check = mysqli_query($db,$check_cart);
+    $run_check = mysqli_query($con,$check_cart);
 
     $row_check = mysqli_fetch_array($run_check);
 
@@ -85,7 +85,7 @@ if(isset($_POST['del_id'])){
 
         $update_qty= "update cart set qty=qty-1 where p_id='$p_id' AND user_id='$user_id'";
 
-        $run_update_qty = mysqli_query($db,$update_qty);
+        $run_update_qty = mysqli_query($con,$update_qty);
 
         echo "done";
 
