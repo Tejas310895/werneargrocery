@@ -174,7 +174,7 @@
                 
                 $get_cat = "select * from products where store_id='$store_id' and product_visibility='Y' order by product_position asc";
                 
-                $run_products = mysqli_query($db,$get_cat);
+                $run_products = mysqli_query($con,$get_cat);
                 
                 $count = mysqli_num_rows($run_products);
                 
