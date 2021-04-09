@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost:3308','root','','wrngrocery');
+$db = mysqli_connect('localhost','u464233779_grocery','Sugandha@11','u464233779_grocery');
 /// begin getRealIpUser functions ///
 
 function getRealIpUser(){
