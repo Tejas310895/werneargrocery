@@ -628,6 +628,24 @@ if($today>='09:00' && $today<='18:00'){
         <?php } ?>
     </div>
 </div>
+<div class="container-fluid pt-2" style="background-color:#e6e6e6;">
+    <div class="row mt-2 pb-2">
+        <div class="col-12">
+            <h6 class="pl-2" style="font-size:1rem;">SERVICES</h6>
+            <ul class="pl-1">
+                <li class="d-block"><a href="about_us" style="color:#000 !important;">About Us</a></li>
+                <li class="d-block"><a href="terms&policies" style="color:#000 !important;">Terms & Policies</a></li>
+            </ul>
+        </div>
+        <div class="col-12" style="font-family: Josefin Sans;">
+            <h6 class="pl-2" style="font-size:1rem;">CONTACT US</h6>
+            <li class="d-block" style="font-size:0.9rem;">WERNEAR TECHNOLOGIES</li>
+            <li class="d-block" style="font-size:0.8rem;">Dombivali East - 421204</li>
+            <li class="d-block" style="font-size:0.8rem;">Call Us :- +91 9019196792</li>
+            <li class="d-block" style="font-size:0.8rem;">Email Us :- werneartech@gmail.com</li>
+        </div>
+    </div>
+</div>
 <!-- offer -->
 
 <!-- offers -->
