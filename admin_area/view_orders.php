@@ -25,6 +25,7 @@
                     <a href="index?order_report" class="btn btn-primary pull-right">REPORTS</a>
                     <a href="index?promo_store" class="btn btn-primary pull-right">PROMOTION</a>
                     <a href="index?vendor_report" class="btn btn-primary pull-right">DAILY REPORT</a>
+                    <a href="index?ledger_notes" class="btn btn-primary pull-right">CLIENT LEDGER</a>
                 </div>
               <div class="card-body" id="refresh">
                 <div class="table-full-width table-responsive" id="time">
@@ -144,6 +145,19 @@
 
                           $del_charges = $row_del_charges['del_charges'];
 
+                          $get_v_cash = "select * from vendor_cash where invoice_no='$invoice_id'";
+                          $run_v_cash = mysqli_query($con,$get_v_cash);
+                          $row_v_cash = mysqli_fetch_array($run_v_cash);
+
+                          $vendor_cash_status = $row_v_cash['vendor_cash_status'];
+                          $v_client_id = $row_v_cash['client_id'];
+
+                          $get_v_client = "select * from clients where client_id='$v_client_id'";
+                          $run_v_client = mysqli_query($con,$get_v_client);
+                          $row_v_client = mysqli_fetch_array($run_v_client);
+
+                          $vclient_name = $row_v_client['client_name'];
+
                           $get_value_diff = "select * from bill_controller where invoice_no='$invoice_id'";
                           $run_value_diff = mysqli_query($con,$get_value_diff);
                           $diff_amount_total = 0;
@@ -151,6 +165,7 @@
       
                           $value_diff_amount = $row_value_diff['bill_amount'];
                           $diff_amount_total += $value_diff_amount;
+
                           }
 
                           ?>
@@ -160,8 +175,11 @@
                                   <div class="col-lg-6 col-sm-12">
                                     <h6 class="card-text mb-2">
                                     Order on - <?php echo date('d/M/Y(h:i a)',strtotime($order_date)); ?>
-                                    <span class="badge <?php if($txn_status==="TXN_SUCCESS"){echo "badge-info";}else{echo "badge-danger";} ?>">
+                                    <span class="badge <?php if($txn_status==="TXN_SUCCESS"){echo "badge-success";}else{echo "badge-danger";} ?>">
                                     <?php if($txn_status==="TXN_SUCCESS"){echo "PAID ONLINE";}else{echo "PAY ON DELIVERY";} ?>
+                                    </span>
+                                    <span class="badge badge-info <?php if($vendor_cash_status==='paid'){echo 'show';}else{echo 'd-none';}?>">
+                                    <?php if($vendor_cash_status==='paid'){echo $vendor_cash_status." to ".$vclient_name;} ?>
                                     </span>
                                     <?php
                                     
@@ -200,6 +218,9 @@
                                           </a>
                                           <a class="btn btn-primary" href="process_order.php?cancel_order=<?php echo $invoice_id;?>" onclick="return confirm('Are you sure?')" title="Cancel Order">
                                               <i class="tim-icons icon-trash-simple text-white"></i>
+                                          </a>
+                                          <a class="btn btn-primary" href="paytm/payment_link.php?payment_link=<?php echo $invoice_id;?>" onclick="return confirm('Are you sure?')" title="Send Payment link">
+                                              <i class="tim-icons icon-link-72 text-white"></i>
                                           </a>
                                     </div>
                                     <div class="col-lg-6 col-sm-12">

@@ -504,6 +504,26 @@
                 
               }
 
+              
+              if(isset($_GET['ledger_notes'])){
+                    
+                include("ledger_notes.php");
+                
+              }
+
+              if(isset($_GET['raise_notes'])){
+                    
+                include("raise_notes.php");
+                
+              }
+
+              if(isset($_GET['client_ledger'])){
+                    
+                include("client_ledger.php");
+                
+              }
+
+
               //FMR PANEL //
 
             ?>

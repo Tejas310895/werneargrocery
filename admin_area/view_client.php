@@ -63,6 +63,9 @@
                 <td ><?php echo $client_gstn; ?></td>
                 <td ><?php echo $client_pro_type; ?></td>
                 <td class="td-actions text-center">
+                        <a  href="index.php?client_ledger=<?php echo $client_id; ?>" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                            <i class="tim-icons icon-money-coins"></i>
+                        </a>
                         <a  href="index.php?edit_client=<?php echo $client_id; ?>" rel="tooltip" class="btn btn-success btn-sm btn-icon">
                             <i class="tim-icons icon-settings"></i>
                         </a>
