@@ -95,18 +95,18 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json")); 
 $response = curl_exec($ch);
-// print_r ($response);
+print_r ($response);
 $result = json_decode($response, true);
 
 // echo $result['body']['resultInfo']['resultStatus']."</br>";
 // echo $result['body']['shortUrl'];
 
-if($result['body']['resultInfo']['resultStatus']==="SUCCESS"){
-    echo "<script>alert('Link sent to customer')</script>";
-    echo "<script>window.open('../index.php?view_orders','_self')</script>";
-}else{
-    echo "<script>alert('Sending link failed')</script>";
-    echo "<script>window.open('../index.php?view_orders','_self')</script>";
-}
+// if($result['body']['resultInfo']['resultStatus']==="SUCCESS"){
+//     echo "<script>alert('Link sent to customer')</script>";
+//     echo "<script>window.open('../index.php?view_orders','_self')</script>";
+// }else{
+//     echo "<script>alert('Sending link failed')</script>";
+//     echo "<script>window.open('../index.php?view_orders','_self')</script>";
+// }
 }
 ?>
