@@ -31,7 +31,7 @@
                 $run_client = mysqli_query($con,$get_client);
                 while($row_client = mysqli_fetch_array($run_client)){
 
-                    echo "<option value=".$row_client['client_id'].">".$row_client['client_name']."Female</option>";
+                    echo "<option value=".$row_client['client_id'].">".$row_client['client_name']."</option>";
                     
                 }
                 
