@@ -23,6 +23,13 @@ $(function() {
 </script>
 <!-- header on scroll -->
 
+<script>
+    window.onload = function() {
+        // similar behavior as clicking on a link
+        window.location = "maintenance";
+    }
+</script>
+
 <!-- product carousel script -->
 <!-- Swiper JS -->
 <script src="js/swiper.min.js"></script>
